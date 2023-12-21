@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Infrastructure.Settings;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
 {
@@ -6,6 +7,11 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddControllers(options =>
+            {
+                options.Conventions.Add(new ApiVersionConvention());
+            });
+
             return services;
         }
     }
