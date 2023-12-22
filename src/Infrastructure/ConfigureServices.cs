@@ -12,6 +12,10 @@ namespace Infrastructure
                 options.Conventions.Add(new ApiVersionConvention());
             });
 
+            services.AddEndpointsApiExplorer();
+
+            services.AddDefaultSwagger();
+
             return services;
         }
     }
