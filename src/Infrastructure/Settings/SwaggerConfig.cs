@@ -6,19 +6,28 @@ namespace Infrastructure.Settings
 {
     public static class SwaggerConfig
     {
+        private const string ApplicationName = Application.ConfigureServices.ApplicationName;
+        private const string Swagger = "swagger";
+        private const string Version1 = "v1";
+        private const string Version2 = "v2";
+        private const string Json = "json";
+        private const string Authorization = "Authorization";
+        private const string Bearer = "Bearer";
+        private const string Jwt = "JWT";
+
         public static IServiceCollection AddDefaultSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthService", Version = "v1" });
-                c.SwaggerDoc("v2", new OpenApiInfo { Title = "AuthService", Version = "v2" });
+                c.SwaggerDoc(Version1, new OpenApiInfo { Title = ApplicationName, Version = Version1 });
+                c.SwaggerDoc(Version2, new OpenApiInfo { Title = ApplicationName, Version = Version2 });
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                c.AddSecurityDefinition(Bearer, new OpenApiSecurityScheme
                 {
-                    Name = "Authorization",
+                    Name = Authorization,
                     Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer",
-                    BearerFormat = "JWT",
+                    Scheme = Bearer,
+                    BearerFormat = Jwt,
                     In = ParameterLocation.Header
                 });
 
@@ -30,10 +39,10 @@ namespace Infrastructure.Settings
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
+                                Id = Bearer
                             }
                         },
-                        new string[]{}
+                        new string[]{ }
                     }
                 });
             });
@@ -46,8 +55,8 @@ namespace Infrastructure.Settings
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuthService v1");
-                c.SwaggerEndpoint("/swagger/v2/swagger.json", "AuthService v2");
+                c.SwaggerEndpoint($"/{Swagger}/{Version1}/{Swagger}.{Json}", $"{ApplicationName} {Version1}");
+                c.SwaggerEndpoint($"/{Swagger}/{Version2}/{Swagger}.{Json}", $"{ApplicationName} {Version2}");
             });
 
             return app;
