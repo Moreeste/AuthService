@@ -11,7 +11,7 @@ namespace Infrastructure
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder();
 
-            builder.Services.AddInfrastructure();
+            builder.Services.AddInfrastructure(builder);
             builder.Services.AddApplication();
 
             if (webappBuilder != null)
