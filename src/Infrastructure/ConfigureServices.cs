@@ -10,6 +10,8 @@ namespace Infrastructure
         {
             services.AddDatabase(builder);
 
+            services.AddCustomServices();
+
             services.AddControllers(options =>
             {
                 options.Conventions.Add(new ApiVersionConvention());
