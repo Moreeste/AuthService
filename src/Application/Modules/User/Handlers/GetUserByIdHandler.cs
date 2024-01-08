@@ -1,29 +1,22 @@
 ﻿using Application.Modules.User.DTOs;
 using Application.Modules.User.Queries;
-using Domain.Repository;
+using Application.Modules.User.Services;
 using MediatR;
 
 namespace Application.Modules.User.Handlers
 {
     public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserDTO>
     {
-        private readonly IUserRepository _userRepository;
-
-        public GetUserByIdHandler(IUserRepository userRepository)
+        private readonly IUserService _userService;
+        
+        public GetUserByIdHandler(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
-
+        
         public async Task<UserDTO> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            var consulta = await _userRepository.GetUserById(request.Id);
-
-            var result = new UserDTO()
-            {
-                FirstName = consulta.FirstName
-            };
-
-            return result;
+            return await _userService.GetUserById(request.Id);
         }
     }
 }

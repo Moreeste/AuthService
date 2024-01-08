@@ -1,4 +1,5 @@
-﻿using Domain.Repository;
+﻿using Application.Modules.User.Services;
+using Domain.Repository;
 using Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,6 +10,7 @@ namespace Infrastructure
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

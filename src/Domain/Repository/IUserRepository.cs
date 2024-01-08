@@ -4,6 +4,6 @@ namespace Domain.Repository
 {
     public interface IUserRepository
     {
-        Task<UserModel> GetUserById(string id);
+        Task<UserModel?> GetUserById(string id);
     }
 }

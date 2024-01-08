@@ -15,10 +15,13 @@ namespace Infrastructure.Repository
             _authServiceContext = authServiceContext;
         }
 
-        public async Task<UserModel> GetUserById(string id)
+        public async Task<UserModel?> GetUserById(string id)
         {
-            string qry = string.Format("SELECT * FROM Users WHERE IdUser = '{0}';", id);
-            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<UserModel>(qry);
+            string qry = "EXECUTE sp_GetUserById @IdUser";
+            var parameters = new { IdUser = id };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<UserModel>(qry, parameters);
+            
             return result;
         }
     }
