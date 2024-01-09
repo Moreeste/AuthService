@@ -1,4 +1,5 @@
-﻿using Application.Modules.User.Services;
+﻿using Application.Modules.Register.Services;
+using Application.Modules.User.Services;
 using Domain.Repository;
 using Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ namespace Infrastructure
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRegisterService, RegisterService>();
 
             return services;
         }
