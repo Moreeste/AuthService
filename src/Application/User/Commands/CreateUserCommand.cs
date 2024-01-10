@@ -1,7 +1,7 @@
-﻿using Application.Modules.User.DTOs;
+﻿using Application.User.DTOs;
 using MediatR;
 
-namespace Application.Modules.User.Commands
+namespace Application.User.Commands
 {
     public sealed record CreateUserCommand(string Name) : IRequest<UserDTO>;
 }

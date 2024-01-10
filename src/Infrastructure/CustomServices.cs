@@ -1,5 +1,5 @@
-﻿using Application.Modules.Register.Services;
-using Application.Modules.User.Services;
+﻿using Application.Register.Services;
+using Application.User.Services;
 using Domain.Repository;
 using Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;

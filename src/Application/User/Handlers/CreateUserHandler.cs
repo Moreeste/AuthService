@@ -1,8 +1,8 @@
-﻿using Application.Modules.User.Commands;
-using Application.Modules.User.DTOs;
+﻿using Application.User.Commands;
+using Application.User.DTOs;
 using MediatR;
 
-namespace Application.Modules.User.Handlers
+namespace Application.User.Handlers
 {
     public class CreateUserHandler : IRequestHandler<CreateUserCommand, UserDTO>
     {

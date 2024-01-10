@@ -1,5 +1,5 @@
-﻿using Application.Modules.Register.Commands;
-using Application.Modules.Register.DTOs;
+﻿using Application.Register.Commands;
+using Application.Register.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

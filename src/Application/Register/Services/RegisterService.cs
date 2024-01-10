@@ -1,7 +1,7 @@
-﻿using Application.Modules.Register.Commands;
-using Application.Modules.Register.DTOs;
+﻿using Application.Register.Commands;
+using Application.Register.DTOs;
 
-namespace Application.Modules.Register.Services
+namespace Application.Register.Services
 {
     public class RegisterService : IRegisterService
     {

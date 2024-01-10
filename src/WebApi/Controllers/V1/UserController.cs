@@ -1,6 +1,6 @@
-﻿using Application.Modules.User.Commands;
-using Application.Modules.User.DTOs;
-using Application.Modules.User.Queries;
+﻿using Application.User.Queries;
+using Application.User.Commands;
+using Application.User.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

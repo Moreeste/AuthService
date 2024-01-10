@@ -1,4 +1,4 @@
-﻿namespace Application.Modules.Register.DTOs
+﻿namespace Application.Register.DTOs
 {
     public class RegisterDTO
     {

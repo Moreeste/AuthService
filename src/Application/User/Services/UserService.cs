@@ -1,7 +1,7 @@
-﻿using Application.Modules.User.DTOs;
+﻿using Application.User.DTOs;
 using Domain.Repository;
 
-namespace Application.Modules.User.Services
+namespace Application.User.Services
 {
     public class UserService : IUserService
     {

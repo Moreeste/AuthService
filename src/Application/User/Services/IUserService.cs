@@ -1,6 +1,6 @@
-﻿using Application.Modules.User.DTOs;
+﻿using Application.User.DTOs;
 
-namespace Application.Modules.User.Services
+namespace Application.User.Services
 {
     public interface IUserService
     {
