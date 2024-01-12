@@ -14,7 +14,7 @@ namespace Infrastructure.Repository
         {
             _authServiceContext = authServiceContext;
         }
-
+        
         public async Task<UserModel?> GetUserById(string id)
         {
             string qry = "EXECUTE sp_GetUserById @IdUser";
@@ -22,6 +22,26 @@ namespace Infrastructure.Repository
 
             var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<UserModel>(qry, parameters);
             
+            return result;
+        }
+
+        public async Task<UserModel?> GetUserByEmail(string email)
+        {
+            string qry = "EXECUTE sp_GetUserByEmail @Email";
+            var parameters = new { Email = email };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<UserModel>(qry, parameters);
+
+            return result;
+        }
+
+        public async Task<UserModel?> GetUserByPhone(string phone)
+        {
+            string qry = "EXECUTE sp_GetUserByPhone @Phone";
+            var parameters = new { Phone = phone };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<UserModel>(qry, parameters);
+
             return result;
         }
     }
