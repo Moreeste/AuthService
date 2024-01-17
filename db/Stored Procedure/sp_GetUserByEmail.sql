@@ -15,7 +15,7 @@ BEGIN
 			MiddleName, 
 			LastName, 
 			SecondLastName, 
-			UPPER(G.Description) AS Gender, 
+			G.Description AS Gender, 
 			BirthDate, 
 			Email, 
 			PhoneNumber, 
