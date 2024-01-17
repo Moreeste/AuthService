@@ -15,14 +15,14 @@ namespace Application.Register.Services
 
         public async Task<RegisterDTO> Register(RegisterCommand register)
         {
-            var userEmail = _userRepository.GetUserByEmail(register.Email);
+            var userEmail = await _userRepository.GetUserByEmail(register.Email);
 
             if (userEmail != null)
             {
                 throw new Exception($"Ya existe un usuario registrado con el email {register.Email}.");
             }
 
-            var userPhone = _userRepository.GetUserByPhone(register.PhoneNumber);
+            var userPhone = await _userRepository.GetUserByPhone(register.PhoneNumber);
 
             if (userPhone != null)
             {
