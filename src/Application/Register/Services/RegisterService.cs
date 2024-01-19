@@ -33,7 +33,7 @@ namespace Application.Register.Services
             }
 
             int iterations = _passwordService.GetIterations("E2C76764-1050-4301-906E-EBFDBB54C9E1");
-            byte[] salt = _passwordService.GenerateSalt();
+            string salt = _passwordService.GenerateSalt();
             string hashedPassword = _passwordService.GenerateHash(register.Password, salt, iterations);
 
             return new RegisterDTO() { IdUser = hashedPassword };

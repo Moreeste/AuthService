@@ -19,29 +19,39 @@ namespace Application.Auth.Services
             return iterations;
         }
 
-        public byte[] GenerateSalt()
+        public string GenerateSalt()
         {
+            string salt = string.Empty;
+            byte[] saltBytes = new byte[32];
+
             using (var rng = new RNGCryptoServiceProvider())
             {
-                byte[] salt = new byte[32];
-                rng.GetBytes(salt);
-                return salt;
+                rng.GetBytes(saltBytes);
             }
+
+            salt = Convert.ToBase64String(saltBytes);
+
+            return salt;
         }
 
-        public string GenerateHash(string password, byte[] salt, int iterations)
+        public string GenerateHash(string password, string salt, int iterations)
         {
-            using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256))
+            string hashedPassword = string.Empty;
+            byte[] saltByte = Convert.FromBase64String(salt);
+
+            using (var pbkdf2 = new Rfc2898DeriveBytes(password, saltByte, iterations, HashAlgorithmName.SHA256))
             {
                 byte[] hashBytes = pbkdf2.GetBytes(32);
-                
                 StringBuilder stringBuilder = new StringBuilder();
+
                 foreach (byte b in hashBytes)
                 {
                     stringBuilder.Append(b.ToString("x2"));
                 }
 
-                return stringBuilder.ToString();
+                hashedPassword = stringBuilder.ToString();
+
+                return hashedPassword;
             }
         }
     }

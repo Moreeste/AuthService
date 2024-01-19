@@ -3,7 +3,7 @@
     public interface IPasswordService
     {
         int GetIterations(string idUser);
-        byte[] GenerateSalt();
-        string GenerateHash(string password, byte[] salt, int iterations);
+        string GenerateSalt();
+        string GenerateHash(string password, string salt, int iterations);
     }
 }
