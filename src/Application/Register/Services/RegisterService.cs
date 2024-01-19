@@ -1,4 +1,5 @@
-﻿using Application.Register.Commands;
+﻿using Application.Auth.Services;
+using Application.Register.Commands;
 using Application.Register.DTOs;
 using Domain.Repository;
 
@@ -7,10 +8,12 @@ namespace Application.Register.Services
     public class RegisterService : IRegisterService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IPasswordService _passwordService;
 
-        public RegisterService(IUserRepository userRepository)
+        public RegisterService(IUserRepository userRepository, IPasswordService passwordService)
         {
             _userRepository = userRepository;
+            _passwordService = passwordService;
         }
 
         public async Task<RegisterDTO> Register(RegisterCommand register)
@@ -29,7 +32,11 @@ namespace Application.Register.Services
                 throw new Exception($"Ya existe un usuario registrado con el teléfono {register.PhoneNumber}.");
             }
 
-            return new RegisterDTO() { IdUser = "000000000" };
+            int iterations = _passwordService.GetIterations("E2C76764-1050-4301-906E-EBFDBB54C9E1");
+            byte[] salt = _passwordService.GenerateSalt();
+            string hashedPassword = _passwordService.GenerateHash(register.Password, salt, iterations);
+
+            return new RegisterDTO() { IdUser = hashedPassword };
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Application.Register.Services;
+﻿using Application.Auth.Services;
+using Application.Register.Services;
 using Application.User.Services;
 using Domain.Repository;
 using Infrastructure.Repository;
@@ -10,9 +11,11 @@ namespace Infrastructure
     {
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRegisterService, RegisterService>();
+            services.AddScoped<IPasswordService, PasswordService>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
