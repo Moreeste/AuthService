@@ -6,7 +6,7 @@ namespace Infrastructure.Settings
 {
     public static class SwaggerConfig
     {
-        private const string ApplicationName = Application.ConfigureServices.ApplicationName;
+        private const string ApplicationName = Application.DependencyInjection.ApplicationName;
         private const string Swagger = "swagger";
         private const string Version1 = "v1";
         private const string Version2 = "v2";
