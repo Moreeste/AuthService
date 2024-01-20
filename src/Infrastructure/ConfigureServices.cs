@@ -1,14 +1,14 @@
 ﻿using Infrastructure.Settings;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
 {
     public static class ConfigureServices
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, WebApplicationBuilder builder)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfigurationManager configuration)
         {
-            services.AddDatabase(builder);
+            services.AddDatabase(configuration);
 
             services.AddCustomServices();
 

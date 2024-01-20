@@ -11,7 +11,7 @@ namespace Infrastructure
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder();
 
-            builder.Services.AddInfrastructure(builder);
+            builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
 
             if (webappBuilder != null)
@@ -30,9 +30,7 @@ namespace Infrastructure
             }
 
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.Run();
         }
     }
