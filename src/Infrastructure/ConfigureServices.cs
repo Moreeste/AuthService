@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
 {
-    public static class CustomServices
+    public static class ConfigureServices
     {
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
