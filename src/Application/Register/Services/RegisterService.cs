@@ -1,7 +1,7 @@
-﻿using Application.Auth.Services;
-using Application.Register.Commands;
+﻿using Application.Register.Commands;
 using Application.Register.DTOs;
 using Domain.Repository;
+using Domain.Services;
 
 namespace Application.Register.Services
 {
