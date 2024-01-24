@@ -27,7 +27,7 @@ BEGIN
 		BEGIN TRANSACTION;
 		
 		INSERT INTO Users (IdUser, FirstName, MiddleName, LastName, SecondLastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser) 
-		VALUES (@IdUser, @FirstName, @MiddleName, @LastName, @SecondLastName, @Gender, @BirthDate, @Email, @PhoneNumber, GETDATE(), @RegistrationUser);
+		VALUES (@IdUser, UPPER(@FirstName), UPPER(@MiddleName), UPPER(@LastName), UPPER(@SecondLastName), @Gender, @BirthDate, @Email, @PhoneNumber, GETDATE(), @RegistrationUser);
 
 		EXECUTE sp_GenerateUsersHistory @IdUser;
 
