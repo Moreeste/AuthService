@@ -7,9 +7,9 @@ namespace Application.Register.Commands
         string Email,
         string PhoneNumber,
         string FirstName,
-        string MiddleName,
+        string? MiddleName,
         string LastName,
-        string SecondLastName,
+        string? SecondLastName,
         int Gender,
         DateTime BirthDate,
         string Password

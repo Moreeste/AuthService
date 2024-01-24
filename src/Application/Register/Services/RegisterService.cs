@@ -32,11 +32,14 @@ namespace Application.Register.Services
                 throw new Exception($"Ya existe un usuario registrado con el teléfono {register.PhoneNumber}.");
             }
 
-            int iterations = _passwordService.GetIterations("E2C76764-1050-4301-906E-EBFDBB54C9E1");
+            string idUser = _userRepository.GetId();
+            int iterations = _passwordService.GetIterations(idUser);
             string salt = _passwordService.GenerateSalt();
             string hashedPassword = _passwordService.GenerateHash(register.Password, salt, iterations);
 
-            return new RegisterDTO() { IdUser = hashedPassword };
+            bool userCreated = await _userRepository.CreateUser(idUser, register.FirstName, register.MiddleName, register.LastName, register.SecondLastName, register.Gender, register.BirthDate, register.Email, register.PhoneNumber, idUser, hashedPassword, salt);
+
+            return new RegisterDTO() { IdUser = idUser };
         }
     }
 }
