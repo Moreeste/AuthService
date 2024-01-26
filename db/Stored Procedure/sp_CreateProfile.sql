@@ -18,7 +18,7 @@ BEGIN
 		BEGIN TRANSACTION;
 		
 		INSERT INTO Profiles (IdProfile, Description, Active, RegistrationDate, RegistrationUser)
-		VALUES (@IdProfile, @Description, 1, GETDATE(), @RegistrationUser);
+		VALUES (@IdProfile, UPPER(@Description), 1, GETDATE(), @RegistrationUser);
 
 		EXECUTE sp_GenerateProfilesHistory @IdProfile;
 
