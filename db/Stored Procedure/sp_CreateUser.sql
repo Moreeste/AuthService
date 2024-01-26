@@ -25,6 +25,8 @@ BEGIN
 
 	BEGIN TRY
 		BEGIN TRANSACTION;
+		DECLARE @DefaultStatus INT = 1;
+		DECLARE @DefaultProfile VARCHAR(36) = '550E8400-E29B-41D4-A716-446655440000';
 		
 		INSERT INTO Users (IdUser, FirstName, MiddleName, LastName, SecondLastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser) 
 		VALUES (@IdUser, UPPER(@FirstName), UPPER(@MiddleName), UPPER(@LastName), UPPER(@SecondLastName), @Gender, @BirthDate, @Email, @PhoneNumber, GETDATE(), @RegistrationUser);
@@ -35,6 +37,11 @@ BEGIN
 		VALUES (@IdUser, @Password, @Salt, GETDATE(), DATEADD(YEAR, 1, GETDATE()), 0, NULL, 0);
 
 		EXECUTE sp_GeneratePasswordHistory @IdUser;
+
+		INSERT INTO UserProperties (IdUser, Status, Profile, CreationDate, CreationUser)
+		VALUES(@IdUser, 1, @DefaultProfile, GETDATE(), @RegistrationUser);
+
+		EXECUTE sp_GenerateUserPropertiesHistory @IdUser;
 
 		COMMIT;
 		SET @Success = 1;
