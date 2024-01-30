@@ -1,4 +1,5 @@
-﻿using Application.Register.Services;
+﻿using Application.Login.Services;
+using Application.Register.Services;
 using Application.User.Services;
 using Domain.Repository;
 using Domain.Services;
@@ -15,6 +16,7 @@ namespace Infrastructure
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IPasswordService, PasswordService>();
+            services.AddScoped<ILoginService, LoginService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
 
