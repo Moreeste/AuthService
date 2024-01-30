@@ -1,7 +1,7 @@
-﻿using Application.Login.DTOs;
+﻿using Application.Auth.DTOs;
 using MediatR;
 
-namespace Application.Login.Commands
+namespace Application.Auth.Commands
 {
     public sealed record LoginCommand(string Email, string Password) : IRequest<LoginDTO>;
 }

@@ -1,9 +1,9 @@
-﻿using Application.Login.Commands;
-using Application.Login.DTOs;
-using Application.Login.Services;
+﻿using Application.Auth.Commands;
+using Application.Auth.DTOs;
+using Application.Auth.Services;
 using MediatR;
 
-namespace Application.Login.Handlers
+namespace Application.Auth.Handlers
 {
     public class LoginHandler : IRequestHandler<LoginCommand, LoginDTO>
     {

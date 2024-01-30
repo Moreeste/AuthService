@@ -1,6 +1,6 @@
-﻿using Application.Login.DTOs;
+﻿using Application.Auth.DTOs;
 
-namespace Application.Login.Services
+namespace Application.Auth.Services
 {
     public interface ILoginService
     {
