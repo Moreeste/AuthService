@@ -1,5 +1,4 @@
 ﻿using Application.User.Queries;
-using Application.User.Commands;
 using Application.User.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,13 +21,6 @@ namespace WebApi.Controllers.V1
         {
             var query = new GetUserByIdQuery(id);
             var item = await _mediator.Send(query);
-            return item;
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<UserDTO>> Post(CreateUserCommand command)
-        {
-            var item = await _mediator.Send(command);
             return item;
         }
     }
