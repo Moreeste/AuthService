@@ -10,21 +10,25 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT	IdUser, 
-			FirstName, 
-			MiddleName, 
-			LastName, 
-			SecondLastName, 
+	SELECT	U.IdUser, 
+			U.FirstName, 
+			U.MiddleName, 
+			U.LastName, 
+			U.SecondLastName, 
 			G.Description AS Gender, 
-			BirthDate, 
-			Email, 
-			PhoneNumber, 
-			RegistrationDate, 
-			RegistrationUser, 
-			UpdateDate, 
-			UpdateUser
-	FROM Users U
-	LEFT JOIN Genders G ON G.IdGender = U.Gender
-	WHERE IdUser = @IdUser;
+			U.BirthDate, 
+			U.Email, 
+			U.PhoneNumber, 
+			U.RegistrationDate, 
+			U.RegistrationUser, 
+			U.UpdateDate, 
+			U.UpdateUser, 
+			P.Status, 
+			P.Profile 
+	FROM Users U 
+	LEFT JOIN Genders G ON G.IdGender = U.Gender 
+	INNER JOIN UserProperties P ON P.IdUser = U.IdUser 
+	WHERE U.IdUser = @IdUser;
+
 END
 GO
