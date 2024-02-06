@@ -23,7 +23,7 @@ namespace Infrastructure.Repository
         
         public async Task<UserModel?> GetUserById(string id)
         {
-            string qry = "EXECUTE sp_GetUserById @IdUser";
+            string qry = "EXECUTE sp_GetUserById @IdUser;";
             var parameters = new { IdUser = id };
 
             var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<UserModel>(qry, parameters);
@@ -33,7 +33,7 @@ namespace Infrastructure.Repository
 
         public async Task<UserModel?> GetUserByEmail(string email)
         {
-            string qry = "EXECUTE sp_GetUserByEmail @Email";
+            string qry = "EXECUTE sp_GetUserByEmail @Email;";
             var parameters = new { Email = email };
 
             var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<UserModel>(qry, parameters);
@@ -43,7 +43,7 @@ namespace Infrastructure.Repository
 
         public async Task<UserModel?> GetUserByPhone(string phone)
         {
-            string qry = "EXECUTE sp_GetUserByPhone @Phone";
+            string qry = "EXECUTE sp_GetUserByPhone @Phone;";
             var parameters = new { Phone = phone };
 
             var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<UserModel>(qry, parameters);
@@ -53,7 +53,7 @@ namespace Infrastructure.Repository
 
         public async Task<bool> CreateUser(string idUser, string firstName, string middleName, string lastName, string secondLastName, int gender, DateTime birthDate, string email, string phoneNumber, string registrationUser, string password, string salt)
         {
-            string qry = "EXECUTE sp_CreateUser @IdUser, @FirstName, @MiddleName, @LastName, @SecondLastName, @Gender, @BirthDate, @Email, @PhoneNumber, @RegistrationUser, @Password, @Salt";
+            string qry = "EXECUTE sp_CreateUser @IdUser, @FirstName, @MiddleName, @LastName, @SecondLastName, @Gender, @BirthDate, @Email, @PhoneNumber, @RegistrationUser, @Password, @Salt;";
             var parameters = new 
             {
                 IdUser = idUser,
