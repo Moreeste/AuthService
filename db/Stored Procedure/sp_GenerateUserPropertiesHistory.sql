@@ -10,8 +10,8 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO UserPropertiesHistory (IdUser, Status, Profile, CreationDate, CreationUser, UpdateDate, UpdateUser)
-	SELECT TOP 1 IdUser, Status, Profile, CreationDate, CreationUser, UpdateDate, UpdateUser
+	INSERT INTO UserPropertiesHistory (IdUser, Status, Profile, CreationDate, UpdateDate, UpdateUser)
+	SELECT TOP 1 IdUser, Status, Profile, CreationDate, UpdateDate, UpdateUser
 	FROM UserProperties WHERE IdUser = @IdUser;
 END
 GO

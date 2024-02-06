@@ -15,8 +15,7 @@ BEGIN
 			CreationDate, 
 			ExpirationDate, 
 			FailedAttempts, 
-			LastAttemptDate, 
-			Blocked 
+			LastAttemptDate
 	FROM Passwords 
 	WHERE IdUser = @IdUser;
 

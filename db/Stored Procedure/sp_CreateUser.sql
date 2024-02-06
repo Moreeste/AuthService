@@ -26,20 +26,20 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION;
 		DECLARE @DefaultStatus INT = 1;
-		DECLARE @DefaultProfile VARCHAR(36) = '550E8400-E29B-41D4-A716-446655440000';
+		DECLARE @DefaultProfile VARCHAR(36) = '8D5A1FBE-CC7E-4B9B-88A6-3F2E1D9C05A2';
 		
 		INSERT INTO Users (IdUser, FirstName, MiddleName, LastName, SecondLastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser) 
 		VALUES (@IdUser, UPPER(@FirstName), UPPER(@MiddleName), UPPER(@LastName), UPPER(@SecondLastName), @Gender, @BirthDate, @Email, @PhoneNumber, GETDATE(), @RegistrationUser);
 
 		EXECUTE sp_GenerateUsersHistory @IdUser;
 
-		INSERT INTO Passwords (IdUser, Password, Salt, CreationDate, ExpirationDate, FailedAttempts, LastAttemptDate, Blocked)
-		VALUES (@IdUser, @Password, @Salt, GETDATE(), DATEADD(YEAR, 1, GETDATE()), 0, NULL, 0);
+		INSERT INTO Passwords (IdUser, Password, Salt, CreationDate, ExpirationDate, FailedAttempts, LastAttemptDate)
+		VALUES (@IdUser, @Password, @Salt, GETDATE(), DATEADD(YEAR, 1, GETDATE()), 0, NULL);
 
 		EXECUTE sp_GeneratePasswordHistory @IdUser;
 
-		INSERT INTO UserProperties (IdUser, Status, Profile, CreationDate, CreationUser)
-		VALUES(@IdUser, 1, @DefaultProfile, GETDATE(), @RegistrationUser);
+		INSERT INTO UserProperties (IdUser, Status, Profile, CreationDate)
+		VALUES(@IdUser, 1, @DefaultProfile, GETDATE());
 
 		EXECUTE sp_GenerateUserPropertiesHistory @IdUser;
 

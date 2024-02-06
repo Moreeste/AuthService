@@ -7,7 +7,6 @@ CREATE TABLE UserProperties
 	Status INT NOT NULL,
 	Profile VARCHAR(36) NOT NULL,
 	CreationDate DATETIME NOT NULL,
-	CreationUser VARCHAR(36) NOT NULL,
 	UpdateDate DATETIME,
 	UpdateUser VARCHAR(36),
 

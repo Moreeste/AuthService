@@ -9,8 +9,7 @@ CREATE TABLE Passwords
 	CreationDate DATETIME NOT NULL,
 	ExpirationDate DATETIME NOT NULL,
 	FailedAttempts INT NOT NULL,
-	LastAttemptDate DATETIME,
-	Blocked BIT NOT NULL,
+	LastAttemptDate DATETIME
 
 	CONSTRAINT PK_Passwords_IdUser PRIMARY KEY (IdUser),
 );

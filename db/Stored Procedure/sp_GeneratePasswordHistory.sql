@@ -10,8 +10,8 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO PasswordsHistory (IdUser, Password, Salt, CreationDate, ExpirationDate, FailedAttempts, LastAttemptDate, Blocked)
-	SELECT TOP 1 IdUser, Password, Salt, CreationDate, ExpirationDate, FailedAttempts, LastAttemptDate, Blocked
+	INSERT INTO PasswordsHistory (IdUser, Password, Salt, CreationDate, ExpirationDate, FailedAttempts, LastAttemptDate)
+	SELECT TOP 1 IdUser, Password, Salt, CreationDate, ExpirationDate, FailedAttempts, LastAttemptDate
 	FROM Passwords WHERE IdUser = @IdUser;
 END
 GO

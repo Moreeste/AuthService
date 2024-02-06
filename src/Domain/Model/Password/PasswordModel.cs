@@ -8,6 +8,5 @@
         public DateTime ExpirationDate { get; set; }
         public int FailedAttempts { get; set; }
         public DateTime LastAttemptDate { get; set; }
-        public bool Blocked { get; set; }
     }
 }

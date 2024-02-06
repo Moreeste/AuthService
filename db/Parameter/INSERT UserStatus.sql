@@ -1,4 +1,4 @@
 
-INSERT INTO UserStatus (IdStatus, Description) VALUES ('1', 'Active');
-INSERT INTO UserStatus (IdStatus, Description) VALUES ('2', 'Inactive');
-INSERT INTO UserStatus (IdStatus, Description) VALUES ('3', 'Blocked');
+INSERT INTO UserStatus (IdStatus, Description) VALUES ('1', 'ACTIVE');
+INSERT INTO UserStatus (IdStatus, Description) VALUES ('2', 'INACTIVE');
+INSERT INTO UserStatus (IdStatus, Description) VALUES ('3', 'BLOCKED');

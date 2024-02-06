@@ -33,7 +33,17 @@ namespace Application.Auth.Services
                 throw new Exception("Usuario bloqueado.");
             }
 
-            var passwordInfo = _passwordRepository.GetPassword(user.IdUser);
+            var passwordInfo = await _passwordRepository.GetPassword(user.IdUser);
+
+            if (passwordInfo == null)
+            {
+                throw new Exception("Usuario no cuenta con contraseña válida.");
+            }
+
+            if (DateTime.Now > passwordInfo.ExpirationDate)
+            {
+                throw new Exception("Contraseña expirada, favor de cambiarla y volver a iniciar sesión.");
+            }
 
             return null;
         }
