@@ -6,10 +6,12 @@ namespace Application.Auth.Services
     public class LoginService : ILoginService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IPasswordRepository _passwordRepository;
 
-        public LoginService(IUserRepository userRepository)
+        public LoginService(IUserRepository userRepository, IPasswordRepository passwordRepository)
         {
             _userRepository = userRepository;
+            _passwordRepository = passwordRepository;
         }
 
         public async Task<LoginDTO> Login(string email, string password)
@@ -30,6 +32,8 @@ namespace Application.Auth.Services
             {
                 throw new Exception("Usuario bloqueado.");
             }
+
+            var passwordInfo = _passwordRepository.GetPassword(user.IdUser);
 
             return null;
         }
