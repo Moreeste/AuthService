@@ -6,10 +6,14 @@ namespace Infrastructure.Security
 {
     public class PasswordService : IPasswordService
     {
-        public int GetIterations(string idUser)
+        public int GetIterations(string? idUser)
         {
-            int iterations;
+            if (string.IsNullOrEmpty(idUser))
+            {
+                throw new Exception("idUser requerido.");
+            }
 
+            int iterations;
             Guid guid = Guid.Parse(idUser);
             byte[] guidByte = guid.ToByteArray();
             long guidNumber = BitConverter.ToInt64(guidByte, 0);
@@ -25,7 +29,7 @@ namespace Infrastructure.Security
             string salt = string.Empty;
             byte[] saltBytes = new byte[32];
 
-            using (var rng = new RNGCryptoServiceProvider())
+            using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(saltBytes);
             }
@@ -35,8 +39,18 @@ namespace Infrastructure.Security
             return salt;
         }
 
-        public string GenerateHash(string password, string salt, int iterations)
+        public string GenerateHash(string? password, string? salt, int iterations)
         {
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new Exception("password requerido.");
+            }
+
+            if (string.IsNullOrEmpty(salt))
+            {
+                throw new Exception("salt requerida.");
+            }
+
             string hashedPassword = string.Empty;
             byte[] saltByte = Convert.FromBase64String(salt);
 

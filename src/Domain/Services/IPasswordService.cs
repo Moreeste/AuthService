@@ -2,8 +2,8 @@
 {
     public interface IPasswordService
     {
-        int GetIterations(string idUser);
+        int GetIterations(string? idUser);
         string GenerateSalt();
-        string GenerateHash(string password, string salt, int iterations);
+        string GenerateHash(string? password, string? salt, int iterations);
     }
 }
