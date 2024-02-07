@@ -46,7 +46,7 @@ namespace Infrastructure.Repository
             return result;
         }
 
-        public async Task<bool> CreateUser(string idUser, string firstName, string middleName, string lastName, string secondLastName, int gender, DateTime birthDate, string email, string phoneNumber, string registrationUser, string password, string salt)
+        public async Task<bool> CreateUser(string idUser, string firstName, string? middleName, string lastName, string? secondLastName, int gender, DateTime birthDate, string email, string phoneNumber, string registrationUser, string password, string salt)
         {
             string qry = "EXECUTE sp_CreateUser @IdUser, @FirstName, @MiddleName, @LastName, @SecondLastName, @Gender, @BirthDate, @Email, @PhoneNumber, @RegistrationUser, @Password, @Salt;";
             var parameters = new 

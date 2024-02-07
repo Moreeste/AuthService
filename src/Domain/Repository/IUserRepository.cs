@@ -9,6 +9,6 @@ namespace Domain.Repository
         Task<UserModel?> GetUserById(string id);
         Task<UserModel?> GetUserByEmail(string email);
         Task<UserModel?> GetUserByPhone(string phone);
-        Task<bool> CreateUser(string idUser, string firstName, string middleName, string lastName, string secondLastName, int gender, DateTime birthDate, string email, string phoneNumber, string registrationUser, string password, string salt);
+        Task<bool> CreateUser(string idUser, string firstName, string? middleName, string lastName, string? secondLastName, int gender, DateTime birthDate, string email, string phoneNumber, string registrationUser, string password, string salt);
     }
 }
