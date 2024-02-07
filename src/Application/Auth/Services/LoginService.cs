@@ -1,15 +1,18 @@
 ﻿using Application.Auth.DTOs;
 using Domain.Repository;
+using Domain.Utilities;
 
 namespace Application.Auth.Services
 {
     public class LoginService : ILoginService
     {
+        private readonly IUtilities _utilities;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordRepository _passwordRepository;
 
-        public LoginService(IUserRepository userRepository, IPasswordRepository passwordRepository)
+        public LoginService(IUtilities utilities, IUserRepository userRepository, IPasswordRepository passwordRepository)
         {
+            _utilities = utilities;
             _userRepository = userRepository;
             _passwordRepository = passwordRepository;
         }
@@ -40,7 +43,7 @@ namespace Application.Auth.Services
                 throw new Exception("Usuario no cuenta con contraseña válida.");
             }
 
-            if (DateTime.Now > passwordInfo.ExpirationDate)
+            if (_utilities.GetDateTime() > passwordInfo.ExpirationDate)
             {
                 throw new Exception("Contraseña expirada, favor de cambiarla y volver a iniciar sesión.");
             }

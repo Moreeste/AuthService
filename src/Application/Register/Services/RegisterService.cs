@@ -2,16 +2,19 @@
 using Application.Register.DTOs;
 using Domain.Repository;
 using Domain.Services;
+using Domain.Utilities;
 
 namespace Application.Register.Services
 {
     public class RegisterService : IRegisterService
     {
+        private readonly IUtilities _utilities;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordService _passwordService;
 
-        public RegisterService(IUserRepository userRepository, IPasswordService passwordService)
+        public RegisterService(IUtilities utilities, IUserRepository userRepository, IPasswordService passwordService)
         {
+            _utilities = utilities;
             _userRepository = userRepository;
             _passwordService = passwordService;
         }
@@ -32,7 +35,7 @@ namespace Application.Register.Services
                 throw new Exception($"Ya existe un usuario registrado con el teléfono {register.PhoneNumber}.");
             }
 
-            string idUser = _userRepository.GetId();
+            string idUser = _utilities.GenerateId();
             int iterations = _passwordService.GetIterations(idUser);
             string salt = _passwordService.GenerateSalt();
             string hashedPassword = _passwordService.GenerateHash(register.Password, salt, iterations);

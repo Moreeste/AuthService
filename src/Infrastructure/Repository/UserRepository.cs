@@ -15,11 +15,6 @@ namespace Infrastructure.Repository
         {
             _authServiceContext = authServiceContext;
         }
-
-        public string GetId()
-        {
-            return Guid.NewGuid().ToString().ToUpper();
-        }
         
         public async Task<UserModel?> GetUserById(string id)
         {
