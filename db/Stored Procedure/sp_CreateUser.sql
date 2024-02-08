@@ -39,7 +39,7 @@ BEGIN
 		EXECUTE sp_GeneratePasswordHistory @IdUser;
 
 		INSERT INTO UserProperties (IdUser, Status, Profile, CreationDate)
-		VALUES(@IdUser, 1, @DefaultProfile, GETDATE());
+		VALUES(@IdUser, @DefaultStatus, @DefaultProfile, GETDATE());
 
 		EXECUTE sp_GenerateUserPropertiesHistory @IdUser;
 
