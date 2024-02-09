@@ -20,6 +20,8 @@ BEGIN
 			LastAttemptDate = GETDATE() 
 			WHERE IdUser = @IdUser;
 
+		EXECUTE sp_GeneratePasswordHistory @IdUser;
+
 		COMMIT;
 		SET @Success = 1;
 	END TRY
