@@ -7,6 +7,5 @@ namespace Domain.Repository
         Task<PasswordModel?> GetPassword(string? idUser);
         Task<bool> SetFailedAttempt(string? idUser);
         Task<bool> ResetFailedAttempts(string? idUser);
-        Task<bool> BlockUser(string? idUser);
     }
 }

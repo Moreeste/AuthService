@@ -65,25 +65,5 @@ namespace Infrastructure.Repository
 
             return true;
         }
-
-        public async Task<bool> BlockUser(string? idUser)
-        {
-            string qry = "EXECUTE sp_BlockUser @IdUser;";
-            var parameters = new { IdUser = idUser };
-
-            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);
-
-            if (result == null)
-            {
-                throw new Exception("Ocurrió un error en la db");
-            }
-
-            if (!result.Success)
-            {
-                throw new Exception($"Error en db: {result.ErrorMessage}");
-            }
-
-            return true;
-        }
     }
 }

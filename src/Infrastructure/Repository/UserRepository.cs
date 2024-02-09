@@ -15,7 +15,41 @@ namespace Infrastructure.Repository
         {
             _authServiceContext = authServiceContext;
         }
-        
+
+        public async Task<bool> CreateUser(string idUser, string firstName, string? middleName, string lastName, string? secondLastName, int gender, DateTime birthDate, string email, string phoneNumber, string registrationUser, string password, string salt)
+        {
+            string qry = "EXECUTE sp_CreateUser @IdUser, @FirstName, @MiddleName, @LastName, @SecondLastName, @Gender, @BirthDate, @Email, @PhoneNumber, @RegistrationUser, @Password, @Salt;";
+            var parameters = new
+            {
+                IdUser = idUser,
+                FirstName = firstName,
+                MiddleName = middleName,
+                LastName = lastName,
+                SecondLastName = secondLastName,
+                Gender = gender,
+                BirthDate = birthDate,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                RegistrationUser = registrationUser,
+                Password = password,
+                Salt = salt
+            };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);
+
+            if (result == null)
+            {
+                throw new Exception("Ocurrió un error en la db");
+            }
+
+            if (!result.Success)
+            {
+                throw new Exception($"Error en db: {result.ErrorMessage}");
+            }
+
+            return true;
+        }
+
         public async Task<UserModel?> GetUserById(string id)
         {
             string qry = "EXECUTE sp_GetUserById @IdUser;";
@@ -46,24 +80,10 @@ namespace Infrastructure.Repository
             return result;
         }
 
-        public async Task<bool> CreateUser(string idUser, string firstName, string? middleName, string lastName, string? secondLastName, int gender, DateTime birthDate, string email, string phoneNumber, string registrationUser, string password, string salt)
+        public async Task<bool> BlockUser(string? idUser)
         {
-            string qry = "EXECUTE sp_CreateUser @IdUser, @FirstName, @MiddleName, @LastName, @SecondLastName, @Gender, @BirthDate, @Email, @PhoneNumber, @RegistrationUser, @Password, @Salt;";
-            var parameters = new 
-            {
-                IdUser = idUser,
-                FirstName = firstName,
-                MiddleName = middleName,
-                LastName = lastName,
-                SecondLastName = secondLastName,
-                Gender = gender,
-                BirthDate = birthDate,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                RegistrationUser = registrationUser,
-                Password = password,
-                Salt = salt
-            };
+            string qry = "EXECUTE sp_BlockUser @IdUser;";
+            var parameters = new { IdUser = idUser };
 
             var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);
 
