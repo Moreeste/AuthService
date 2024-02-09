@@ -18,7 +18,7 @@ BEGIN
 		UPDATE Passwords 
 		SET	FailedAttempts = FailedAttempts + 1, 
 			LastAttemptDate = GETDATE() 
-			WHERE IdUser = @IdUser;
+		WHERE IdUser = @IdUser;
 
 		EXECUTE sp_GeneratePasswordHistory @IdUser;
 
