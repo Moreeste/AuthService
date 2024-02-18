@@ -12,7 +12,8 @@ namespace Infrastructure.Security
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfigurationManager configuration)
         {
             var jwt = configuration.GetSection("Jwt").Get<JwtOptions>();
-            
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt?.Key ?? string.Empty));
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -23,7 +24,7 @@ namespace Infrastructure.Security
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwt?.Issuer,
                     ValidAudience = jwt?.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt?.Key ?? string.Empty))
+                    IssuerSigningKey = key
                 };
             });
 
