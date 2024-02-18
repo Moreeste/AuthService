@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Database;
+using Infrastructure.Security;
 using Infrastructure.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,8 @@ namespace Infrastructure
             services.AddEndpointsApiExplorer();
 
             services.AddDefaultSwagger();
+
+            services.AddCustomAuthentication(configuration);
 
             return services;
         }
