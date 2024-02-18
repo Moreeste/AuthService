@@ -16,11 +16,13 @@ namespace Infrastructure
         {
             services.AddScoped<IUtilities, Utilities>();
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IPasswordService, PasswordService>();
-            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<ITokenService, TokenService>();
 
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IRegisterService, RegisterService>();
+            services.AddScoped<IUserService, UserService>();
+            
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPasswordRepository, PasswordRepository>();
 

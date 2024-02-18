@@ -11,13 +11,15 @@ namespace Application.Auth.Services
         private readonly IUserRepository _userRepository;
         private readonly IPasswordRepository _passwordRepository;
         private readonly IPasswordService _passwordService;
+        private readonly ITokenService _tokenService;
 
-        public LoginService(IUtilities utilities, IUserRepository userRepository, IPasswordRepository passwordRepository, IPasswordService passwordService)
+        public LoginService(IUtilities utilities, IUserRepository userRepository, IPasswordRepository passwordRepository, IPasswordService passwordService, ITokenService tokenService)
         {
             _utilities = utilities;
             _userRepository = userRepository;
             _passwordRepository = passwordRepository;
             _passwordService = passwordService;
+            _tokenService = tokenService;
         }
 
         public async Task<LoginDTO> Login(string email, string password)
@@ -47,6 +49,7 @@ namespace Application.Auth.Services
             }
 
             var date = _utilities.GetDateTime();
+
             if (date > passwordInfo.ExpirationDate)
             {
                 throw new Exception("Contraseña expirada, favor de cambiarla y volver a iniciar sesión.");
