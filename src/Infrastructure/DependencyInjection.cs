@@ -1,4 +1,5 @@
-﻿using Infrastructure.Settings;
+﻿using Infrastructure.Database;
+using Infrastructure.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

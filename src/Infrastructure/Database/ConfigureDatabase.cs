@@ -1,9 +1,8 @@
-﻿using Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure
+namespace Infrastructure.Database
 {
     public static class ConfigureDatabase
     {
