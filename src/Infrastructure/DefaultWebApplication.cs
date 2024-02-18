@@ -29,6 +29,7 @@ namespace Infrastructure
                 app.UseDefaultSwagger();
             }
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
             app.Run();
