@@ -63,7 +63,13 @@ namespace Application.Auth.Services
                 throw new Exception("Contraseña incorrecta.");
             }
 
-            return null;
+            var jwt = _tokenService.GenerateToken(user);
+
+            return new LoginDTO()
+            {
+                Token = jwt.Token,
+                Expiration = jwt.Expiration
+            };
         }
     }
 }

@@ -4,5 +4,6 @@
     {
         string GenerateId();
         DateTime GetDateTime();
+        DateTimeOffset GetDateTimeOffset();
     }
 }
