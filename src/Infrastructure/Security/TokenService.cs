@@ -36,8 +36,8 @@ namespace Infrastructure.Security
             var claims = new[]
             {
                 new Claim("IdUser", user?.IdUser ?? string.Empty),
+                new Claim(JwtRegisteredClaimNames.Sub, user?.IdUser ?? string.Empty),
                 new Claim(JwtRegisteredClaimNames.Jti, id),
-                new Claim(JwtRegisteredClaimNames.Sub, jwtOptions?.Subject ?? string.Empty),
                 new Claim(JwtRegisteredClaimNames.Iat, creationOffset.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer),
             };
 
