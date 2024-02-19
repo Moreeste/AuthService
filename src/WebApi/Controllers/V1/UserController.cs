@@ -2,9 +2,11 @@
 using Application.User.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers.V1
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
