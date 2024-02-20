@@ -9,21 +9,25 @@ namespace WebApi.Controllers.V1
     [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : MainController
     {
-        private readonly IMediator _mediator;
-
-        public UserController(IMediator mediator)
+        public UserController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<UserDTO>> Get()
+        {
+            var query = new GetUserByIdQuery(GetIdUser());
+            return await mediator.Send(query);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDTO>> Get(string id)
+        public async Task<ActionResult<UserDTO>> GetById(string id)
         {
             var query = new GetUserByIdQuery(id);
-            var item = await _mediator.Send(query);
-            return item;
+            return await mediator.Send(query);
         }
     }
 }

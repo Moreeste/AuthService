@@ -9,20 +9,18 @@ namespace WebApi.Controllers.V1
     [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : MainController
     {
-        private readonly IMediator _mediator;
-
-        public AuthController(IMediator mediator)
+        public AuthController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
+
         }
 
         [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<ActionResult<LoginDTO>> Login(LoginCommand command)
         {
-            return await _mediator.Send(command);
+            return await mediator.Send(command);
         }
     }
 }

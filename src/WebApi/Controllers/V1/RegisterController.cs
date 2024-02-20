@@ -9,20 +9,18 @@ namespace WebApi.Controllers.V1
     [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class RegisterController : ControllerBase
+    public class RegisterController : MainController
     {
-        private readonly IMediator _mediator;
-
-        public RegisterController(IMediator mediator)
+        public RegisterController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
+
         }
 
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<RegisterDTO>> Post(RegisterCommand command)
         {
-            return await _mediator.Send(command);
+            return await mediator.Send(command);
         }
     }
 }
