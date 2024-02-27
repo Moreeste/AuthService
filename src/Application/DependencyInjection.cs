@@ -1,5 +1,5 @@
-﻿using Application.Auth.Validators;
-using FluentValidation.AspNetCore;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
@@ -13,12 +13,8 @@ namespace Application
             var assembly = typeof(DependencyInjection).Assembly;
 
             services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(assembly));
-
-            services.AddFluentValidation(x =>
-            {
-                x.RegisterValidatorsFromAssemblyContaining<LoginValidator>();
-                x.DisableDataAnnotationsValidation = true;
-            });
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddValidatorsFromAssembly(assembly);
 
             return services;
         }
