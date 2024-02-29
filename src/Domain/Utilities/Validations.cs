@@ -20,5 +20,12 @@ namespace Domain.Utilities
             string regexPattern = @"^[a-zA-Z]+$";
             return Regex.IsMatch(name, regexPattern);
         }
+
+        public bool BeValidBirthDate(DateTime birthDate)
+        {
+            DateTime minDate = new DateTime(1900, 1, 1);
+            DateTime maxDate = DateTime.Now;
+            return birthDate >= minDate && birthDate <= maxDate;
+        }
     }
 }
