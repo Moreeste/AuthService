@@ -1,9 +1,17 @@
-﻿using System.Text.RegularExpressions;
+﻿using Domain.Repository;
+using System.Text.RegularExpressions;
 
 namespace Domain.Utilities
 {
     public class Validations : IValidations
     {
+        private readonly ICatalogueRepository _catalogueRepository;
+
+        public Validations(ICatalogueRepository catalogueRepository)
+        {
+            _catalogueRepository = catalogueRepository;
+        }
+
         public bool BeValidId(string id)
         {
             return Guid.TryParse(id, out _);
@@ -26,6 +34,12 @@ namespace Domain.Utilities
             DateTime minDate = new DateTime(1900, 1, 1);
             DateTime maxDate = DateTime.Now;
             return birthDate >= minDate && birthDate <= maxDate;
+        }
+
+        public async Task<bool> BeValidGenderId(int gender, CancellationToken cancellationToken)
+        {
+            var genders = await _catalogueRepository.GetGenders();
+            return genders.Any(x => x.IdGender == gender);
         }
     }
 }
