@@ -8,7 +8,7 @@ namespace Application.User.Validators
     {
         public GetUserByIdValidator(IValidations validations)
         {
-            RuleFor(x => x.Id).NotNull().NotEmpty().Length(36).Must(validations.ValidateId);
+            RuleFor(x => x.Id).NotNull().NotEmpty().Length(36).Must(validations.BeValidId);
         }
     }
 }

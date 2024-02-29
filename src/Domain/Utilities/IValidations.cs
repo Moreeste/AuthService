@@ -2,6 +2,8 @@
 {
     public interface IValidations
     {
-        bool ValidateId(string id);
+        bool BeValidId(string id);
+        bool BeValidPhoneNumber(string phone);
+        bool BeValidName(string name);
     }
 }
