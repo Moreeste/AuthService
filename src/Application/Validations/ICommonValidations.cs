@@ -1,6 +1,6 @@
-﻿namespace Domain.Utilities
+﻿namespace Application.Validations
 {
-    public interface IValidations
+    public interface ICommonValidations
     {
         bool BeValidId(string id);
         bool BeValidPhoneNumber(string phone);

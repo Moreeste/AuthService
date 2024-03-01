@@ -1,13 +1,13 @@
 ﻿using Domain.Repository;
 using System.Text.RegularExpressions;
 
-namespace Domain.Utilities
+namespace Application.Validations
 {
-    public class Validations : IValidations
+    public class CommonValidations : ICommonValidations
     {
         private readonly ICatalogueRepository _catalogueRepository;
 
-        public Validations(ICatalogueRepository catalogueRepository)
+        public CommonValidations(ICatalogueRepository catalogueRepository)
         {
             _catalogueRepository = catalogueRepository;
         }

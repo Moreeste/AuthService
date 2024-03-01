@@ -15,7 +15,6 @@ namespace Infrastructure
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IUtilities, Utilities>();
-            services.AddScoped<IValidations, Validations>();
 
             services.AddScoped<IPasswordService, PasswordService>();
             services.AddScoped<ITokenService, TokenService>();
