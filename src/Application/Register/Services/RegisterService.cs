@@ -40,7 +40,19 @@ namespace Application.Register.Services
             string salt = _passwordService.GenerateSalt();
             string hashedPassword = _passwordService.GenerateHash(register.Password, salt, iterations);
 
-            bool userCreated = await _userRepository.CreateUser(idUser, register.FirstName, register.MiddleName, register.LastName, register.SecondLastName, register.Gender, register.BirthDate, register.Email, register.PhoneNumber, idUser, hashedPassword, salt);
+            bool userCreated = await _userRepository.CreateUser(
+                idUser, 
+                register.FirstName, 
+                (register.MiddleName == string.Empty ? null : register.MiddleName), 
+                register.LastName, 
+                (register.SecondLastName == string.Empty ? null : register.SecondLastName), 
+                register.Gender, 
+                register.BirthDate, 
+                register.Email, 
+                register.PhoneNumber, 
+                idUser, 
+                hashedPassword, 
+                salt);
 
             return new RegisterDTO() { IdUser = idUser };
         }

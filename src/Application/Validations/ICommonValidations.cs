@@ -3,9 +3,10 @@
     public interface ICommonValidations
     {
         bool BeValidId(string id);
-        bool BeValidPhoneNumber(string phone);
-        bool BeValidName(string name);
+        bool BeValidRequiredName(string name);
+        bool BeValidOptionalName(string name);
         bool BeValidBirthDate(DateTime birthDate);
+        bool BeValidPhoneNumber(string phone);
         Task <bool> BeValidGenderId(int gender, CancellationToken cancellationToken);
     }
 }

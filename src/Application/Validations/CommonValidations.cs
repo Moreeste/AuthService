@@ -17,14 +17,19 @@ namespace Application.Validations
             return Guid.TryParse(id, out _);
         }
 
-        public bool BeValidPhoneNumber(string phone)
+        public bool BeValidRequiredName(string name)
         {
-            string regexPattern = @"^\d{10}$";
-            return Regex.IsMatch(phone, regexPattern);
+            string regexPattern = @"^[a-zA-Z]+$";
+            return Regex.IsMatch(name, regexPattern);
         }
 
-        public bool BeValidName(string name)
+        public bool BeValidOptionalName(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                return true;
+            }
+
             string regexPattern = @"^[a-zA-Z]+$";
             return Regex.IsMatch(name, regexPattern);
         }
@@ -36,6 +41,12 @@ namespace Application.Validations
             return birthDate >= minDate && birthDate <= maxDate;
         }
 
+        public bool BeValidPhoneNumber(string phone)
+        {
+            string regexPattern = @"^\d{10}$";
+            return Regex.IsMatch(phone, regexPattern);
+        }
+        
         public async Task<bool> BeValidGenderId(int gender, CancellationToken cancellationToken)
         {
             var genders = await _catalogueRepository.GetGenders();
