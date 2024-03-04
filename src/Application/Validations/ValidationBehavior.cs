@@ -17,7 +17,10 @@ namespace Application.Validations
             if (_validators.Any())
             {
                 var context = new ValidationContext<TRequest>(request);
-                var failures = _validators.Select(x => x.Validate(context)).SelectMany(x => x.Errors).Where(x => x != null).ToList();
+                var validationTasks = _validators.Select(async x => await x.ValidateAsync(context, cancellationToken));
+                var validationResults = await Task.WhenAll(validationTasks);
+
+                var failures = validationResults.SelectMany(x => x.Errors).Where(x => x != null).ToList();
 
                 if (failures.Count > 0)
                 {
