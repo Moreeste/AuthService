@@ -1,4 +1,5 @@
 ﻿using Application;
+using Infrastructure.Middleware;
 using Infrastructure.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,8 @@ namespace Infrastructure
             {
                 app.UseDefaultSwagger();
             }
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseAuthentication();
             app.UseAuthorization();
