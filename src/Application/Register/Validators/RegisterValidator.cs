@@ -16,7 +16,7 @@ namespace Application.Register.Validators
             RuleFor(x => x.SecondLastName).MaximumLength(30).Must(commonValidations.BeValidOptionalName);
             RuleFor(x => x.Gender).NotNull().MustAsync(commonValidations.BeValidGenderId);
             RuleFor(x => x.BirthDate).NotNull().Must(commonValidations.BeValidBirthDate);
-            RuleFor(x => x.Password).NotNull().NotEmpty().MinimumLength(8).MaximumLength(32);
+            RuleFor(x => x.Password).MustBeValidPassword();
         }
     }
 }
