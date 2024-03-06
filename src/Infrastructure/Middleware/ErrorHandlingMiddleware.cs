@@ -48,7 +48,7 @@ namespace Infrastructure.Middleware
                     statusCode = StatusCodes.Status404NotFound;
                     errorMessage = exception.Message;
                     break;
-                case ValidationException:
+                case CustomValidationException:
                     statusCode = StatusCodes.Status400BadRequest;
                     errorMessage = exception.Message;
                     break;
