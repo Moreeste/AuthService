@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Exceptions;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Infrastructure.Middleware
 {
@@ -25,7 +27,44 @@ namespace Infrastructure.Middleware
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            return null;
+            int statusCode;
+            string errorMessage;
+
+            switch (exception)
+            {
+                case SysException:
+                    statusCode = StatusCodes.Status500InternalServerError;
+                    errorMessage = "Internal System Error";
+                    break;
+                case DataBaseException:
+                    statusCode = StatusCodes.Status500InternalServerError;
+                    errorMessage = "DataBase Error";
+                    break;
+                case BusinessException:
+                    statusCode = StatusCodes.Status500InternalServerError;
+                    errorMessage = "Internal Business Error";
+                    break;
+                case SearchException:
+                    statusCode = StatusCodes.Status404NotFound;
+                    errorMessage = exception.Message;
+                    break;
+                case ValidationException:
+                    statusCode = StatusCodes.Status400BadRequest;
+                    errorMessage = exception.Message;
+                    break;
+                default:
+                    statusCode = StatusCodes.Status500InternalServerError;
+                    errorMessage = "Unknown Error";
+                    break;
+            }
+
+            var response = new { StatusCode = statusCode, Message = errorMessage };
+            var jsonResponse = JsonConvert.SerializeObject(response);
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = statusCode;
+
+            return context.Response.WriteAsync(jsonResponse);
         }
     }
 }
