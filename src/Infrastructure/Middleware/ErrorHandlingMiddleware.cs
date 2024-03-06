@@ -41,8 +41,8 @@ namespace Infrastructure.Middleware
                     errorMessage = "DataBase Error";
                     break;
                 case BusinessException:
-                    statusCode = StatusCodes.Status500InternalServerError;
-                    errorMessage = "Internal Business Error";
+                    statusCode = StatusCodes.Status400BadRequest;
+                    errorMessage = "Business Error";
                     break;
                 case SearchException:
                     statusCode = StatusCodes.Status404NotFound;
