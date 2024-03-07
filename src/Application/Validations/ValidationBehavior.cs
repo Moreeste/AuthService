@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using Domain.Exceptions;
+using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 
 namespace Application.Validations
@@ -23,11 +25,17 @@ namespace Application.Validations
 
                 if (failures.Count > 0)
                 {
-                    throw new ValidationException(failures);
+                    string errorMessage = GenerateErrorMessage(failures);
+                    throw new CustomValidationException(errorMessage);
                 }
             }
 
             return await next();
+        }
+
+        private string GenerateErrorMessage(List<ValidationFailure> failures)
+        {
+            return string.Join(" ", failures.Select(failure => failure.ErrorMessage));
         }
     }
 }
