@@ -42,7 +42,7 @@ namespace Infrastructure.Middleware
                     break;
                 case BusinessException:
                     statusCode = StatusCodes.Status400BadRequest;
-                    errorMessage = "Business Error";
+                    errorMessage = exception.Message;
                     break;
                 case SearchException:
                     statusCode = StatusCodes.Status404NotFound;
