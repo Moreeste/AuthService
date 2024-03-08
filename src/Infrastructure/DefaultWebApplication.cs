@@ -30,6 +30,7 @@ namespace Infrastructure
                 app.UseDefaultSwagger();
             }
 
+            app.UseMiddleware<ApiResponseMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseAuthentication();
