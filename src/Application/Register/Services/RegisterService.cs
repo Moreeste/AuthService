@@ -1,5 +1,6 @@
 ﻿using Application.Register.Commands;
 using Application.Register.DTOs;
+using Domain.Exceptions;
 using Domain.Repository;
 using Domain.Services;
 using Domain.Utilities;
@@ -25,14 +26,14 @@ namespace Application.Register.Services
 
             if (userEmail != null)
             {
-                throw new Exception($"Ya existe un usuario registrado con el email {register.Email}.");
+                throw new BusinessException($"Ya existe un usuario registrado con el email {register.Email}.");
             }
 
             var userPhone = await _userRepository.GetUserByPhone(register.PhoneNumber);
 
             if (userPhone != null)
             {
-                throw new Exception($"Ya existe un usuario registrado con el teléfono {register.PhoneNumber}.");
+                throw new BusinessException($"Ya existe un usuario registrado con el teléfono {register.PhoneNumber}.");
             }
 
             string idUser = _utilities.GenerateId();

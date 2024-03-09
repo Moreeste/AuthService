@@ -1,4 +1,5 @@
-﻿using Domain.Services;
+﻿using Domain.Exceptions;
+using Domain.Services;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace Infrastructure.Security
         {
             if (string.IsNullOrEmpty(idUser))
             {
-                throw new Exception("idUser requerido.");
+                throw new SysException("IdUser required for GetIterations.");
             }
 
             int iterations;
@@ -43,12 +44,12 @@ namespace Infrastructure.Security
         {
             if (string.IsNullOrEmpty(password))
             {
-                throw new Exception("password requerido.");
+                throw new SysException("Password required for GenerateHash.");
             }
 
             if (string.IsNullOrEmpty(salt))
             {
-                throw new Exception("salt requerida.");
+                throw new SysException("Salt required for GenerateHash.");
             }
 
             string hashedPassword = string.Empty;

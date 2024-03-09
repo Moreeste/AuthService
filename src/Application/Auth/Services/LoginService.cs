@@ -1,4 +1,5 @@
 ﻿using Application.Auth.DTOs;
+using Domain.Exceptions;
 using Domain.Repository;
 using Domain.Services;
 using Domain.Utilities;
@@ -28,31 +29,31 @@ namespace Application.Auth.Services
 
             if (user == null)
             {
-                throw new Exception("No existe el usuario.");
+                throw new SearchException("No existe el usuario.");
             }
 
             if (user.Status == 2)
             {
-                throw new Exception("Usuario inactivo.");
+                throw new BusinessException("Usuario inactivo.");
             }
 
             if (user.Status == 3)
             {
-                throw new Exception("Usuario bloqueado.");
+                throw new BusinessException("Usuario bloqueado.");
             }
 
             var passwordInfo = await _passwordRepository.GetPassword(user.IdUser);
 
             if (passwordInfo == null)
             {
-                throw new Exception("Usuario no cuenta con contraseña válida.");
+                throw new BusinessException("Usuario no cuenta con contraseña válida.");
             }
 
             var date = _utilities.GetDateTime();
 
             if (date > passwordInfo.ExpirationDate)
             {
-                throw new Exception("Contraseña expirada, favor de cambiarla y volver a iniciar sesión.");
+                throw new BusinessException("Contraseña expirada, favor de cambiarla y volver a iniciar sesión.");
             }
 
             int iterations = _passwordService.GetIterations(user.IdUser);
@@ -60,7 +61,7 @@ namespace Application.Auth.Services
 
             if (passwordInfo.Password != hashedPassword)
             {
-                throw new Exception("Contraseña incorrecta.");
+                throw new BusinessException("Contraseña incorrecta.");
             }
 
             var jwt = _tokenService.GenerateToken(user);
