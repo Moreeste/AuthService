@@ -31,7 +31,7 @@ namespace Infrastructure.Middleware
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             int statusCode;
             string errorMessage;
