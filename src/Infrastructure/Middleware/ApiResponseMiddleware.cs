@@ -30,18 +30,23 @@ namespace Infrastructure.Middleware
 
                 context.Response.Body = originalBodyStream;
 
-                var headerTraceId = context.Response.Headers["TraceId"];
-                string? traceId = (headerTraceId.Count > 0) ? headerTraceId[0] : string.Empty;
+                var newResponse = new ResponseModel();
 
-                var newResponse = new ResponseModel()
+                if (context.Response.StatusCode == StatusCodes.Status200OK)
                 {
-                    Success = true,
-                    TraceId = traceId,
-                    Data = originalResponse,
-                };
+                    newResponse.Success = true;
+                    newResponse.TraceId = Guid.NewGuid().ToString().ToUpper();
+                    newResponse.Result = originalResponse;
+                }
+                else
+                {
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseBody);
+                    newResponse.Success = false;
+                    newResponse.TraceId = errorResponse?.ErrorId;
+                    newResponse.Error = errorResponse?.ErrorMessage;
+                }
 
                 var jsonResponse = JsonConvert.SerializeObject(newResponse);
-                context.Response.Headers.Remove("TraceId");
                 await context.Response.WriteAsync(jsonResponse);
             }
         }

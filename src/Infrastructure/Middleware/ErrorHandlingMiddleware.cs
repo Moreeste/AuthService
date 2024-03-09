@@ -64,16 +64,11 @@ namespace Infrastructure.Middleware
                     break;
             }
             
-            var response = new ErrorResponse
-            {
-                ErrorMessage = errorMessage,
-            };
+            var response = new ErrorResponse(Guid.NewGuid().ToString().ToUpper(), errorMessage);
 
-            string idError = Guid.NewGuid().ToString().ToUpper();
             var jsonResponse = JsonConvert.SerializeObject(response);
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;
-            context.Response.Headers.Append("TraceId", idError);
 
             return context.Response.WriteAsync(jsonResponse);
         }
