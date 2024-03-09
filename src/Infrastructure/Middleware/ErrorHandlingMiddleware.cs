@@ -39,11 +39,11 @@ namespace Infrastructure.Middleware
             {
                 case SysException:
                     statusCode = StatusCodes.Status500InternalServerError;
-                    errorMessage = "Internal System Error";
+                    errorMessage = "An internal error has occurred.";
                     break;
                 case DataBaseException:
                     statusCode = StatusCodes.Status500InternalServerError;
-                    errorMessage = "DataBase Error";
+                    errorMessage = "A database error has occurred.";
                     break;
                 case BusinessException:
                     statusCode = StatusCodes.Status400BadRequest;
@@ -59,7 +59,7 @@ namespace Infrastructure.Middleware
                     break;
                 default:
                     statusCode = StatusCodes.Status500InternalServerError;
-                    errorMessage = "Unknown Error";
+                    errorMessage = "An unknown error has occurred.";
                     break;
             }
 
