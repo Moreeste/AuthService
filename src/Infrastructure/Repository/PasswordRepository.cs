@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Domain.Exceptions;
 using Domain.Model.Password;
 using Domain.Model.Response;
 using Domain.Repository;
@@ -35,12 +36,12 @@ namespace Infrastructure.Repository
 
             if (result == null)
             {
-                throw new Exception("Ocurrió un error en la db");
+                throw new DataBaseException(qry, parameters);
             }
 
             if (!result.Success)
             {
-                throw new Exception($"Error en db: {result.ErrorMessage}");
+                throw new DataBaseException(qry, parameters, result.ErrorMessage);
             }
 
             return true;
@@ -55,12 +56,12 @@ namespace Infrastructure.Repository
 
             if (result == null)
             {
-                throw new Exception("Ocurrió un error en la db");
+                throw new DataBaseException(qry, parameters);
             }
 
             if (!result.Success)
             {
-                throw new Exception($"Error en db: {result.ErrorMessage}");
+                throw new DataBaseException(qry, parameters, result.ErrorMessage);
             }
 
             return true;

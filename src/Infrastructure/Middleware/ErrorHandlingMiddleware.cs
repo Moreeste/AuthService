@@ -22,7 +22,7 @@ namespace Infrastructure.Middleware
             }
             catch (SqlException ex)
             {
-                await HandleExceptionAsync(context, new DataBaseException(ex.Message));
+                await HandleExceptionAsync(context, new DataBaseException(ex.Procedure, null, ex.Message));
             }
             catch (Exception ex)
             {
