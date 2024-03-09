@@ -1,5 +1,6 @@
 ﻿using Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
 
 namespace Infrastructure.Middleware
@@ -18,6 +19,10 @@ namespace Infrastructure.Middleware
             try
             {
                 await _next(context);
+            }
+            catch (SqlException ex)
+            {
+                await HandleExceptionAsync(context, new DataBaseException(ex.Message));
             }
             catch (Exception ex)
             {
