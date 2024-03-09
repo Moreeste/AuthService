@@ -1,4 +1,5 @@
 ﻿using Domain.Exceptions;
+using Domain.Model.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
@@ -62,12 +63,17 @@ namespace Infrastructure.Middleware
                     errorMessage = "An unknown error has occurred.";
                     break;
             }
+            
+            var response = new ErrorResponse
+            {
+                ErrorMessage = errorMessage,
+            };
 
-            var response = new { StatusCode = statusCode, Message = errorMessage };
+            string idError = Guid.NewGuid().ToString().ToUpper();
             var jsonResponse = JsonConvert.SerializeObject(response);
-
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;
+            context.Response.Headers.Append("TraceId", idError);
 
             return context.Response.WriteAsync(jsonResponse);
         }

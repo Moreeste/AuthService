@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Model.Response;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace Infrastructure.Middleware
@@ -29,14 +30,18 @@ namespace Infrastructure.Middleware
 
                 context.Response.Body = originalBodyStream;
 
-                var newResponse = new
+                var headerTraceId = context.Response.Headers["TraceId"];
+                string? traceId = (headerTraceId.Count > 0) ? headerTraceId[0] : string.Empty;
+
+                var newResponse = new ResponseModel()
                 {
-                    success = true,
-                    message = "Proceso exitoso",
-                    data = originalResponse
+                    Success = true,
+                    TraceId = traceId,
+                    Data = originalResponse,
                 };
 
                 var jsonResponse = JsonConvert.SerializeObject(newResponse);
+                context.Response.Headers.Remove("TraceId");
                 await context.Response.WriteAsync(jsonResponse);
             }
         }
