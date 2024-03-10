@@ -58,6 +58,10 @@ namespace Infrastructure.Middleware
                     statusCode = StatusCodes.Status400BadRequest;
                     errorMessage = exception.Message;
                     break;
+                case JsonRequestException:
+                    statusCode = StatusCodes.Status400BadRequest;
+                    errorMessage = exception.Message;
+                    break;
                 default:
                     statusCode = StatusCodes.Status500InternalServerError;
                     errorMessage = "An unknown error has occurred.";

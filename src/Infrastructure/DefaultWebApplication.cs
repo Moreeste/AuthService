@@ -32,6 +32,7 @@ namespace Infrastructure
 
             app.UseMiddleware<ApiResponseMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
+            app.UseMiddleware<JsonRequestValidationMiddleware>();
 
             app.UseAuthentication();
             app.UseAuthorization();
