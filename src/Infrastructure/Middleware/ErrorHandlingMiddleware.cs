@@ -70,7 +70,7 @@ namespace Infrastructure.Middleware
 
             string id = Guid.NewGuid().ToString().ToUpper();
 
-            //_logRepository.AddErrorLog(id, exception.GetType().Name, exception.Message, exception?.StackTrace);
+            SaveLog(id, exception);
 
             var response = new ErrorResponse(id, errorMessage);
             var jsonResponse = JsonConvert.SerializeObject(response);
@@ -78,6 +78,22 @@ namespace Infrastructure.Middleware
             context.Response.StatusCode = statusCode;
 
             return context.Response.WriteAsync(jsonResponse);
+        }
+
+        private void SaveLog(string id, Exception exception)
+        {
+            string type = exception.GetType().Name;
+            string message = exception.Message;
+            string? stackTrace = exception.StackTrace;
+            string? query = null;
+            string? parameters = null;
+
+            if (exception is DataBaseException)
+            {
+                DataBaseException ex = (DataBaseException)exception;
+                query = ex.Query;
+                parameters = ex.Parameters;
+            }
         }
     }
 }
