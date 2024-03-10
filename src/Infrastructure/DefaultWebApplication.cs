@@ -29,11 +29,8 @@ namespace Infrastructure
             {
                 app.UseDefaultSwagger();
             }
-
-            app.UseMiddleware<ApiResponseMiddleware>();
-            app.UseMiddleware<ErrorHandlingMiddleware>();
-            app.UseMiddleware<JsonRequestValidationMiddleware>();
-
+            
+            app.UseCustomMiddlewares();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
