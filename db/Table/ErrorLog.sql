@@ -8,6 +8,8 @@ CREATE TABLE ErrorLog
 	Type VARCHAR(50) NOT NULL,
 	Message NVARCHAR(MAX),
 	StackTrace NVARCHAR(MAX),
+	Query NVARCHAR(MAX),
+	Parameters NVARCHAR(MAX),
 
 	CONSTRAINT PK_ErrorLog_TraceId PRIMARY KEY (TraceId)
 );
