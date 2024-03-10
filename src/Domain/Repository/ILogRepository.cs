@@ -2,6 +2,6 @@
 {
     public interface ILogRepository
     {
-        Task<bool> AddErrorLog(string traceId, string type, string? message, string? stackTrace);
+        Task<bool> AddErrorLog(string traceId, string type, string? message, string? stackTrace, string? query, string? qryParameters);
     }
 }

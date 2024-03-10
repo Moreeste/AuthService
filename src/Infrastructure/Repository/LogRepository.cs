@@ -16,15 +16,17 @@ namespace Infrastructure.Repository
             _authServiceContext = authServiceContext;
         }
 
-        public async Task<bool> AddErrorLog(string traceId, string type, string? message, string? stackTrace)
+        public async Task<bool> AddErrorLog(string traceId, string type, string? message, string? stackTrace, string? query, string? qryParameters)
         {
-            string qry = "EXECUTE sp_AddErrorLog @TraceId, @Type, @Message, @StackTrace;";
+            string qry = "EXECUTE sp_AddErrorLog @TraceId, @Type, @Message, @StackTrace, @Query, @QryParameters;";
             var parameters = new
             {
                 TraceId = traceId,
                 Type = type,
                 Message = message,
-                StackTrace = stackTrace
+                StackTrace = stackTrace,
+                Query = query,
+                QryParameters = qryParameters
             };
 
             var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);

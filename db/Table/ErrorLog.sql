@@ -9,7 +9,7 @@ CREATE TABLE ErrorLog
 	Message NVARCHAR(MAX),
 	StackTrace NVARCHAR(MAX),
 	Query NVARCHAR(MAX),
-	Parameters NVARCHAR(MAX),
+	QryParameters NVARCHAR(MAX),
 
 	CONSTRAINT PK_ErrorLog_TraceId PRIMARY KEY (TraceId)
 );

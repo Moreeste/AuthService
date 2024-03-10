@@ -10,7 +10,7 @@ CREATE OR ALTER PROCEDURE sp_AddErrorLog
 	@Message NVARCHAR(MAX),
 	@StackTrace NVARCHAR(MAX),
 	@Query NVARCHAR(MAX),
-	@Parameters NVARCHAR(MAX)
+	@QryParameters NVARCHAR(MAX)
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -20,8 +20,8 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION;
 		
-		INSERT INTO ErrorLog (TraceId, TimeSpan, Type, Message, StackTrace, Query, Parameters)
-		VALUES (@TraceId, GETDATE(), @Type, @Message, @StackTrace, @Query, @Parameters);
+		INSERT INTO ErrorLog (TraceId, TimeSpan, Type, Message, StackTrace, Query, QryParameters)
+		VALUES (@TraceId, GETDATE(), @Type, @Message, @StackTrace, @Query, @QryParameters);
 
 		COMMIT;
 		SET @Success = 1;
