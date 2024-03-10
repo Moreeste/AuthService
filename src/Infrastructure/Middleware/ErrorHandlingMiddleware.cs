@@ -67,9 +67,12 @@ namespace Infrastructure.Middleware
                     errorMessage = "An unknown error has occurred.";
                     break;
             }
-            
-            var response = new ErrorResponse(Guid.NewGuid().ToString().ToUpper(), errorMessage);
 
+            string id = Guid.NewGuid().ToString().ToUpper();
+
+            //_logRepository.AddErrorLog(id, exception.GetType().Name, exception.Message, exception?.StackTrace);
+
+            var response = new ErrorResponse(id, errorMessage);
             var jsonResponse = JsonConvert.SerializeObject(response);
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;

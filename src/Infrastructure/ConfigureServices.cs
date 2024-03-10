@@ -23,6 +23,7 @@ namespace Infrastructure
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<ILogRepository, LogRepository>(); 
             services.AddScoped<ICatalogueRepository, CatalogueRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPasswordRepository, PasswordRepository>();
