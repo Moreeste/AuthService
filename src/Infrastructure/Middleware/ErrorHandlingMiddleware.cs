@@ -1,25 +1,29 @@
 ﻿using Domain.Exceptions;
 using Domain.Model.Response;
+using Domain.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Infrastructure.Middleware
 {
-    public class ErrorHandlingMiddleware
+    public class ErrorHandlingMiddleware : IMiddleware
     {
-        private readonly RequestDelegate _next;
+        private readonly ILogger<ErrorHandlingMiddleware> _logger;
+        private readonly ILogRepository _logRepository;
 
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger, ILogRepository logRepository)
         {
-            _next = next;
+            _logger = logger;
+            _logRepository = logRepository;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try
             {
-                await _next(context);
+                await next(context);
             }
             catch (SqlException ex)
             {
@@ -31,7 +35,7 @@ namespace Infrastructure.Middleware
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             int statusCode;
             string errorMessage;
@@ -70,17 +74,17 @@ namespace Infrastructure.Middleware
 
             string id = Guid.NewGuid().ToString().ToUpper();
 
-            SaveLog(id, exception);
+            await SaveLog(id, exception);
 
             var response = new ErrorResponse(id, errorMessage);
             var jsonResponse = JsonConvert.SerializeObject(response);
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;
-
-            return context.Response.WriteAsync(jsonResponse);
+            
+            await context.Response.WriteAsync(jsonResponse);
         }
 
-        private void SaveLog(string id, Exception exception)
+        private async Task SaveLog(string id, Exception exception)
         {
             string type = exception.GetType().Name;
             string message = exception.Message;
@@ -93,6 +97,15 @@ namespace Infrastructure.Middleware
                 DataBaseException ex = (DataBaseException)exception;
                 query = ex.Query;
                 parameters = ex.Parameters;
+            }
+
+            try
+            {
+                await _logRepository.AddErrorLog(id, type, message, stackTrace, query, parameters);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"An error occurred saving the 'error log' - {ex.Message}.");
             }
         }
     }

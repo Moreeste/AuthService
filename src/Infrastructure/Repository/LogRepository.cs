@@ -28,7 +28,7 @@ namespace Infrastructure.Repository
                 Query = query,
                 QryParameters = qryParameters
             };
-
+            
             var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);
 
             if (result == null)
