@@ -1,7 +1,6 @@
-﻿using Infrastructure.Middleware;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 
-namespace Infrastructure
+namespace Infrastructure.Middleware
 {
     public static class ConfigureMiddlewares
     {
