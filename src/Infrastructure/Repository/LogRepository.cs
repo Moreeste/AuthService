@@ -43,5 +43,38 @@ namespace Infrastructure.Repository
 
             return true;
         }
+
+        public async Task<bool> AddApiLog(string traceId, decimal timeElapsed, string clientIP, string path, int statusCode, bool success, string? error, string? request, string? response, string? apiResult, string? token)
+        {
+            string qry = "EXECUTE sp_AddApiLog @TraceId, @TimeElapsed, @ClientIP, @Path, @StatusCode, @ParamSuccess, @Error, @Request, @Response, @Result, @Token;";
+            var parameters = new
+            {
+                TraceId = traceId,
+                TimeElapsed = timeElapsed,
+                ClientIP = clientIP,
+                Path = path,
+                StatusCode = statusCode,
+                ParamSuccess = success,
+                Error = error,
+                Request = request,
+                Response = response,
+                Result = apiResult,
+                Token = token
+            };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);
+
+            if (result == null)
+            {
+                throw new DataBaseException(qry, parameters);
+            }
+
+            if (!result.Success)
+            {
+                throw new DataBaseException(qry, parameters, result.ErrorMessage);
+            }
+
+            return true;
+        }
     }
 }
