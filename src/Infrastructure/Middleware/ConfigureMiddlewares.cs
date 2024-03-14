@@ -6,6 +6,7 @@ namespace Infrastructure.Middleware
     {
         public static IApplicationBuilder UseCustomMiddlewares(this IApplicationBuilder builder)
         {
+            builder.UseMiddleware<ApiLogMiddleware>();
             builder.UseMiddleware<ApiResponseMiddleware>();
             builder.UseMiddleware<ErrorHandlingMiddleware>();
             builder.UseMiddleware<JsonRequestValidationMiddleware>();
