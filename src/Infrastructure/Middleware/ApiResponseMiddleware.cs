@@ -37,17 +37,24 @@ namespace Infrastructure.Middleware
                     newResponse.Success = true;
                     newResponse.TraceId = Guid.NewGuid().ToString().ToUpper();
                     newResponse.Result = originalResponse;
+
+                    var jsonResponse = JsonConvert.SerializeObject(newResponse);
+                    await context.Response.WriteAsync(jsonResponse);
                 }
                 else
                 {
                     var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseBody);
-                    newResponse.Success = false;
-                    newResponse.TraceId = errorResponse?.ErrorId;
-                    newResponse.Error = errorResponse?.ErrorMessage;
-                }
 
-                var jsonResponse = JsonConvert.SerializeObject(newResponse);
-                await context.Response.WriteAsync(jsonResponse);
+                    if (errorResponse != null)
+                    {
+                        newResponse.Success = false;
+                        newResponse.TraceId = errorResponse?.ErrorId;
+                        newResponse.Error = errorResponse?.ErrorMessage;
+
+                        var jsonResponse = JsonConvert.SerializeObject(newResponse);
+                        await context.Response.WriteAsync(jsonResponse);
+                    }
+                }
             }
         }
     }
