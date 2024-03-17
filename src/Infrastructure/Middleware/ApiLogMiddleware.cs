@@ -1,7 +1,6 @@
 ﻿using Domain.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.IO;
 using System.Text;
 
 namespace Infrastructure.Middleware
@@ -21,14 +20,13 @@ namespace Infrastructure.Middleware
         {
             int statusCode;
             string? jsonResponse;
-
             string? jsonRequest = await ReadRequestBody(context.Request);
             string? path = context.Request.Path;
             string? method = context.Request.Method;
             string? ip = context.Connection.RemoteIpAddress?.ToString();
             string? token = context.Request.Headers.Authorization.ToString();
             
-            var originalBodyStream = context.Request.Body;
+            var originalBodyStream = context.Response.Body;
             using (var responseBody = new MemoryStream())
             {
                 context.Response.Body = responseBody;
@@ -38,7 +36,7 @@ namespace Infrastructure.Middleware
                 jsonResponse = await ReadResponseBody(context.Response);
                 statusCode = context.Response.StatusCode;
 
-                context.Response.Body = originalBodyStream;
+                responseBody.Seek(0, SeekOrigin.Begin);
                 await responseBody.CopyToAsync(originalBodyStream);
             }
         }
