@@ -44,7 +44,7 @@ namespace Infrastructure.Repository
             return true;
         }
 
-        public async Task<bool> AddApiLog(string traceId, decimal timeElapsed, string clientIP, string path, int statusCode, bool? success, string? error, string? request, string? response, string? apiResult, string? token)
+        public async Task<bool> AddApiLog(string traceId, decimal timeElapsed, string? clientIP, string? path, int statusCode, bool? success, string? error, string? request, string? response, string? apiResult, string? token)
         {
             string qry = "EXECUTE sp_AddApiLog @TraceId, @TimeElapsed, @ClientIP, @Path, @StatusCode, @ParamSuccess, @Error, @Request, @Response, @Result, @Token;";
             var parameters = new

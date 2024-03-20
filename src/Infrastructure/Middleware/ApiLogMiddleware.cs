@@ -2,6 +2,7 @@
 using Domain.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text;
 
@@ -75,9 +76,16 @@ namespace Infrastructure.Middleware
 
         private async Task SaveLog(ApiLogModel apiLog, TimeSpan timeSpan)
         {
+            string traceId = string.Empty;
+            bool? success = null;
+            string? error = null;
+            string? result = null;
+
+            var response = JsonConvert.DeserializeObject<ResponseModel>(apiLog.JsonResponse ?? string.Empty);
+
             try
             {
-                //await _logRepository.AddApiLog();
+                await _logRepository.AddApiLog(traceId, Convert.ToDecimal(timeSpan.TotalSeconds), apiLog.Ip, apiLog.Path, apiLog.StatusCode, success, error, apiLog.JsonRequest, apiLog.JsonResponse, result, apiLog.Token);
             }
             catch (Exception ex)
             {
