@@ -46,7 +46,7 @@ namespace Infrastructure.Middleware
 
                 await next(context);
 
-                result.JsonResponse = await ReadResponseBody(context.Response);
+                result.JsonResponse = (await ReadResponseBody(context.Response)).Replace("\n", string.Empty);
                 result.StatusCode = context.Response.StatusCode;
 
                 responseBody.Seek(0, SeekOrigin.Begin);
@@ -77,15 +77,31 @@ namespace Infrastructure.Middleware
         private async Task SaveLog(ApiLogModel apiLog, TimeSpan timeSpan)
         {
             string traceId = string.Empty;
-            bool? success = null;
-            string? error = null;
-            string? result = null;
+            string? jsonRequest = string.IsNullOrEmpty(apiLog.JsonRequest) ? null : apiLog.JsonRequest;
+            string? jsonResponse = string.IsNullOrEmpty(apiLog.JsonResponse) ? null : apiLog.JsonResponse;
+            string? token = string.IsNullOrEmpty(apiLog.Token) ? null : apiLog.Token;
 
             var response = JsonConvert.DeserializeObject<ResponseModel>(apiLog.JsonResponse ?? string.Empty);
 
+            if (response == null)
+            {
+                traceId = Guid.NewGuid().ToString().ToUpper();
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(response.TraceId))
+                {
+                    traceId = Guid.NewGuid().ToString().ToUpper();
+                }
+                else
+                {
+                    traceId = response.TraceId;
+                }
+            }
+
             try
             {
-                await _logRepository.AddApiLog(traceId, Convert.ToDecimal(timeSpan.TotalSeconds), apiLog.Ip, apiLog.Path, apiLog.StatusCode, success, error, apiLog.JsonRequest, apiLog.JsonResponse, result, apiLog.Token);
+                await _logRepository.AddApiLog(traceId, timeSpan.TotalSeconds, apiLog.Ip, apiLog.Path, apiLog.StatusCode, jsonRequest, jsonResponse, token);
             }
             catch (Exception ex)
             {

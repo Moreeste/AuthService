@@ -10,11 +10,8 @@ CREATE OR ALTER PROCEDURE sp_AddApiLog
 	@ClientIP VARCHAR(15),
 	@Path VARCHAR(80),
 	@StatusCode INT,
-	@ParamSuccess BIT,
-	@Error NVARCHAR(MAX),
 	@Request NVARCHAR(MAX),
 	@Response NVARCHAR(MAX),
-	@Result NVARCHAR(MAX),
 	@Token NVARCHAR(MAX)
 AS
 BEGIN
@@ -25,8 +22,8 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION;
 		
-		INSERT INTO ApiLog (TraceId, TimeSpan, TimeElapsed, ClientIP, Path, StatusCode, Success, Error, Request, Response, Result, Token)
-		VALUES (@TraceId, GETDATE(), @TimeElapsed, @ClientIP, @Path, @StatusCode, @ParamSuccess, @Error, @Request, @Response, @Result, @Token);
+		INSERT INTO ApiLog (TraceId, TimeSpan, TimeElapsed, ClientIP, Path, StatusCode, Request, Response, Token)
+		VALUES (@TraceId, GETDATE(), @TimeElapsed, @ClientIP, @Path, @StatusCode, @Request, @Response, @Token);
 
 		COMMIT;
 		SET @Success = 1;

@@ -9,11 +9,8 @@ CREATE TABLE ApiLog
 	ClientIP VARCHAR(15) NOT NULL,
 	Path VARCHAR(80) NOT NULL,
 	StatusCode INT NOT NULL,
-	Success BIT,
-	Error NVARCHAR(MAX),
 	Request NVARCHAR(MAX),
 	Response NVARCHAR(MAX),
-	Result NVARCHAR(MAX),
 	Token NVARCHAR(MAX),
 
 	CONSTRAINT PK_ApiLog_TraceId PRIMARY KEY (TraceId)
