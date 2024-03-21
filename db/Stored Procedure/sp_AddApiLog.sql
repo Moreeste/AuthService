@@ -6,7 +6,7 @@ GO
 
 CREATE OR ALTER PROCEDURE sp_AddApiLog
 	@TraceId VARCHAR(36),
-	@TimeElapsed DECIMAL(32,16),
+	@TimeElapsed FLOAT,
 	@ClientIP VARCHAR(15),
 	@Path VARCHAR(80),
 	@StatusCode INT,
