@@ -31,8 +31,6 @@ namespace Infrastructure
             }
             
             app.UseCustomMiddlewares();
-            app.UseAuthentication();
-            app.UseAuthorization();
             app.MapControllers();
             app.Run();
         }

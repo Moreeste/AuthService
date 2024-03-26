@@ -17,6 +17,7 @@ namespace Infrastructure
         {
             services.AddTransient<ApiLogMiddleware>();
             services.AddTransient<ErrorHandlingMiddleware>();
+            services.AddTransient<AuthMiddleware>();
 
             services.AddScoped<IUtilities, Utilities>();
 

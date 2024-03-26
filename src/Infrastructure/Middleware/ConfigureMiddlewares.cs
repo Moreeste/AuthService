@@ -11,6 +11,11 @@ namespace Infrastructure.Middleware
             builder.UseMiddleware<ErrorHandlingMiddleware>();
             builder.UseMiddleware<JsonRequestValidationMiddleware>();
 
+            builder.UseAuthentication();
+            builder.UseAuthorization();
+
+            builder.UseMiddleware<AuthMiddleware>();
+
             return builder;
         }
     }
