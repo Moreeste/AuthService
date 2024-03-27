@@ -15,7 +15,7 @@ namespace Application.Profile.Services
         public async Task<IEnumerable<ProfileDTO>> GetProfiles()
         {
             var profiles = await _profileRepository.GetProfiles();
-            profiles = null;
+
             if (profiles == null)
             {
                 return Enumerable.Empty<ProfileDTO>();
