@@ -1,4 +1,5 @@
 ﻿using Application.Auth.Services;
+using Application.Profile.Services;
 using Application.Register.Services;
 using Application.User.Services;
 using Domain.Repository;
@@ -27,11 +28,13 @@ namespace Infrastructure
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProfileService, ProfileService>();
 
             services.AddScoped<ILogRepository, LogRepository>();
             services.AddScoped<ICatalogueRepository, CatalogueRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPasswordRepository, PasswordRepository>();
+            services.AddScoped<IProfileRepository, ProfileRepository>();
 
             return services;
         }

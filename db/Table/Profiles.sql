@@ -13,3 +13,7 @@ CREATE TABLE Profiles
 
 	CONSTRAINT PK_Profiles_IdProfile PRIMARY KEY (IdProfile)
 );
+
+CREATE NONCLUSTERED INDEX IX_Profiles_IdProfile ON Profiles (IdProfile);
+CREATE NONCLUSTERED INDEX IX_Profiles_Description ON Profiles (Description);
+CREATE UNIQUE INDEX UQ_Profiles_Description ON Profiles (Description);
