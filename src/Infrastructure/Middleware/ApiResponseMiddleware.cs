@@ -1,6 +1,7 @@
 ﻿using Domain.Model.Response;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Infrastructure.Middleware
 {
@@ -15,6 +16,11 @@ namespace Infrastructure.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
+            var settings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
             var originalBodyStream = context.Response.Body;
 
             using (var memoryStream = new MemoryStream())
@@ -38,7 +44,7 @@ namespace Infrastructure.Middleware
                     newResponse.TraceId = Guid.NewGuid().ToString().ToUpper();
                     newResponse.Result = originalResponse;
 
-                    var jsonResponse = JsonConvert.SerializeObject(newResponse);
+                    var jsonResponse = JsonConvert.SerializeObject(newResponse, settings);
                     await context.Response.WriteAsync(jsonResponse);
                 }
                 else
@@ -51,7 +57,7 @@ namespace Infrastructure.Middleware
                         newResponse.TraceId = errorResponse?.ErrorId;
                         newResponse.Error = errorResponse?.ErrorMessage;
 
-                        var jsonResponse = JsonConvert.SerializeObject(newResponse);
+                        var jsonResponse = JsonConvert.SerializeObject(newResponse, settings);
                         await context.Response.WriteAsync(jsonResponse);
                     }
                 }
