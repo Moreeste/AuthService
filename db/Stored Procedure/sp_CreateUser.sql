@@ -26,7 +26,7 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION;
 		DECLARE @DefaultStatus INT = 1;
-		DECLARE @DefaultProfile VARCHAR(36) = '8D5A1FBE-CC7E-4B9B-88A6-3F2E1D9C05A2';
+		DECLARE @DefaultProfile VARCHAR(36) = '8d5a1fbe-cc7e-4b9b-88a6-3f2e1d9c05a2';
 		
 		INSERT INTO Users (IdUser, FirstName, MiddleName, LastName, SecondLastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser) 
 		VALUES (@IdUser, UPPER(@FirstName), UPPER(@MiddleName), UPPER(@LastName), UPPER(@SecondLastName), @Gender, @BirthDate, @Email, @PhoneNumber, GETDATE(), @RegistrationUser);

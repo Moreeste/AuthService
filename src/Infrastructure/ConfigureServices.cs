@@ -16,6 +16,7 @@ namespace Infrastructure
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
             services.AddTransient<ApiLogMiddleware>();
+            services.AddTransient<ApiResponseMiddleware>();
             services.AddTransient<ErrorHandlingMiddleware>();
             services.AddTransient<AuthMiddleware>();
 

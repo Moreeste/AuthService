@@ -1,6 +1,7 @@
 ﻿using Domain.Exceptions;
 using Domain.Model.Response;
 using Domain.Repository;
+using Domain.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
@@ -12,11 +13,13 @@ namespace Infrastructure.Middleware
     {
         private readonly ILogger<ErrorHandlingMiddleware> _logger;
         private readonly ILogRepository _logRepository;
+        private readonly IUtilities _utilities;
 
-        public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger, ILogRepository logRepository)
+        public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger, ILogRepository logRepository, IUtilities utilities)
         {
             _logger = logger;
             _logRepository = logRepository;
+            _utilities = utilities;
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -72,7 +75,7 @@ namespace Infrastructure.Middleware
                     break;
             }
 
-            string id = Guid.NewGuid().ToString().ToUpper();
+            string id = _utilities.GenerateId();
 
             await SaveLog(id, exception);
 

@@ -4,7 +4,7 @@
     {
         public string GenerateId()
         {
-            return Guid.NewGuid().ToString().ToUpper();
+            return Guid.NewGuid().ToString();
         }
 
         public DateTime GetDateTime()

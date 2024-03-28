@@ -1,5 +1,6 @@
 ﻿using Domain.Model.Response;
 using Domain.Repository;
+using Domain.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -12,11 +13,13 @@ namespace Infrastructure.Middleware
     {
         private readonly ILogger<ApiLogMiddleware> _logger;
         private readonly ILogRepository _logRepository;
+        private readonly IUtilities _utilities;
 
-        public ApiLogMiddleware(ILogger<ApiLogMiddleware> logger, ILogRepository logRepository)
+        public ApiLogMiddleware(ILogger<ApiLogMiddleware> logger, ILogRepository logRepository, IUtilities utilities)
         {
             _logger = logger;
             _logRepository = logRepository;
+            _utilities = utilities;
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -85,13 +88,13 @@ namespace Infrastructure.Middleware
 
             if (response == null)
             {
-                traceId = Guid.NewGuid().ToString().ToUpper();
+                traceId = _utilities.GenerateId();
             }
             else
             {
                 if (string.IsNullOrEmpty(response.TraceId))
                 {
-                    traceId = Guid.NewGuid().ToString().ToUpper();
+                    traceId = _utilities.GenerateId();
                 }
                 else
                 {
