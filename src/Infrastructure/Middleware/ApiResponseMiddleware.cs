@@ -16,7 +16,7 @@ namespace Infrastructure.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var settings = new JsonSerializerSettings
+            var serializerSettings = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
@@ -44,7 +44,7 @@ namespace Infrastructure.Middleware
                     newResponse.TraceId = Guid.NewGuid().ToString().ToUpper();
                     newResponse.Result = originalResponse;
 
-                    var jsonResponse = JsonConvert.SerializeObject(newResponse, settings);
+                    var jsonResponse = JsonConvert.SerializeObject(newResponse, serializerSettings);
                     await context.Response.WriteAsync(jsonResponse);
                 }
                 else
@@ -57,7 +57,7 @@ namespace Infrastructure.Middleware
                         newResponse.TraceId = errorResponse?.ErrorId;
                         newResponse.Error = errorResponse?.ErrorMessage;
 
-                        var jsonResponse = JsonConvert.SerializeObject(newResponse, settings);
+                        var jsonResponse = JsonConvert.SerializeObject(newResponse, serializerSettings);
                         await context.Response.WriteAsync(jsonResponse);
                     }
                 }
