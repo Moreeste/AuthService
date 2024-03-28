@@ -17,9 +17,20 @@ namespace WebApi.Controllers
 
         protected string GetIdUser()
         {
+            string idUser = string.Empty;
             var identity = HttpContext.User.Identity as ClaimsIdentity;
-            string id = identity.Claims.FirstOrDefault(X => X.Type == "IdUser").Value;
-            return id;
+
+            if (identity != null)
+            {
+                var claimIdUser = identity.Claims.FirstOrDefault(x => x.Type == "IdUser");
+
+                if (claimIdUser != null)
+                {
+                    idUser = claimIdUser.Value;
+                }
+            }
+
+            return idUser;
         }
     }
 }
