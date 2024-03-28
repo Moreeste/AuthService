@@ -1,7 +1,7 @@
-﻿using Application.Register.DTOs;
+﻿using Application.Auth.DTOs;
 using MediatR;
 
-namespace Application.Register.Commands
+namespace Application.Auth.Commands
 {
     public sealed record RegisterCommand(
         string Email,

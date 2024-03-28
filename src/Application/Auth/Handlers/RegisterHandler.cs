@@ -1,9 +1,9 @@
-﻿using Application.Register.Commands;
-using Application.Register.DTOs;
-using Application.Register.Services;
+﻿using Application.Auth.Commands;
+using Application.Auth.DTOs;
+using Application.Auth.Services;
 using MediatR;
 
-namespace Application.Register.Handlers
+namespace Application.Auth.Handlers
 {
     public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterDTO>
     {

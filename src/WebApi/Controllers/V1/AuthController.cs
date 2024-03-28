@@ -22,5 +22,12 @@ namespace WebApi.Controllers.V1
         {
             return await mediator.Send(command);
         }
+
+        [AllowAnonymous]
+        [HttpPost("Register")]
+        public async Task<ActionResult<RegisterDTO>> Post(RegisterCommand command)
+        {
+            return await mediator.Send(command);
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Application.Auth.Services;
 using Application.Profile.Services;
-using Application.Register.Services;
 using Application.User.Services;
 using Domain.Repository;
 using Domain.Services;

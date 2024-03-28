@@ -1,11 +1,11 @@
-﻿using Application.Register.Commands;
-using Application.Register.DTOs;
+﻿using Application.Auth.Commands;
+using Application.Auth.DTOs;
 using Domain.Exceptions;
 using Domain.Repository;
 using Domain.Services;
 using Domain.Utilities;
 
-namespace Application.Register.Services
+namespace Application.Auth.Services
 {
     public class RegisterService : IRegisterService
     {
@@ -42,17 +42,17 @@ namespace Application.Register.Services
             string hashedPassword = _passwordService.GenerateHash(register.Password, salt, iterations);
 
             bool userCreated = await _userRepository.CreateUser(
-                idUser, 
-                register.FirstName, 
-                (register.MiddleName == string.Empty ? null : register.MiddleName), 
-                register.LastName, 
-                (register.SecondLastName == string.Empty ? null : register.SecondLastName), 
-                register.Gender, 
-                register.BirthDate, 
-                register.Email, 
-                register.PhoneNumber, 
-                idUser, 
-                hashedPassword, 
+                idUser,
+                register.FirstName,
+                register.MiddleName == string.Empty ? null : register.MiddleName,
+                register.LastName,
+                register.SecondLastName == string.Empty ? null : register.SecondLastName,
+                register.Gender,
+                register.BirthDate,
+                register.Email,
+                register.PhoneNumber,
+                idUser,
+                hashedPassword,
                 salt);
 
             return new RegisterDTO() { IdUser = idUser };

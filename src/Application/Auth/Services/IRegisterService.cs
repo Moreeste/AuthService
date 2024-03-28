@@ -1,7 +1,7 @@
-﻿using Application.Register.Commands;
-using Application.Register.DTOs;
+﻿using Application.Auth.Commands;
+using Application.Auth.DTOs;
 
-namespace Application.Register.Services
+namespace Application.Auth.Services
 {
     public interface IRegisterService
     {
