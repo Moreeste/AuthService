@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using Domain.Exceptions;
+using Domain.Model.Response;
 using Domain.Model.User;
 using Domain.Repository;
 using Infrastructure.Database;
@@ -22,6 +24,31 @@ namespace Infrastructure.Repository
             var result = await _authServiceContext.Database.GetDbConnection().QueryAsync<Profile>(qry);
 
             return result;
+        }
+
+        public async Task<bool> CreateProfile(string idProfile, string description, string registrationUser)
+        {
+            string qry = "EXECUTE sp_CreateProfile @IdProfile, @Description, @RegistrationUser;";
+            var parameters = new
+            {
+                IdProfile = idProfile,
+                Description = description,
+                RegistrationUser = registrationUser
+            };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);
+
+            if (result == null)
+            {
+                throw new DataBaseException(qry, parameters);
+            }
+
+            if (!result.Success)
+            {
+                throw new DataBaseException(qry, parameters, result.ErrorMessage);
+            }
+
+            return true;
         }
     }
 }
