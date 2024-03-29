@@ -8,5 +8,6 @@
         bool BeValidBirthDate(DateTime birthDate);
         bool BeValidPhoneNumber(string phone);
         Task <bool> BeValidGenderId(int gender, CancellationToken cancellationToken);
+        bool BeOnlyLettersAndNumbers(string text);
     }
 }

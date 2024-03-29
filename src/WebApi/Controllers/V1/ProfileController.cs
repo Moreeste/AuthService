@@ -1,4 +1,5 @@
-﻿using Application.Profile.DTOs;
+﻿using Application.Profile.Commands;
+using Application.Profile.DTOs;
 using Application.Profile.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -21,6 +22,13 @@ namespace WebApi.Controllers.V1
         {
             var query = new GetProfilesQuery();
             return await mediator.Send(query);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<CreateProfileOutDTO>> Post(CreateProfileInDTO parameters)
+        {
+            var command = new CreateProfileCommand(parameters.Description, GetIdUser());
+            return await mediator.Send(command);
         }
     }
 }

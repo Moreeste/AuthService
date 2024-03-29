@@ -52,5 +52,16 @@ namespace Application.Validations
             var genders = await _catalogueRepository.GetGenders();
             return genders.Any(x => x.IdGender == gender);
         }
+
+        public bool BeOnlyLettersAndNumbers(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return false;
+            }
+
+            string regexPattern = @"^[a-zA-Z0-9]*$";
+            return Regex.IsMatch(text, regexPattern);
+        }
     }
 }
