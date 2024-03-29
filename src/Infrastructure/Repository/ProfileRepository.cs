@@ -26,7 +26,7 @@ namespace Infrastructure.Repository
             return result;
         }
 
-        public async Task<bool> CreateProfile(string idProfile, string description, string registrationUser)
+        public async Task<bool> CreateProfile(string idProfile, string? description, string? registrationUser)
         {
             string qry = "EXECUTE sp_CreateProfile @IdProfile, @Description, @RegistrationUser;";
             var parameters = new

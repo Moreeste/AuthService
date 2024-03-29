@@ -2,6 +2,6 @@
 {
     public class CreateProfileOutDTO
     {
-        public string? Description { get; set; }
+        public string? IdProfile { get; set; }
     }
 }
