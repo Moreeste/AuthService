@@ -16,7 +16,7 @@ namespace Application.Profile.Handlers
 
         public async Task<CreateProfileOutDTO> Handle(CreateProfileCommand request, CancellationToken cancellationToken)
         {
-            return await _profileService.CreateProfile(request.Description?? string.Empty, request.RegistrationUser);
+            return await _profileService.CreateProfile(request.Description, request.RegistrationUser);
         }
     }
 }
