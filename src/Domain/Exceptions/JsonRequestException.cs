@@ -2,7 +2,7 @@
 {
     public class JsonRequestException : Exception
     {
-        public JsonRequestException() : base("Invalid JSON structure")
+        public JsonRequestException() : base("Invalid JSON structure.")
         {
 
         }
