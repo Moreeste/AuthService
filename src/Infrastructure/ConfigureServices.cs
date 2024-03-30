@@ -1,7 +1,4 @@
-﻿using Application.Auth.Services;
-using Application.Profile.Services;
-using Application.User.Services;
-using Domain.Repository;
+﻿using Domain.Repository;
 using Domain.Services;
 using Domain.Utilities;
 using Infrastructure.Middleware;
@@ -21,15 +18,8 @@ namespace Infrastructure
             services.AddTransient<AuthMiddleware>();
 
             services.AddScoped<IUtilities, Utilities>();
-
             services.AddScoped<IPasswordService, PasswordService>();
             services.AddScoped<ITokenService, TokenService>();
-
-            services.AddScoped<ILoginService, LoginService>();
-            services.AddScoped<IRegisterService, RegisterService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IProfileService, ProfileService>();
-
             services.AddScoped<ILogRepository, LogRepository>();
             services.AddScoped<ICatalogueRepository, CatalogueRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

@@ -1,4 +1,7 @@
-﻿using Application.Validations;
+﻿using Application.Auth.Services;
+using Application.Profile.Services;
+using Application.User.Services;
+using Application.Validations;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +21,10 @@ namespace Application
             services.AddValidatorsFromAssembly(assembly);
 
             services.AddScoped<ICommonValidations, CommonValidations>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IRegisterService, RegisterService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProfileService, ProfileService>();
 
             return services;
         }
