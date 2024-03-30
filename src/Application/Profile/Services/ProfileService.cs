@@ -1,4 +1,5 @@
 ﻿using Application.Profile.DTOs;
+using Domain.Exceptions;
 using Domain.Repository;
 using Domain.Utilities;
 
@@ -36,7 +37,12 @@ namespace Application.Profile.Services
 
         public async Task<CreateProfileOutDTO> CreateProfile(string? description, string? registrationUser)
         {
-            // ToDo: Validación de perfil existente
+            var profile = await _profileRepository.GetProfileByName(description == null ? string.Empty : description.ToUpper());
+
+            if (profile != null)
+            {
+                throw new BusinessException($"Ya existe el perfil {profile.Description}.");
+            }
 
             string id = _utilities.GenerateId();
             bool profileCreated = await _profileRepository.CreateProfile(id, description, registrationUser);
