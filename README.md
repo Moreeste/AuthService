@@ -17,3 +17,9 @@ Es un sistema de autenticación y autorización basado en JWT con gestión de us
     - Obtener mi información de usuario
     - Obtener usuario por id
 
+
+## Arquitectura del proyecto
+El proyecto está construido siguiendo los principios de arquitecturas limpias. Estas arquitecturas se caracterizan por su estructura modular y bien definida y están compuestas por tres capas principales: aplicación, dominio e infraestructura, las cuales interactúan entre sí siguiendo un flujo unidireccional de datos y control. 
+
+La importancia de esta separación radica en la escalabilidad y mantenibilidad del sistema. Al tener una clara separación de responsabilidades entre las capas, podemos realizar cambios en una parte del sistema sin afectar a otras, lo que facilita la evolución de la aplicación a medida que crece y se adapta a nuevos requisitos y tecnologías.
+
