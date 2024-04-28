@@ -23,3 +23,12 @@ El proyecto está construido siguiendo los principios de arquitecturas limpias. 
 
 La importancia de esta separación radica en la escalabilidad y mantenibilidad del sistema. Al tener una clara separación de responsabilidades entre las capas, podemos realizar cambios en una parte del sistema sin afectar a otras, lo que facilita la evolución de la aplicación a medida que crece y se adapta a nuevos requisitos y tecnologías.
 
+### Dominio
+Esta capa es exclusiva para las entidades de negocio las cuales son objetos que encapsulan datos y comportamiento relacionados con el negocio, su estado se modifica mediante operaciones definidas por las reglas de negocio. Por ejemplo, en una aplicación de comercio electrónico, las entidades del negocio podrían incluir productos, clientes, pedidos, etc.
+
+### Aplicación
+En esta capa tenemos los casos de uso, es decir, las diferentes funcionalidades que ofrece la aplicación desde la perspectiva del usuario. Cada caso de uso describe una acción específica que un usuario puede realizar en el sistema y cómo se lleva a cabo esa acción. Estos casos de uso pueden incluir desde tareas simples, como registrar un usuario, hasta procesos más complejos, como realizar una compra o generar un informe.
+
+### Infraestructura
+Esta capa proporciona la implementación concreta de los detalles técnicos de la aplicación. Aquí se gestionan aspectos como el acceso a bases de datos, la comunicación con servicios externos, la persistencia de datos y la integración con frameworks y librerías externas.
+
