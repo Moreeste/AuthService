@@ -1,7 +1,5 @@
 # AuthService
-
 Es un sistema de autenticación y autorización basado en JWT con gestión de usuarios y control de accesos por perfiles el cual puede ser utilizado como base para realizar sistemas más complejos. Este proyecto está desarrollado en C# con arquitecturas limpias para poder tener una mejor escalabilidad.
-
 
 ## Features
 - Generales
@@ -17,11 +15,8 @@ Es un sistema de autenticación y autorización basado en JWT con gestión de us
     - Obtener mi información de usuario
     - Obtener usuario por id
 
-
 ## Arquitectura del proyecto
-El proyecto está construido siguiendo los principios de arquitecturas limpias. Estas arquitecturas se caracterizan por su estructura modular y bien definida y están compuestas por tres capas principales: aplicación, dominio e infraestructura, las cuales interactúan entre sí siguiendo un flujo unidireccional de datos y control. 
-
-La importancia de esta separación radica en la escalabilidad y mantenibilidad del sistema. Al tener una clara separación de responsabilidades entre las capas, podemos realizar cambios en una parte del sistema sin afectar a otras, lo que facilita la evolución de la aplicación a medida que crece y se adapta a nuevos requisitos y tecnologías.
+El proyecto está construido siguiendo los principios de arquitecturas limpias. Estas arquitecturas se caracterizan por su estructura modular y bien definida y están compuestas por cuatro capas principales: aplicación, dominio, infraestructura y presentación, las cuales interactúan entre sí siguiendo un flujo unidireccional de datos y control.
 
 ### Dominio
 Esta capa es exclusiva para las entidades de negocio las cuales son objetos que encapsulan datos y comportamiento relacionados con el negocio, su estado se modifica mediante operaciones definidas por las reglas de negocio. Por ejemplo, en una aplicación de comercio electrónico, las entidades del negocio podrían incluir productos, clientes, pedidos, etc.
@@ -32,3 +27,13 @@ En esta capa tenemos los casos de uso, es decir, las diferentes funcionalidades 
 ### Infraestructura
 Esta capa proporciona la implementación concreta de los detalles técnicos de la aplicación. Aquí se gestionan aspectos como el acceso a bases de datos, la comunicación con servicios externos, la persistencia de datos y la integración con frameworks y librerías externas.
 
+### Presentación
+Esta capa es la responsable de todas las interacciones directas con el usuario o con otros sistemas externos. Esto puede incluir interfaces de usuario gráficas (GUI), interfaces de línea de comandos (CLI), interfaces web, APIs, etc.
+
+Es importante remarcar las reglas fundamentales para la separación de estas capas:
+- **Dominio:** No tiene acceso a las demás capas.
+- **Aplicación:** Sólo tiene acceso al dominio y para acceder a la infraestructura se tiene que hacer mediante interfaces que se encuentran en el dominio.
+- **Infraestructura:** Tiene acceso al dominio y a la aplicación.
+- **Presentación:** Tiene acceso a la infraestructura y aplicación.
+
+La importancia de esta separación radica en la escalabilidad y mantenibilidad del sistema. Al tener una clara separación de responsabilidades entre las capas, podemos realizar cambios en una parte del sistema sin afectar a otras, lo que facilita la evolución de la aplicación a medida que crece y se adapta a nuevos requisitos y tecnologías.
