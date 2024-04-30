@@ -19,7 +19,12 @@ Es un sistema de autenticación y autorización basado en JWT con gestión de us
 El proyecto está construido siguiendo los principios de arquitecturas limpias. Estas arquitecturas se caracterizan por su estructura modular y bien definida y están compuestas por cuatro capas principales: aplicación, dominio, infraestructura y presentación, las cuales interactúan entre sí siguiendo un flujo unidireccional de datos y control.
 
 ### Dominio
-Esta capa es exclusiva para las entidades de negocio las cuales son objetos que encapsulan datos y comportamiento relacionados con el negocio, su estado se modifica mediante operaciones definidas por las reglas de negocio. Por ejemplo, en una aplicación de comercio electrónico, las entidades del negocio podrían incluir productos, clientes, pedidos, etc.
+Esta capa es exclusiva para las entidades de negocio las cuales son objetos que encapsulan datos y comportamiento relacionados con el negocio, su estado se modifica mediante operaciones definidas por las reglas de negocio. Por ejemplo, en una aplicación de comercio electrónico, las entidades del negocio podrían incluir productos, clientes, pedidos, etc. En este proyecto consideramos la siguiente estructura:
+- **Exceptions:** Clases de los diferentes tipos de excepciones y errores personalizandos.
+- **Model:** Clases que representan las entidades de nuestro negocio.
+- **Repository:** Interfaces de los diferentes repositorios que están implementados en la infraestructura.
+- **Services:** Interfaces de los diferentes servicios generales que están implementados en la infraestructura.
+- **Utilities:** Interfaces y clases complementarias con código de uso común entre la aplicación e infraestructura.
 
 ### Aplicación
 En esta capa tenemos los casos de uso, es decir, las diferentes funcionalidades que ofrece la aplicación desde la perspectiva del usuario. Cada caso de uso describe una acción específica que un usuario puede realizar en el sistema y cómo se lleva a cabo esa acción. Estos casos de uso pueden incluir desde tareas simples, como registrar un usuario, hasta procesos más complejos, como realizar una compra o generar un informe.
