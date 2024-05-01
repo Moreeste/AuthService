@@ -19,7 +19,9 @@ Es un sistema de autenticación y autorización basado en JWT con gestión de us
 El proyecto está construido siguiendo los principios de arquitecturas limpias. Estas arquitecturas se caracterizan por su estructura modular y bien definida y están compuestas por cuatro capas principales: aplicación, dominio, infraestructura y presentación, las cuales interactúan entre sí siguiendo un flujo unidireccional de datos y control.
 
 ### Dominio
-Esta capa es exclusiva para las entidades de negocio las cuales son objetos que encapsulan datos y comportamiento relacionados con el negocio, su estado se modifica mediante operaciones definidas por las reglas de negocio. Por ejemplo, en una aplicación de comercio electrónico, las entidades del negocio podrían incluir productos, clientes, pedidos, etc. En este proyecto consideramos la siguiente estructura:
+Esta capa es exclusiva para las entidades de negocio las cuales son objetos que encapsulan datos y comportamiento relacionados con el negocio, su estado se modifica mediante operaciones definidas por las reglas de negocio. Por ejemplo, en una aplicación de comercio electrónico, las entidades del negocio podrían incluir productos, clientes, pedidos, etc. 
+
+En este proyecto consideramos la siguiente estructura:
 - **Exceptions:** Clases de los diferentes tipos de excepciones y errores personalizandos.
 - **Model:** Clases que representan las entidades de nuestro negocio.
 - **Repository:** Interfaces de los diferentes repositorios que están implementados en la infraestructura.
@@ -28,6 +30,14 @@ Esta capa es exclusiva para las entidades de negocio las cuales son objetos que 
 
 ### Aplicación
 En esta capa tenemos los casos de uso, es decir, las diferentes funcionalidades que ofrece la aplicación desde la perspectiva del usuario. Cada caso de uso describe una acción específica que un usuario puede realizar en el sistema y cómo se lleva a cabo esa acción. Estos casos de uso pueden incluir desde tareas simples, como registrar un usuario, hasta procesos más complejos, como realizar una compra o generar un informe.
+
+En este proyecto usamos vertical slicing, esto quiere decir que primero separaremos por módulos como auth, user, etc y posteriormente cada módulo tendrá la siguiente estructura:
+- **Commands:** 
+- **DTOs:** 
+- **Handlers:** 
+- **Queries:** 
+- **Services:** 
+- **Validators:** 
 
 ### Infraestructura
 Esta capa proporciona la implementación concreta de los detalles técnicos de la aplicación. Aquí se gestionan aspectos como el acceso a bases de datos, la comunicación con servicios externos, la persistencia de datos y la integración con frameworks y librerías externas.
