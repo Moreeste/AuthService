@@ -32,12 +32,12 @@ En este proyecto consideramos la siguiente estructura:
 En esta capa tenemos los casos de uso, es decir, las diferentes funcionalidades que ofrece la aplicación desde la perspectiva del usuario. Cada caso de uso describe una acción específica que un usuario puede realizar en el sistema y cómo se lleva a cabo esa acción. Estos casos de uso pueden incluir desde tareas simples, como registrar un usuario, hasta procesos más complejos, como realizar una compra o generar un informe.
 
 En este proyecto usamos vertical slicing, esto quiere decir que primero separaremos por módulos como auth, user, etc y posteriormente cada módulo tendrá la siguiente estructura:
-- **Commands:** 
-- **DTOs:** 
-- **Handlers:** 
-- **Queries:** 
-- **Services:** 
-- **Validators:** 
+- **Commands:** Son los record que se utilizan para realizar operaciones como crear, actualizar o eliminar datos de acuerdo al patrón de diseño CQRS.
+- **DTOs:** Son clases para transferir datos entre diferentes capas de una aplicación.
+- **Handlers:** Son piezas de código responsables de ejecutar la lógica de negocio asociada a un command o a un query de acuerdo al patrón de diseño CQRS.
+- **Queries:** Son los record que se utilizan para realizar consultas de acuerdo al patrón de diseño CQRS.
+- **Services:** Interfaces y clases que contienen los casos de uso.
+- **Validators:** Clases de validaciones, con fluent validation, para los queries y commands.
 
 ### Infraestructura
 Esta capa proporciona la implementación concreta de los detalles técnicos de la aplicación. Aquí se gestionan aspectos como el acceso a bases de datos, la comunicación con servicios externos, la persistencia de datos y la integración con frameworks y librerías externas.
