@@ -33,7 +33,7 @@ En esta capa tenemos los casos de uso, es decir, las diferentes funcionalidades 
 
 El proyecto se inicializa en el archivo `DependencyInjection.cs` el cual tiene las configuraciones generales de las librerías [MediatR](https://github.com/jbogard/MediatR) para utilizar el [patrón de diseño CQRS](https://www.netmentor.es/entrada/patron-cqrs-explicado-10-minutos) y [FluentValidation](https://github.com/FluentValidation) para las validaciones de datos de entrada; Además de la inyección de dependencias de los servicios.
 
-Para la organización del proyecto usamos vertical slicing, esto quiere decir que primero separaremos por módulos como auth, user, etc y posteriormente cada módulo tendrá la siguiente estructura:
+Para la organización usamos vertical slicing, esto quiere decir que primero separaremos por módulos como auth, user, etc y posteriormente cada módulo tendrá la siguiente estructura:
 - **Commands:** Son los record que se utilizan para realizar operaciones como crear, actualizar o eliminar datos de acuerdo al patrón de diseño CQRS.
 - **DTOs:** Son clases para transferir datos entre diferentes capas de una aplicación.
 - **Handlers:** Son piezas de código responsables de ejecutar la lógica de negocio asociada a un command o a un query de acuerdo al patrón de diseño CQRS.
