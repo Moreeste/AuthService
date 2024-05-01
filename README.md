@@ -39,6 +39,8 @@ En este proyecto usamos vertical slicing, esto quiere decir que primero separare
 - **Services:** Interfaces y clases que contienen los casos de uso.
 - **Validators:** Clases de validaciones, con fluent validation, para los queries y commands.
 
+El proyecto de aplicación se inicializa en el archivo `DependencyInjection.cs` el cual tiene las configuraciones generales de las librerías [MediatR](https://github.com/jbogard/MediatR) para utilizar el [patrón de diseño CQRS](https://www.netmentor.es/entrada/patron-cqrs-explicado-10-minutos) y [FluentValidation](https://github.com/FluentValidation) para las validaciones de datos de entrada; Además de la inyección de dependencias de los servicios.
+
 ### Infraestructura
 Esta capa proporciona la implementación concreta de los detalles técnicos de la aplicación. Aquí se gestionan aspectos como el acceso a bases de datos, la comunicación con servicios externos, la persistencia de datos y la integración con frameworks y librerías externas.
 
