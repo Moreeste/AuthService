@@ -45,11 +45,11 @@ Para nuestra configuración principal tenemos el archivo `DefaultWebApplication.
 
 Adicionalmente a los archivos anteriormente mencionados, tenemos la siguiente división por tipo de componente con su respectivo archivo de inicialización:
 
-- **Database:** 
-- **Middleware:** 
-- **Repository:** 
-- **Security:** 
-- **Settings:** 
+- **Database:** Agregamos todos los contextos y conexiones de base de datos.
+- **Middleware:** Clases intermediarias para el control del flujo de la app.
+- **Repository:** Clases donde realizamos las consultas a las base de datos.
+- **Security:** Servicios relacionados con autenticación y seguridad en general.
+- **Settings:** Configuraciones adicionales para el aplicativo.
 
 ### Presentación
 Esta capa es la responsable de todas las interacciones directas con el usuario o con otros sistemas externos. Esto puede incluir interfaces de usuario gráficas (GUI), interfaces de línea de comandos (CLI), interfaces web, APIs, etc.
