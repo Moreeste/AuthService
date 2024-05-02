@@ -18,6 +18,7 @@ namespace Application.User.Services
 
             var result = new UserDTO()
             {
+                IdUser = user?.IdUser,
                 FirstName = user?.FirstName,
                 MiddleName = user?.MiddleName,
                 LastName = user?.LastName,
@@ -25,7 +26,8 @@ namespace Application.User.Services
                 Gender = user?.Gender,
                 BirthDate = user?.BirthDate.ToString("yyyy-MM-dd"),
                 Email = user?.Email,
-                PhoneNumber = user?.PhoneNumber
+                PhoneNumber = user?.PhoneNumber,
+                Profile = user?.Profile
             };
 
             return result;
