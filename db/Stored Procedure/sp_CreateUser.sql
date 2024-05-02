@@ -26,7 +26,7 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION;
 		DECLARE @DefaultStatus INT = 1;
-		DECLARE @DefaultProfile VARCHAR(36) = '00000000-0000-0000-0000-000000000000';
+		DECLARE @DefaultProfile VARCHAR(36) = '11111111-1111-1111-1111-111111111111';
 		
 		INSERT INTO Users (IdUser, FirstName, MiddleName, LastName, SecondLastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser) 
 		VALUES (@IdUser, UPPER(@FirstName), UPPER(@MiddleName), UPPER(@LastName), UPPER(@SecondLastName), @Gender, @BirthDate, @Email, @PhoneNumber, GETDATE(), @RegistrationUser);
