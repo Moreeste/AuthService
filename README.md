@@ -53,3 +53,5 @@ Adicionalmente a los archivos anteriormente mencionados, tenemos la siguiente di
 
 ### Presentación
 Esta capa es la responsable de todas las interacciones directas con el usuario o con otros sistemas externos. Esto puede incluir interfaces de usuario gráficas (GUI), interfaces de línea de comandos (CLI), interfaces web, APIs, etc.
+
+En caso de este proyecto la capa de presentación es un web api la cual prácticamente está vacía ya que su inicialización se encuentra en la infraestructura. Esta capa sólo se encarga de recibir las peticiones a través de los controladores y desviarlas a las diferentes capas de aplicación e infraestructura.
