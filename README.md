@@ -39,11 +39,7 @@ Para la organización usamos vertical slicing, esto quiere decir que primero sep
 ### Infraestructura
 Esta capa proporciona la implementación concreta de los detalles técnicos de la aplicación. Aquí se gestionan aspectos como el acceso a bases de datos, la comunicación con servicios externos, la persistencia de datos y la integración con frameworks y librerías externas.
 
-Dentro del proyecto tenemos el archivo `DefaultWebApplication.cs` el cual contiene la configuración para poder inicializar un proyecto de web api, invocando la configuración de la capa de aplicación y la configuración personalizada de la capa de infraestructura.
-
-En el archivo `DependencyInjection.cs` realizamos todas las configuraciones personalizadas de nuestra infraestructura. En este caso tenemos la inicialización de las bases de datos, servicios, autenticación y otras configuraciones adicionales.
-
-En `ConfigureServices.cs` realizamos todas las inyecciones de dependencia de servicios, repositorios, middlewares, etc.
+Para nuestra configuración principal tenemos el archivo `DefaultWebApplication.cs` el cual contiene la configuración para poder inicializar un proyecto de web api, invocando la configuración de la capa de aplicación y la configuración personalizada de la capa de infraestructura. En el archivo `DependencyInjection.cs` realizamos todas las configuraciones personalizadas de nuestra infraestructura, en este caso tenemos la inicialización de las bases de datos, servicios, autenticación y otras configuraciones adicionales. En `ConfigureServices.cs` realizamos todas las inyecciones de dependencia de servicios, repositorios, middlewares, etc. 
 
 ### Presentación
 Esta capa es la responsable de todas las interacciones directas con el usuario o con otros sistemas externos. Esto puede incluir interfaces de usuario gráficas (GUI), interfaces de línea de comandos (CLI), interfaces web, APIs, etc.
