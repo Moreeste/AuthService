@@ -1,4 +1,5 @@
 ﻿using Application.User.DTOs;
+using Domain.Exceptions;
 using Domain.Repository;
 
 namespace Application.User.Services
@@ -15,6 +16,11 @@ namespace Application.User.Services
         public async Task<UserDTO> GetUserById(string id)
         {
             var user = await _userRepository.GetUserById(id);
+
+            if (user == null)
+            {
+                throw new SearchException("No existe el usuario.");
+            }
 
             var result = new UserDTO()
             {
