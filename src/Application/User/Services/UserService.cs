@@ -13,6 +13,27 @@ namespace Application.User.Services
             _userRepository = userRepository;
         }
 
+        public async Task<IEnumerable<UserDTO>> GetAllUsers()
+        {
+            var userList = await _userRepository.GetAllUsers();
+
+            IEnumerable<UserDTO> result = userList.Select(user => new UserDTO
+            {
+                IdUser = user?.IdUser,
+                FirstName = user?.FirstName,
+                MiddleName = user?.MiddleName,
+                LastName = user?.LastName,
+                SecondLastName = user?.SecondLastName,
+                Gender = user?.Gender,
+                BirthDate = user?.BirthDate.ToString("yyyy-MM-dd"),
+                Email = user?.Email,
+                PhoneNumber = user?.PhoneNumber,
+                Profile = user?.Profile
+            });
+
+            return result;
+        }
+
         public async Task<UserDTO> GetUserById(string id)
         {
             var user = await _userRepository.GetUserById(id);

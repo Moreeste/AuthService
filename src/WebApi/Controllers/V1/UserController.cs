@@ -16,6 +16,13 @@ namespace WebApi.Controllers.V1
 
         }
 
+        [HttpGet]
+        public async Task<IEnumerable<UserDTO>> GetAllUsers()
+        {
+            var query = new GetAllUsersQuery();
+            return await mediator.Send(query);
+        }
+
         [HttpGet("MyUser")]
         public async Task<ActionResult<UserDTO>> GetMine()
         {
