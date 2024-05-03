@@ -51,6 +51,15 @@ namespace Infrastructure.Repository
             return true;
         }
 
+        public async Task<IEnumerable<UserModel>> GetAllUsers()
+        {
+            string qry = "EXECUTE sp_GetAllUsers;";
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryAsync<UserModel>(qry);
+
+            return result;
+        }
+
         public async Task<UserModel?> GetUserById(string id)
         {
             string qry = "EXECUTE sp_GetUserById @IdUser;";
