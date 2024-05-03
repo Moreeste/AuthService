@@ -17,7 +17,7 @@ namespace WebApi.Controllers.V1
         }
 
         [HttpGet("MyUser")]
-        public async Task<ActionResult<UserDTO>> GetMyUser()
+        public async Task<ActionResult<UserDTO>> GetMine()
         {
             var query = new GetUserByIdQuery(GetIdUser());
             return await mediator.Send(query);
