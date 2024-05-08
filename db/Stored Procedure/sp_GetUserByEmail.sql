@@ -15,7 +15,7 @@ BEGIN
 			U.MiddleName, 
 			U.LastName, 
 			U.SecondLastName, 
-			G.Description AS Gender, 
+			U.Gender, 
 			U.BirthDate, 
 			U.Email, 
 			U.PhoneNumber, 
@@ -25,7 +25,6 @@ BEGIN
 			U.UpdateUser, 
 			P.Status 
 	FROM Users U 
-	LEFT JOIN Genders G ON G.IdGender = U.Gender 
 	INNER JOIN UserProperties P ON P.IdUser = U.IdUser 
 	WHERE U.Email = @Email;
 END
