@@ -51,7 +51,7 @@ namespace Infrastructure.Repository
             return true;
         }
 
-        public async Task<IEnumerable<UserModel>> GetAllUsers()
+        public async Task<IEnumerable<UserModel>> GetUsers()
         {
             string qry = "EXECUTE sp_GetUsers;";
 
