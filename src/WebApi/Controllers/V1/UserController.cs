@@ -17,7 +17,7 @@ namespace WebApi.Controllers.V1
         }
 
         [HttpGet]
-        public async Task<IEnumerable<UserDTO>> GetAllUsers()
+        public async Task<IEnumerable<UserDTO>> GetAll()
         {
             var query = new GetAllUsersQuery();
             return await mediator.Send(query);
