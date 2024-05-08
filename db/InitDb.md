@@ -44,9 +44,10 @@ Los scripts `*.sql` se encuentran en `db/Stored Procedure`.
 14. sp_GetPassword
 15. sp_CreateProfile
 16. sp_CreateUser
-17. sp_SetFailedAttempt
-18. sp_BlockUser
-19. sp_ResetFailedAttempts
+17. sp_GetUserProperties
+18. sp_SetFailedAttempt
+19. sp_BlockUser
+20. sp_ResetFailedAttempts
 
 ## Parametría General
 Los scripts `*.sql` se encuentran en `db/Parameter`.
