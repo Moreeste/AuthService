@@ -37,7 +37,7 @@ Los scripts `*.sql` se encuentran en `db/Stored Procedure`.
 7. sp_GetGenders
 8. sp_GetProfiles
 9. sp_GetProfileByName
-10. sp_GetAllUsers
+10. sp_GetUsers
 11. sp_GetUserById
 12. sp_GetUserByEmail
 13. sp_GetUserByPhone

@@ -53,7 +53,7 @@ namespace Infrastructure.Repository
 
         public async Task<IEnumerable<UserModel>> GetAllUsers()
         {
-            string qry = "EXECUTE sp_GetAllUsers;";
+            string qry = "EXECUTE sp_GetUsers;";
 
             var result = await _authServiceContext.Database.GetDbConnection().QueryAsync<UserModel>(qry);
 
