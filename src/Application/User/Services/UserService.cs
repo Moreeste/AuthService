@@ -27,8 +27,7 @@ namespace Application.User.Services
                 Gender = user?.Gender,
                 BirthDate = user?.BirthDate.ToString("yyyy-MM-dd"),
                 Email = user?.Email,
-                PhoneNumber = user?.PhoneNumber,
-                Profile = user?.Profile
+                PhoneNumber = user?.PhoneNumber
             });
 
             return result;
@@ -53,8 +52,7 @@ namespace Application.User.Services
                 Gender = user?.Gender,
                 BirthDate = user?.BirthDate.ToString("yyyy-MM-dd"),
                 Email = user?.Email,
-                PhoneNumber = user?.PhoneNumber,
-                Profile = user?.Profile
+                PhoneNumber = user?.PhoneNumber
             };
 
             return result;

@@ -22,8 +22,7 @@ BEGIN
 			U.RegistrationUser, 
 			U.UpdateDate, 
 			U.UpdateUser, 
-			P.Status, 
-			P.Profile 
+			P.Status 
 	FROM Users U 
 	LEFT JOIN Genders G ON G.IdGender = U.Gender 
 	INNER JOIN UserProperties P ON P.IdUser = U.IdUser 
