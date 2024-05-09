@@ -10,14 +10,16 @@ namespace Application.Auth.Services
     {
         private readonly IUtilities _utilities;
         private readonly IUserRepository _userRepository;
+        private readonly IUserPropertiesRepository _userPropertiesRepository;
         private readonly IPasswordRepository _passwordRepository;
         private readonly IPasswordService _passwordService;
         private readonly ITokenService _tokenService;
 
-        public LoginService(IUtilities utilities, IUserRepository userRepository, IPasswordRepository passwordRepository, IPasswordService passwordService, ITokenService tokenService)
+        public LoginService(IUtilities utilities, IUserRepository userRepository, IUserPropertiesRepository userPropertiesRepository, IPasswordRepository passwordRepository, IPasswordService passwordService, ITokenService tokenService)
         {
             _utilities = utilities;
             _userRepository = userRepository;
+            _userPropertiesRepository = userPropertiesRepository;
             _passwordRepository = passwordRepository;
             _passwordService = passwordService;
             _tokenService = tokenService;
@@ -32,12 +34,19 @@ namespace Application.Auth.Services
                 throw new SearchException("No existe el usuario.");
             }
 
-            if (user.Status == 2)
+            var userProperties = await _userPropertiesRepository.GetUserProperties(user.IdUser);
+            
+            if (userProperties == null)
+            {
+                throw new SearchException("No existen propiedades para el usuario.");
+            }
+
+            if (userProperties.Status == 2)
             {
                 throw new BusinessException("Usuario inactivo.");
             }
 
-            if (user.Status == 3)
+            if (userProperties.Status == 3)
             {
                 throw new BusinessException("Usuario bloqueado.");
             }

@@ -15,7 +15,7 @@ namespace Infrastructure.Repository
             _authServiceContext = authServiceContext;
         }
 
-        public async Task<UserPropertiesModel?> GetUserProperties(string idUser)
+        public async Task<UserPropertiesModel?> GetUserProperties(string? idUser)
         {
             string qry = "EXECUTE sp_GetUserProperties @IdUser;";
             var parameters = new { IdUser = idUser };
