@@ -15,6 +15,5 @@
         public string? RegistrationUser { get; set; }
         public DateTime UpdateDate { get; set; }
         public string? UpdateUser { get; set; }
-        public int Status { get; set; }
     }
 }
