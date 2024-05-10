@@ -4,7 +4,7 @@ namespace Application.User.Services
 {
     public interface IUserService
     {
-        Task<IEnumerable<UserDTO>> GetAllUsers();
+        Task<IEnumerable<UserDTO>> GetAllUsers(int page, int pageSize);
         Task<UserDTO> GetUserById(string id);
     }
 }

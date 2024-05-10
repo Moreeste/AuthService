@@ -16,7 +16,7 @@ namespace Application.User.Handlers
 
         public async Task<IEnumerable<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            return await _userService.GetAllUsers();
+            return await _userService.GetAllUsers(request.Page, request.PageSize);
         }
     }
 }

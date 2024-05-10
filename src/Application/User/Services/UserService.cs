@@ -13,11 +13,14 @@ namespace Application.User.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<UserDTO>> GetAllUsers()
+        public async Task<IEnumerable<UserDTO>> GetAllUsers(int page, int pageSize)
         {
             var userList = await _userRepository.GetUsers();
 
-            IEnumerable<UserDTO> result = userList.Select(user => new UserDTO
+            int startIndex = (page - 1) * pageSize;
+            var paginatedList = userList.Skip(startIndex).Take(pageSize);
+
+            IEnumerable<UserDTO> result = paginatedList.Select(user => new UserDTO
             {
                 IdUser = user?.IdUser,
                 FirstName = user?.FirstName,
