@@ -63,11 +63,21 @@ namespace Application.Validations
             string regexPattern = @"^[a-zA-Z0-9]*$";
             return Regex.IsMatch(text, regexPattern);
         }
-        
-        public bool BeInteger(string value)
+
+        public bool BeValidPositiveInteger(string text)
         {
-            return int.TryParse(value, out _);
+            if (!int.TryParse(text, out int number))
+                return false;
+
+            return number > 0;
         }
 
+        public bool BeTextNumberWithinRange(string text, int minValue, int maxValue)
+        {
+            if (!int.TryParse(text, out int number))
+                return false;
+
+            return number >= minValue && number <= maxValue;
+        }
     }
 }
