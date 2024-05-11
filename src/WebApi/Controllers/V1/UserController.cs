@@ -18,7 +18,7 @@ namespace WebApi.Controllers.V1
         }
 
         [HttpGet]
-        public async Task<PagedList<UserDTO>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<PagedList<UserDTO>> GetAll([FromQuery] string page = "1", [FromQuery] string pageSize = "10")
         {
             var query = new GetAllUsersQuery(page, pageSize);
             return await mediator.Send(query);

@@ -63,5 +63,11 @@ namespace Application.Validations
             string regexPattern = @"^[a-zA-Z0-9]*$";
             return Regex.IsMatch(text, regexPattern);
         }
+        
+        public bool BeInteger(string value)
+        {
+            return int.TryParse(value, out _);
+        }
+
     }
 }

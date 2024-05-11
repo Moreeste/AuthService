@@ -9,5 +9,6 @@
         bool BeValidPhoneNumber(string phone);
         Task <bool> BeValidGenderId(int gender, CancellationToken cancellationToken);
         bool BeOnlyLettersAndNumbers(string text);
+        bool BeInteger(string value);
     }
 }

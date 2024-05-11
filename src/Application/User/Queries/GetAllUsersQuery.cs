@@ -4,5 +4,5 @@ using MediatR;
 
 namespace Application.User.Queries
 {
-    public sealed record GetAllUsersQuery(int Page, int PageSize) : IRequest<PagedList<UserDTO>>;
+    public sealed record GetAllUsersQuery(string Page, string PageSize) : IRequest<PagedList<UserDTO>>;
 }
