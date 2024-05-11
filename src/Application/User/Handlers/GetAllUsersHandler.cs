@@ -1,11 +1,12 @@
 ﻿using Application.User.DTOs;
 using Application.User.Queries;
 using Application.User.Services;
+using Domain.Utilities;
 using MediatR;
 
 namespace Application.User.Handlers
 {
-    public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserDTO>>
+    public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, PagedList<UserDTO>>
     {
         private readonly IUserService _userService;
 
@@ -14,7 +15,7 @@ namespace Application.User.Handlers
             _userService = userService;
         }
 
-        public async Task<IEnumerable<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+        public async Task<PagedList<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             return await _userService.GetAllUsers(request.Page, request.PageSize);
         }

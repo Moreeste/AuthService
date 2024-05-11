@@ -1,6 +1,7 @@
 ﻿using Application.User.DTOs;
 using Domain.Exceptions;
 using Domain.Repository;
+using Domain.Utilities;
 
 namespace Application.User.Services
 {
@@ -13,14 +14,11 @@ namespace Application.User.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<UserDTO>> GetAllUsers(int page, int pageSize)
+        public async Task<PagedList<UserDTO>> GetAllUsers(int page, int pageSize)
         {
-            var userList = await _userRepository.GetUsers();
-
-            int startIndex = (page - 1) * pageSize;
-            var paginatedList = userList.Skip(startIndex).Take(pageSize);
-
-            IEnumerable<UserDTO> result = paginatedList.Select(user => new UserDTO
+            var users = await _userRepository.GetUsers();
+            
+            IEnumerable<UserDTO> usersDTO = users.Select(user => new UserDTO
             {
                 IdUser = user?.IdUser,
                 FirstName = user?.FirstName,
@@ -33,7 +31,7 @@ namespace Application.User.Services
                 PhoneNumber = user?.PhoneNumber
             });
 
-            return result;
+            return PagedList<UserDTO>.Create(usersDTO, page, pageSize);
         }
 
         public async Task<UserDTO> GetUserById(string id)
