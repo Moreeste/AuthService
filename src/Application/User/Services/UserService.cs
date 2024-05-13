@@ -1,5 +1,6 @@
 ﻿using Application.User.DTOs;
 using Domain.Exceptions;
+using Domain.Model.User;
 using Domain.Repository;
 using Domain.Utilities;
 
@@ -14,24 +15,13 @@ namespace Application.User.Services
             _userRepository = userRepository;
         }
 
-        public async Task<PagedList<UserDTO>> GetAllUsers(int page, int pageSize)
+        public async Task<PagedList<BasicUserModel>> GetAllUsers(int page, int pageSize)
         {
             var users = await _userRepository.GetUsers();
-            
-            IEnumerable<UserDTO> usersDTO = users.Select(user => new UserDTO
-            {
-                IdUser = user?.IdUser,
-                FirstName = user?.FirstName,
-                MiddleName = user?.MiddleName,
-                LastName = user?.LastName,
-                SecondLastName = user?.SecondLastName,
-                Gender = user?.Gender,
-                BirthDate = user?.BirthDate.ToString("yyyy-MM-dd"),
-                Email = user?.Email,
-                PhoneNumber = user?.PhoneNumber
-            });
 
-            return PagedList<UserDTO>.Create(usersDTO, page, pageSize);
+            var result = PagedList<BasicUserModel>.Create(users, page, pageSize);
+
+            return result;
         }
 
         public async Task<UserDTO> GetUserById(string id)

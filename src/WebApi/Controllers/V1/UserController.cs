@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Domain.Utilities;
+using Domain.Model.User;
 
 namespace WebApi.Controllers.V1
 {
@@ -18,7 +19,7 @@ namespace WebApi.Controllers.V1
         }
 
         [HttpGet]
-        public async Task<PagedList<UserDTO>> GetAll([FromQuery] string page = "1", [FromQuery] string pageSize = "10")
+        public async Task<PagedList<BasicUserModel>> GetAll([FromQuery] string page = "1", [FromQuery] string pageSize = "10")
         {
             var query = new GetAllUsersQuery(page, pageSize);
             return await mediator.Send(query);
