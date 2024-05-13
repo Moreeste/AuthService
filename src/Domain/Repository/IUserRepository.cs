@@ -1,6 +1,4 @@
-﻿using Domain.Model.Response;
-using Domain.Model.User;
-using System;
+﻿using Domain.Model.User;
 
 namespace Domain.Repository
 {
