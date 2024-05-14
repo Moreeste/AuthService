@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Domain.Utilities
+﻿namespace Domain.Utilities
 {
     public class PagedList<T>
     {
@@ -19,16 +17,7 @@ namespace Domain.Utilities
         public bool HasNextPage => Page * PageSize < TotalItems;
         public bool HasPreviousPage => Page > 1;
         public List<T>? Items { get; }
-
-        public static async Task<PagedList<T>> CreateAsync(IQueryable<T> query, int page, int pageSize)
-        {
-            var totalItems = await query.CountAsync();
-            var startIndex = (page - 1) * pageSize;
-            var items = await query.Skip(startIndex).Take(pageSize).ToListAsync();
-
-            return new(items, page, pageSize, totalItems);
-        }
-
+        
         public static PagedList<T> Create(IEnumerable<T> list, int page, int pageSize)
         {
             var totalItems = list.Count();

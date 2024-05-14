@@ -19,7 +19,9 @@ namespace Application.User.Services
         {
             var users = await _userRepository.GetUsers();
 
-            var result = PagedList<BasicUserModel>.Create(users, page, pageSize);
+            IQueryable<BasicUserModel> usersQuery = users.AsQueryable();
+
+            var result = PagedList<BasicUserModel>.Create(usersQuery, page, pageSize);
 
             return result;
         }
