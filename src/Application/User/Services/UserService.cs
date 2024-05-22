@@ -15,11 +15,20 @@ namespace Application.User.Services
             _userRepository = userRepository;
         }
 
-        public async Task<PagedList<BasicUserModel>> GetAllUsers(int page, int pageSize)
+        public async Task<PagedList<BasicUserModel>> GetAllUsers(string? searchTerm, int page, int pageSize)
         {
             var users = await _userRepository.GetUsers();
 
             IQueryable<BasicUserModel> usersQuery = users.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                usersQuery = usersQuery.Where(x => 
+                (x.FirstName != null && x.FirstName.ToUpper().Contains(searchTerm.ToUpper())) || 
+                (x.MiddleName != null && x.MiddleName.ToUpper().Contains(searchTerm.ToUpper())) ||
+                (x.LastName != null && x.LastName.ToUpper().Contains(searchTerm.ToUpper())) ||
+                (x.SecondLastName != null && x.SecondLastName.ToUpper().Contains(searchTerm.ToUpper())));
+            }
 
             var result = PagedList<BasicUserModel>.Create(usersQuery, page, pageSize);
 

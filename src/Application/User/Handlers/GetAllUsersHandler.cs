@@ -17,7 +17,7 @@ namespace Application.User.Handlers
 
         public async Task<PagedList<BasicUserModel>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            return await _userService.GetAllUsers(Convert.ToInt32(request.Page), Convert.ToInt32(request.PageSize));
+            return await _userService.GetAllUsers(request.SearchTerm, Convert.ToInt32(request.Page), Convert.ToInt32(request.PageSize));
         }
     }
 }
