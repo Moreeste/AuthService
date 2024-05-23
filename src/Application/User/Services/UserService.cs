@@ -15,7 +15,7 @@ namespace Application.User.Services
             _userRepository = userRepository;
         }
 
-        public async Task<PagedList<BasicUserModel>> GetAllUsers(string? searchTerm, int page, int pageSize)
+        public async Task<PagedList<BasicUserModel>> GetAllUsers(string? searchTerm, string? sortColumn, string? sortOrder, int page, int pageSize)
         {
             var users = await _userRepository.GetUsers();
 
