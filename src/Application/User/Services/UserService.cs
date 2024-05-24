@@ -23,11 +23,13 @@ namespace Application.User.Services
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
+                searchTerm = searchTerm.ToUpper();
+
                 usersQuery = usersQuery.Where(x => 
-                (x.FirstName != null && x.FirstName.ToUpper().Contains(searchTerm.ToUpper())) || 
-                (x.MiddleName != null && x.MiddleName.ToUpper().Contains(searchTerm.ToUpper())) ||
-                (x.LastName != null && x.LastName.ToUpper().Contains(searchTerm.ToUpper())) ||
-                (x.SecondLastName != null && x.SecondLastName.ToUpper().Contains(searchTerm.ToUpper())));
+                (x.FirstName != null && x.FirstName.ToUpper().Contains(searchTerm)) || 
+                (x.MiddleName != null && x.MiddleName.ToUpper().Contains(searchTerm)) ||
+                (x.LastName != null && x.LastName.ToUpper().Contains(searchTerm)) ||
+                (x.SecondLastName != null && x.SecondLastName.ToUpper().Contains(searchTerm)));
             }
 
             var result = PagedList<BasicUserModel>.Create(usersQuery, page, pageSize);
