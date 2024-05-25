@@ -3,7 +3,6 @@ using Domain.Exceptions;
 using Domain.Model.User;
 using Domain.Repository;
 using Domain.Utilities;
-using System.Linq.Expressions;
 
 namespace Application.User.Services
 {
