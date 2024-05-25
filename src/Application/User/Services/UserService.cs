@@ -33,21 +33,15 @@ namespace Application.User.Services
                 (x.SecondLastName != null && x.SecondLastName.ToUpper().Contains(searchTerm)));
             }
 
-            Expression<Func<BasicUserModel, object>> keySelector = sortColumn?.ToLower() switch
-            {
-                "firstname" => user => user.FirstName ?? string.Empty,
-                "lastname" => user => user.LastName ?? string.Empty,
-                "birthdate" => user => user.BirthDate,
-                _ => user => user.FirstName ?? string.Empty
-            };
+            var key = KeySelector.GetBasicUserModelSortProperty(sortColumn);
 
             if (sortOrder?.ToLower() == "desc")
             {
-                usersQuery = usersQuery.OrderByDescending(keySelector);
+                usersQuery = usersQuery.OrderByDescending(key);
             }
             else
             {
-                usersQuery = usersQuery.OrderBy(keySelector);
+                usersQuery = usersQuery.OrderBy(key);
             }
 
             var result = PagedList<BasicUserModel>.Create(usersQuery, page, pageSize);
