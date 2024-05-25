@@ -3,6 +3,7 @@ using Domain.Exceptions;
 using Domain.Model.User;
 using Domain.Repository;
 using Domain.Utilities;
+using System.Linq.Expressions;
 
 namespace Application.User.Services
 {
@@ -30,6 +31,23 @@ namespace Application.User.Services
                 (x.MiddleName != null && x.MiddleName.ToUpper().Contains(searchTerm)) ||
                 (x.LastName != null && x.LastName.ToUpper().Contains(searchTerm)) ||
                 (x.SecondLastName != null && x.SecondLastName.ToUpper().Contains(searchTerm)));
+            }
+
+            Expression<Func<BasicUserModel, object>> keySelector = sortColumn?.ToLower() switch
+            {
+                "firstname" => user => user.FirstName ?? string.Empty,
+                "lastname" => user => user.LastName ?? string.Empty,
+                "birthdate" => user => user.BirthDate,
+                _ => user => user.FirstName ?? string.Empty
+            };
+
+            if (sortOrder?.ToLower() == "desc")
+            {
+                usersQuery = usersQuery.OrderByDescending(keySelector);
+            }
+            else
+            {
+                usersQuery = usersQuery.OrderBy(keySelector);
             }
 
             var result = PagedList<BasicUserModel>.Create(usersQuery, page, pageSize);
