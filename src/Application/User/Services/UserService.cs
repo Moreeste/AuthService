@@ -32,18 +32,21 @@ namespace Application.User.Services
                 (x.LastName != null && x.LastName.ToUpper().Contains(searchTerm)) ||
                 (x.SecondLastName != null && x.SecondLastName.ToUpper().Contains(searchTerm)));
             }
-
-            var key = KeySelector.GetBasicUserModelSortProperty(sortColumn);
-
-            if (sortOrder?.ToLower() == "desc")
+            
+            if (!string.IsNullOrEmpty(sortColumn))
             {
-                usersQuery = usersQuery.OrderByDescending(key);
-            }
-            else
-            {
-                usersQuery = usersQuery.OrderBy(key);
-            }
+                var sortProperty = KeySelector.GetBasicUserModelSortProperty(sortColumn);
 
+                if (sortOrder?.ToLower() == "desc")
+                {
+                    usersQuery = usersQuery.OrderByDescending(sortProperty);
+                }
+                else
+                {
+                    usersQuery = usersQuery.OrderBy(sortProperty);
+                }
+            }
+            
             var result = PagedList<BasicUserModel>.Create(usersQuery, page, pageSize);
 
             return result;
