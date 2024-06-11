@@ -63,5 +63,18 @@ namespace Infrastructure.Repository
 
             return result;
         }
+
+        public async Task<Profile?> GetProfileById(string? idProfile)
+        {
+            string qry = "EXECUTE sp_GetProfileById @IdProfile;";
+            var parameters = new
+            {
+                IdProfile = idProfile
+            };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<Profile>(qry, parameters);
+
+            return result;
+        }
     }
 }

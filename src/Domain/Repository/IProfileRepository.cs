@@ -7,5 +7,6 @@ namespace Domain.Repository
         Task<IEnumerable<Profile>?> GetProfiles();
         Task<bool> CreateProfile(string idProfile, string? description, string? registrationUser);
         Task<Profile?> GetProfileByName(string? profileName);
+        Task<Profile?> GetProfileById(string? idProfile);
     }
 }
