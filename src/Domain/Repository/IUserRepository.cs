@@ -9,6 +9,7 @@ namespace Domain.Repository
         Task<UserModel?> GetUserById(string id);
         Task<UserModel?> GetUserByEmail(string email);
         Task<UserModel?> GetUserByPhone(string phone);
+        Task<IEnumerable<BasicUserModel>> GetUsersByProfile(string idProfile);
         Task<bool> BlockUser(string? idUser);
     }
 }

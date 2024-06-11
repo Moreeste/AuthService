@@ -109,5 +109,15 @@ namespace Infrastructure.Repository
 
             return true;
         }
+
+        public async Task<IEnumerable<BasicUserModel>> GetUsersByProfile(string idProfile)
+        {
+            string qry = "EXECUTE sp_GetUsersByProfile @IdProfile;";
+            var parameters = new { IdProfile = idProfile };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryAsync<BasicUserModel>(qry);
+
+            return result;
+        }
     }
 }
