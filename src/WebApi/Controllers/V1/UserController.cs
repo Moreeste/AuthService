@@ -20,13 +20,14 @@ namespace WebApi.Controllers.V1
 
         [HttpGet]
         public async Task<PagedList<BasicUserModel>> GetAll(
+            [FromQuery] string? idProfile,
             [FromQuery] string? searchTerm, 
             [FromQuery] string? sortColumn, 
             [FromQuery] string? sortOrder, 
             [FromQuery] string page = "1", 
             [FromQuery] string pageSize = "10")
         {
-            var query = new GetAllUsersQuery(searchTerm, sortColumn, sortOrder, page, pageSize);
+            var query = new GetAllUsersQuery(idProfile, searchTerm, sortColumn, sortOrder, page, pageSize);
             return await mediator.Send(query);
         }
 

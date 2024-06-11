@@ -15,11 +15,16 @@ namespace Application.User.Services
             _userRepository = userRepository;
         }
 
-        public async Task<PagedList<BasicUserModel>> GetAllUsers(string? searchTerm, string? sortColumn, string? sortOrder, int page, int pageSize)
+        public async Task<PagedList<BasicUserModel>> GetAllUsers(string? idProfile, string? searchTerm, string? sortColumn, string? sortOrder, int page, int pageSize)
         {
             var users = await _userRepository.GetUsers();
 
             IQueryable<BasicUserModel> usersQuery = users.AsQueryable();
+
+            if (!string.IsNullOrEmpty(idProfile))
+            {
+                usersQuery = usersQuery.Where(x => x.Profile == idProfile);
+            }
 
             if (!string.IsNullOrEmpty(searchTerm))
             {

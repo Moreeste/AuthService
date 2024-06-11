@@ -9,7 +9,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT	IdUser, 
+	SELECT	Users.IdUser, 
 			FirstName, 
 			MiddleName, 
 			LastName, 
@@ -18,11 +18,9 @@ BEGIN
 			BirthDate, 
 			Email, 
 			PhoneNumber, 
-			RegistrationDate, 
-			RegistrationUser, 
-			UpdateDate, 
-			UpdateUser 
-	FROM Users;
+			UserProperties.Profile
+	FROM Users
+	LEFT JOIN UserProperties ON UserProperties.IdUser = Users.IdUser;
 
 END
 GO
