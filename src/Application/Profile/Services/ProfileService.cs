@@ -52,5 +52,24 @@ namespace Application.Profile.Services
                 IdProfile = id
             };
         }
+
+        public async Task<ProfileDTO> GetProfileById(string id)
+        {
+            var profile = await _profileRepository.GetProfileById(id);
+
+            if (profile == null)
+            {
+                throw new SearchException("No existe el perfil.");
+            }
+
+            var result = new ProfileDTO
+            {
+                Id = profile.IdProfile,
+                Description = profile.Description,
+                Active = profile.Active,
+            };
+
+            return result;
+        }
     }
 }
