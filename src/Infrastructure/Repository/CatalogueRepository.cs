@@ -23,5 +23,14 @@ namespace Infrastructure.Repository
 
             return result;
         }
+
+        public async Task<IEnumerable<UserStatus>> GetUserStatus()
+        {
+            string qry = "EXECUTE sp_GetUserStatus;";
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryAsync<UserStatus>(qry);
+
+            return result;
+        }
     }
 }
