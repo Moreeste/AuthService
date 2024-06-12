@@ -24,6 +24,13 @@ namespace WebApi.Controllers.V1
             return await mediator.Send(query);
         }
 
+        [HttpGet("MyProfile")]
+        public async Task<ProfileDTO> GetMine()
+        {
+            var query = new GetMyProfileQuery(GetIdUser());
+            return await mediator.Send(query);
+        }
+
         [HttpGet("{id}")]
         public async Task<ProfileDTO> GetById(string id)
         {

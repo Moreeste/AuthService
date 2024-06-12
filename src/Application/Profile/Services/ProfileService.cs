@@ -9,11 +9,15 @@ namespace Application.Profile.Services
     {
         private readonly IUtilities _utilities;
         private readonly IProfileRepository _profileRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IUserPropertiesRepository _userPropertiesRepository;
 
-        public ProfileService(IUtilities utilities, IProfileRepository profileRepository)
+        public ProfileService(IUtilities utilities, IProfileRepository profileRepository, IUserRepository userRepository, IUserPropertiesRepository userPropertiesRepository)
         {
             _utilities = utilities;
             _profileRepository = profileRepository;
+            _userRepository = userRepository;
+            _userPropertiesRepository = userPropertiesRepository;
         }
 
         public async Task<IEnumerable<ProfileDTO>> GetProfiles()
@@ -60,6 +64,44 @@ namespace Application.Profile.Services
             if (profile == null)
             {
                 throw new SearchException("No existe el perfil.");
+            }
+
+            var result = new ProfileDTO
+            {
+                Id = profile.IdProfile,
+                Description = profile.Description,
+                Active = profile.Active,
+            };
+
+            return result;
+        }
+
+        public async Task<ProfileDTO> GetMyProfile(string idUser)
+        {
+            var user = await _userRepository.GetUserById(idUser);
+
+            if (user == null)
+            {
+                throw new SearchException("No existe el usuario.");
+            }
+
+            var userProperties = await _userPropertiesRepository.GetUserProperties(idUser);
+
+            if (userProperties == null)
+            {
+                throw new SearchException("El usuario no cuenta con propiedades.");
+            }
+
+            if (string.IsNullOrEmpty(userProperties.Profile))
+            {
+                throw new BusinessException("El usuario no tiene perfil asignado.");
+            }
+            
+            var profile = await _profileRepository.GetProfileById(userProperties.Profile);
+
+            if (profile == null)
+            {
+                throw new SearchException("No existe el perfil asignado al usuario.");
             }
 
             var result = new ProfileDTO

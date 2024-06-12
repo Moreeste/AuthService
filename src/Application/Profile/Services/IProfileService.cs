@@ -7,5 +7,6 @@ namespace Application.Profile.Services
         Task<IEnumerable<ProfileDTO>> GetProfiles();
         Task<CreateProfileOutDTO> CreateProfile(string? description, string? registrationUser);
         Task<ProfileDTO> GetProfileById(string id);
+        Task<ProfileDTO> GetMyProfile(string idUser);
     }
 }
