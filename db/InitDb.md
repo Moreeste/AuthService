@@ -47,6 +47,7 @@ Los scripts `*.sql` se encuentran en `db/Stored Procedure`.
 - sp_CreateProfile
 - sp_CreateUser
 - sp_GetUserProperties
+- sp_UpdateUserPropertiesProfile
 - sp_SetFailedAttempt
 - sp_BlockUser
 - sp_ResetFailedAttempts
