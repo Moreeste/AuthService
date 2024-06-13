@@ -6,7 +6,7 @@ GO
 
 CREATE OR ALTER PROCEDURE sp_UpdateUserPropertiesStatus
 	@IdUser VARCHAR(36),
-	@Status INT,
+	@IdStatus INT,
 	@UpdateUser VARCHAR(36)
 AS
 BEGIN
@@ -18,7 +18,7 @@ BEGIN
 		BEGIN TRANSACTION;
 		
 		UPDATE UserProperties
-		SET	Status = @Status, 
+		SET	Status = @IdStatus, 
 			UpdateUser = @UpdateUser, 
 			UpdateDate = GETDATE() 
 		WHERE IdUser = @IdUser;
