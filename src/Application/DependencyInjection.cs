@@ -1,6 +1,7 @@
 ﻿using Application.Auth.Services;
 using Application.Profile.Services;
 using Application.User.Services;
+using Application.UserProperties.Services;
 using Application.Validations;
 using FluentValidation;
 using MediatR;
@@ -25,6 +26,7 @@ namespace Application
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProfileService, ProfileService>();
+            services.AddScoped<IUserPropertiesService, UserPropertiesService>();
 
             return services;
         }
