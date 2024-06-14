@@ -1,6 +1,5 @@
 ﻿using Application.UserProperties.DTOs;
 using Domain.Exceptions;
-using Domain.Model.User;
 using Domain.Repository;
 
 namespace Application.UserProperties.Services
