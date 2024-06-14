@@ -1,5 +1,6 @@
 ﻿using Application.UserProperties.DTOs;
 using Domain.Exceptions;
+using Domain.Model.User;
 using Domain.Repository;
 
 namespace Application.UserProperties.Services
@@ -8,12 +9,13 @@ namespace Application.UserProperties.Services
     {
         private readonly IUserPropertiesRepository _userPropertiesRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IProfileRepository _profileRepository;
 
-        public UserPropertiesService(IUserPropertiesRepository userPropertiesRepository, IUserRepository userRepository)
+        public UserPropertiesService(IUserPropertiesRepository userPropertiesRepository, IUserRepository userRepository, IProfileRepository profileRepository)
         {
             _userPropertiesRepository = userPropertiesRepository;
             _userRepository = userRepository;
-
+            _profileRepository = profileRepository;
         }
 
         public async Task<UserPropertiesDTO> GetUserProperties(string idUser)
@@ -39,6 +41,41 @@ namespace Application.UserProperties.Services
             };
 
             return result;
+        }
+
+        public async Task<bool> UpdateUserProfile(string idUser, string idProfile, string updateUser)
+        {
+            var user = await _userRepository.GetUserById(idUser);
+
+            if (user == null)
+            {
+                throw new BusinessException("No existe el usuario.");
+            }
+
+            var profile = await _profileRepository.GetProfileById(idProfile);
+
+            if (profile == null)
+            {
+                throw new BusinessException("No existe el perfil.");
+            }
+
+            bool userProfileUpdated = await _userPropertiesRepository.UpdateUserProfile(idUser, idProfile, updateUser);
+
+            return userProfileUpdated;
+        }
+
+        public async Task<bool> UpdateUserStatus(string idUser, int idStatus, string updateUser)
+        {
+            var user = await _userRepository.GetUserById(idUser);
+
+            if (user == null)
+            {
+                throw new BusinessException("No existe el usuario.");
+            }
+
+            bool userStatusUpdated = await _userPropertiesRepository.UpdateUserStatus(idUser, idStatus, updateUser);
+
+            return userStatusUpdated;
         }
     }
 }
