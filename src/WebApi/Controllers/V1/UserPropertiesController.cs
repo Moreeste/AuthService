@@ -1,4 +1,5 @@
-﻿using Application.UserProperties.DTOs;
+﻿using Application.UserProperties.Commands;
+using Application.UserProperties.DTOs;
 using Application.UserProperties.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -28,6 +29,20 @@ namespace WebApi.Controllers.V1
         {
             var query = new GetUserPropertiesQuery(id);
             return await mediator.Send(query);
+        }
+
+        [HttpPut("Profile")]
+        public async Task<bool> PutProfile(UpdateUserProfileDTO parameters)
+        {
+            var command = new UpdateUserProfileCommand(parameters.IdUser, parameters.IdProfile, GetIdUser());
+            return await mediator.Send(command);
+        }
+
+        [HttpPut("Status")]
+        public async Task<bool> PutStatus(UpdateUserStatusDTO parameters)
+        {
+            var command = new UpdateUserStatusCommand(parameters.IdUser, parameters.IdStatus, GetIdUser());
+            return await mediator.Send(command);
         }
     }
 }

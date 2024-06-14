@@ -79,5 +79,11 @@ namespace Application.Validations
 
             return number >= minValue && number <= maxValue;
         }
+
+        public async Task<bool> BeValidStatusId(int status, CancellationToken cancellationToken)
+        {
+            var catStatus = await _catalogueRepository.GetUserStatus();
+            return catStatus.Any(x => x.IdStatus == status);
+        }
     }
 }

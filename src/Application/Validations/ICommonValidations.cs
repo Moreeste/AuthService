@@ -11,5 +11,6 @@
         bool BeOnlyLettersAndNumbers(string text);
         bool BeValidPositiveInteger(string text);
         bool BeTextNumberWithinRange(string text, int minValue, int maxValue);
+        Task<bool> BeValidStatusId(int status, CancellationToken cancellationToken);
     }
 }
