@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using Domain.Exceptions;
+using Domain.Model.Response;
 using Domain.Model.User;
 using Domain.Repository;
 using Infrastructure.Database;
@@ -23,6 +25,56 @@ namespace Infrastructure.Repository
             var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<UserPropertiesModel>(qry, parameters);
 
             return result;
+        }
+
+        public async Task<bool> UpdateUserProfile(string idUser, string idProfile, string updateUser)
+        {
+            string qry = "EXECUTE sp_UpdateUserPropertiesProfile @IdUser, @IdProfile, @UpdateUser;";
+            var parameters = new
+            {
+                IdUser = idUser,
+                IdProfile = idProfile,
+                UpdateUser = updateUser
+            };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);
+
+            if (result == null)
+            {
+                throw new DataBaseException(qry, parameters);
+            }
+
+            if (!result.Success)
+            {
+                throw new DataBaseException(qry, parameters, result.ErrorMessage);
+            }
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserStatus(string idUser, int idStatus, string updateUser)
+        {
+            string qry = "EXECUTE sp_UpdateUserPropertiesStatus @IdUser, @IdStatus, @UpdateUser;";
+            var parameters = new
+            {
+                IdUser = idUser,
+                IdStatus = idStatus,
+                UpdateUser = updateUser
+            };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);
+
+            if (result == null)
+            {
+                throw new DataBaseException(qry, parameters);
+            }
+
+            if (!result.Success)
+            {
+                throw new DataBaseException(qry, parameters, result.ErrorMessage);
+            }
+
+            return true;
         }
     }
 }
