@@ -1,4 +1,5 @@
 ﻿using Application.Auth.DTOs;
+using Domain.Enums;
 using Domain.Exceptions;
 using Domain.Repository;
 using Domain.Services;
@@ -41,12 +42,12 @@ namespace Application.Auth.Services
                 throw new SearchException("No existen propiedades para el usuario.");
             }
 
-            if (userProperties.Status == 2)
+            if (userProperties.Status == (int)UserStatus.Inactive)
             {
                 throw new BusinessException("Usuario inactivo.");
             }
 
-            if (userProperties.Status == 3)
+            if (userProperties.Status == (int)UserStatus.Blocked)
             {
                 throw new BusinessException("Usuario bloqueado.");
             }
