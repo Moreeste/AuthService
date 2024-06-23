@@ -79,7 +79,9 @@ namespace Application.Auth.Services
             return new LoginDTO()
             {
                 Token = jwt.Token,
-                Expiration = jwt.Expiration
+                TokenExpiration = jwt.TokenExpiration,
+                RefreshToken = jwt.RefreshToken,
+                RefreshTokenExpiration = jwt.RefreshTokenExpiration
             };
         }
     }

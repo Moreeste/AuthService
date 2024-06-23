@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Infrastructure.Security
@@ -23,6 +24,9 @@ namespace Infrastructure.Security
         
         public TokenModel GenerateToken(UserModel user)
         {
+            int tokenExpirationMinutes = 60;
+            int refreshTokenExpirationMinutes = 180;
+
             var jwtOptions = _configuration.GetSection("Jwt").Get<JwtOptions>();
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions?.Key ?? string.Empty));
@@ -31,7 +35,7 @@ namespace Infrastructure.Security
             var id = _utilities.GenerateId();
             var creation = _utilities.GetDateTime();
             var creationOffset = _utilities.GetDateTimeOffset();
-            var expiration = _utilities.GetDateTime().AddMinutes(60);
+            var expiration = creation.AddMinutes(tokenExpirationMinutes);
 
             var claims = new[]
             {
@@ -51,11 +55,27 @@ namespace Infrastructure.Security
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
+            var refreshToken = GenerateRefreshToken();
+            var refreshTokenExpiration = creation.AddMinutes(refreshTokenExpirationMinutes);
+
             return new TokenModel()
             {
                 Token = jwt,
-                Expiration = expiration
+                RefreshToken = refreshToken,
+                Creation = creation,
+                TokenExpiration = expiration,
+                RefreshTokenExpiration = refreshTokenExpiration
             };
+        }
+
+        private string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
         }
     }
 }
