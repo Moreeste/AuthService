@@ -53,6 +53,7 @@ Los scripts `*.sql` se encuentran en `db/Stored Procedure`.
 - sp_SetFailedAttempt
 - sp_BlockUser
 - sp_ResetFailedAttempts
+- sp_RegisterLogin
 
 ## Parametría General
 Los scripts `*.sql` se encuentran en `db/Parameter`.
