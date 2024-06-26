@@ -15,8 +15,9 @@ namespace Application.Auth.Services
         private readonly IPasswordRepository _passwordRepository;
         private readonly IPasswordService _passwordService;
         private readonly ITokenService _tokenService;
+        private readonly IUserLoginRepository _userLoginRepository;
 
-        public LoginService(IUtilities utilities, IUserRepository userRepository, IUserPropertiesRepository userPropertiesRepository, IPasswordRepository passwordRepository, IPasswordService passwordService, ITokenService tokenService)
+        public LoginService(IUtilities utilities, IUserRepository userRepository, IUserPropertiesRepository userPropertiesRepository, IPasswordRepository passwordRepository, IPasswordService passwordService, ITokenService tokenService, IUserLoginRepository userLoginRepository)
         {
             _utilities = utilities;
             _userRepository = userRepository;
@@ -24,6 +25,7 @@ namespace Application.Auth.Services
             _passwordRepository = passwordRepository;
             _passwordService = passwordService;
             _tokenService = tokenService;
+            _userLoginRepository = userLoginRepository;
         }
 
         public async Task<LoginDTO> Login(string email, string password)
@@ -75,6 +77,8 @@ namespace Application.Auth.Services
             }
 
             var jwt = _tokenService.GenerateToken(user);
+            
+            await _userLoginRepository.RegisterLogin(user.IdUser, jwt.Creation, jwt.Token, jwt.TokenExpiration, jwt.RefreshToken, jwt.RefreshTokenExpiration, false, null);
 
             return new LoginDTO()
             {

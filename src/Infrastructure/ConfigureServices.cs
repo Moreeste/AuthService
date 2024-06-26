@@ -26,6 +26,7 @@ namespace Infrastructure
             services.AddScoped<IUserPropertiesRepository, UserPropertiesRepository>();
             services.AddScoped<IPasswordRepository, PasswordRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
+            services.AddScoped<IUserLoginRepository, UserLoginRepository>();
 
             return services;
         }
