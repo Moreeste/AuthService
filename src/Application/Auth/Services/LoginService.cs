@@ -88,5 +88,10 @@ namespace Application.Auth.Services
                 RefreshTokenExpiration = jwt.RefreshTokenExpiration
             };
         }
+
+        public async Task<LoginDTO> RefreshToken(string expiredToken, string refreshToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

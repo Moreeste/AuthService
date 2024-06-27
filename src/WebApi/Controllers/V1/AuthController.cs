@@ -29,5 +29,12 @@ namespace WebApi.Controllers.V1
         {
             return await mediator.Send(command);
         }
+
+        [AllowAnonymous]
+        [HttpPost("RefreshToken")]
+        public async Task<ActionResult<LoginDTO>> RefreshToken(RefreshTokenCommand command)
+        {
+            return await mediator.Send(command);
+        }
     }
 }

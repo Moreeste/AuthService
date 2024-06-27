@@ -1,4 +1,5 @@
 ﻿using Domain.Repository;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text.RegularExpressions;
 
 namespace Application.Validations
@@ -84,6 +85,47 @@ namespace Application.Validations
         {
             var catStatus = await _catalogueRepository.GetUserStatus();
             return catStatus.Any(x => x.IdStatus == status);
+        }
+
+        public bool BeAValidBase64String(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return false;
+            }
+
+            if (text.Length % 4 != 0)
+            {
+                return false;
+            }
+
+            var base64Regex = new Regex(@"^[a-zA-Z0-9\+/]*={0,2}$", RegexOptions.None);
+            return base64Regex.IsMatch(text);
+        }
+
+        public bool BeAValidJwt(string jwt)
+        {
+            if (string.IsNullOrWhiteSpace(jwt))
+            {
+                return false;
+            }
+
+            var parts = jwt.Split('.');
+            if (parts.Length != 3)
+            {
+                return false;
+            }
+
+            try
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var token = handler.ReadJwtToken(jwt);
+                return token != null;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

@@ -12,5 +12,7 @@
         bool BeValidPositiveInteger(string text);
         bool BeTextNumberWithinRange(string text, int minValue, int maxValue);
         Task<bool> BeValidStatusId(int status, CancellationToken cancellationToken);
+        bool BeAValidBase64String(string text);
+        bool BeAValidJwt(string jwt);
     }
 }
