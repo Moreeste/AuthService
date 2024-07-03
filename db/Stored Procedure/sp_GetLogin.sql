@@ -12,7 +12,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	SELECT	LoginDate, 
+	SELECT	LoginDate AS Creation, 
 			TokenExpiration, 
 			RefreshTokenExpiration 
 	FROM UserLogin
