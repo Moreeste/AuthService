@@ -1,7 +1,7 @@
-﻿using Application.Auth.DTOs;
-using Dapper;
+﻿using Dapper;
 using Domain.Exceptions;
 using Domain.Model.Response;
+using Domain.Model.Token;
 using Domain.Repository;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +46,21 @@ namespace Infrastructure.Repository
             }
 
             return true;
+        }
+
+        public async Task<TokenModel?> GetLogin(string? idUser, string? token, string? refreshToken)
+        {
+            string qry = "EXECUTE sp_GetLogin @IdUser, @Token, @RefreshToken;";
+            var parameters = new
+            {
+                IdUser = idUser,
+                Token = token,
+                RefreshToken = refreshToken
+            };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<TokenModel>(qry, parameters);
+
+            return result;
         }
     }
 }
