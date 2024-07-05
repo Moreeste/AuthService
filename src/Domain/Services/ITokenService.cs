@@ -6,5 +6,6 @@ namespace Domain.Services
     public interface ITokenService
     {
         TokenModel GenerateToken(UserModel user);
+        string? GetIdUser(string token);
     }
 }

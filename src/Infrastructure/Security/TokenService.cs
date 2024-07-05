@@ -77,5 +77,25 @@ namespace Infrastructure.Security
                 return Convert.ToBase64String(randomNumber);
             }
         }
+
+        public string? GetIdUser(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwt = handler.ReadToken(token) as JwtSecurityToken;
+
+            if (jwt == null)
+            {
+                return null;
+            }
+
+            var claimIdUser = jwt.Claims.FirstOrDefault(x => x.Type == "IdUser");
+
+            if (claimIdUser == null)
+            {
+                return null;
+            }
+
+            return claimIdUser.Value;
+        }
     }
 }
