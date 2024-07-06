@@ -114,7 +114,7 @@ namespace Application.Auth.Services
 
             var jwt = _tokenService.GenerateToken(user);
 
-            await _userLoginRepository.RegisterLogin(user.IdUser, jwt.Creation, jwt.Token, jwt.TokenExpiration, jwt.RefreshToken, jwt.RefreshTokenExpiration, false, null);
+            await _userLoginRepository.RegisterLogin(user.IdUser, jwt.Creation, jwt.Token, jwt.TokenExpiration, jwt.RefreshToken, jwt.RefreshTokenExpiration, true, refreshToken);
 
             return new LoginDTO()
             {
