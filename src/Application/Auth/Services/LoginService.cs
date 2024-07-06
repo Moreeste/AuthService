@@ -91,7 +91,38 @@ namespace Application.Auth.Services
 
         public async Task<LoginDTO> RefreshToken(string expiredToken, string refreshToken)
         {
-            throw new NotImplementedException();
+            var idUser = _tokenService.GetIdUser(expiredToken);
+
+            if (string.IsNullOrEmpty(idUser))
+            {
+                throw new BusinessException("El token no contiene un usuario válido.");
+            }
+
+            var user = await _userRepository.GetUserById(idUser);
+
+            if (user == null)
+            {
+                throw new SearchException("No existe el usuario.");
+            }
+
+            var login = await _userLoginRepository.GetLogin(idUser, expiredToken, refreshToken);
+
+            if (login == null)
+            {
+                throw new SearchException("No se encontró login.");
+            }
+
+            var jwt = _tokenService.GenerateToken(user);
+
+            await _userLoginRepository.RegisterLogin(user.IdUser, jwt.Creation, jwt.Token, jwt.TokenExpiration, jwt.RefreshToken, jwt.RefreshTokenExpiration, false, null);
+
+            return new LoginDTO()
+            {
+                Token = jwt.Token,
+                TokenExpiration = jwt.TokenExpiration,
+                RefreshToken = jwt.RefreshToken,
+                RefreshTokenExpiration = jwt.RefreshTokenExpiration
+            };
         }
     }
 }
