@@ -112,6 +112,18 @@ namespace Application.Auth.Services
                 throw new SearchException("No se encontró login.");
             }
 
+            var now = _utilities.GetDateTime();
+
+            if (login.TokenExpiration > now)
+            {
+                throw new BusinessException("Token no expirado.");
+            }
+
+            if (login.RefreshTokenExpiration < now)
+            {
+                throw new BusinessException("Refresh token expirado.");
+            }
+
             var jwt = _tokenService.GenerateToken(user);
 
             await _userLoginRepository.RegisterLogin(user.IdUser, jwt.Creation, jwt.Token, jwt.TokenExpiration, jwt.RefreshToken, jwt.RefreshTokenExpiration, true, refreshToken);
