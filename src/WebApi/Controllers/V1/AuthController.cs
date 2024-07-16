@@ -36,5 +36,12 @@ namespace WebApi.Controllers.V1
         {
             return await mediator.Send(command);
         }
+
+        [HttpPost("ChangePassword")]
+        public async Task<ActionResult<bool>> ChangePassword(ChangePasswordDTO parameters)
+        {
+            var command = new ChangePasswordCommand(GetIdUser(), parameters.CurrentPassword, parameters.NewPassword);
+            return await mediator.Send(command);
+        }
     }
 }
