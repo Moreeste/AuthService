@@ -27,6 +27,7 @@ namespace Application
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IUserPropertiesService, UserPropertiesService>();
+            services.AddScoped<IChangePasswordService, ChangePasswordService>();
 
             return services;
         }
