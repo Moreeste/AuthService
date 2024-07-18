@@ -27,6 +27,31 @@ namespace Infrastructure.Repository
             return result;
         }
 
+        public async Task<bool> SavePassword(string? idUser, string? password, string? salt)
+        {
+            string qry = "EXECUTE sp_SavePassword @IdUser, @Password, @Salt;";
+            var parameters = new 
+            { 
+                IdUser = idUser,
+                Password = password,
+                Salt = salt
+            };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DbResponse>(qry, parameters);
+
+            if (result == null)
+            {
+                throw new DataBaseException(qry, parameters);
+            }
+
+            if (!result.Success)
+            {
+                throw new DataBaseException(qry, parameters, result.ErrorMessage);
+            }
+
+            return true;
+        }
+
         public async Task<bool> SetFailedAttempt(string? idUser)
         {
             string qry = "EXECUTE sp_SetFailedAttempt @IdUser;";
