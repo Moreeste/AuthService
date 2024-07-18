@@ -27,9 +27,9 @@ namespace Infrastructure.Repository
             return result;
         }
 
-        public async Task<bool> SavePassword(string? idUser, string? password, string? salt)
+        public async Task<bool> ChangePassword(string? idUser, string? password, string? salt)
         {
-            string qry = "EXECUTE sp_SavePassword @IdUser, @Password, @Salt;";
+            string qry = "EXECUTE sp_ChangePassword @IdUser, @Password, @Salt;";
             var parameters = new 
             { 
                 IdUser = idUser,

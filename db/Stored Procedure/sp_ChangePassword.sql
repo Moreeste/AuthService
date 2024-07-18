@@ -4,7 +4,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE OR ALTER PROCEDURE sp_SavePassword
+CREATE OR ALTER PROCEDURE sp_ChangePassword
 	@IdUser VARCHAR(36),
 	@Password VARCHAR(128),
 	@Salt NVARCHAR(128)
@@ -17,8 +17,14 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION;
 		
-		INSERT INTO Passwords (IdUser, Password, Salt, CreationDate, ExpirationDate, FailedAttempts, LastAttemptDate)
-		VALUES (@IdUser, @Password, @Salt, GETDATE(), DATEADD(YEAR, 1, GETDATE()), 0, NULL);
+		UPDATE Passwords
+		SET	Password = @Password,
+			Salt = @Salt,
+			CreationDate = GETDATE(),
+			ExpirationDate = DATEADD(YEAR, 1, GETDATE()),
+			FailedAttempts = 0,
+			LastAttemptDate = NULL
+		WHERE IdUser = @IdUser;
 
 		EXECUTE sp_GeneratePasswordHistory @IdUser;
 
