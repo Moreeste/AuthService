@@ -26,6 +26,7 @@ Los scripts `*.sql` se encuentran en `db/Table`.
 - PasswordsHistory
 - UserPropertiesHistory
 - UserLogin
+- Endpoints
 
 ## Procedimientos Almacenados
 Los scripts `*.sql` se encuentran en `db/Stored Procedure`.
