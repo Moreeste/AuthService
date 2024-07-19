@@ -6,6 +6,8 @@ namespace Infrastructure.Middleware
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
+            var path = context.Request.Path;
+
             await next(context);
         }
     }
