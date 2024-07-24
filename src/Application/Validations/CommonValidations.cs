@@ -127,5 +127,11 @@ namespace Application.Validations
                 return false;
             }
         }
+
+        public bool BeValidEndpoint(string path)
+        {
+            string regexPattern = @"^[a-zA-Z0-9/-]*$";
+            return Regex.IsMatch(path, regexPattern);
+        }
     }
 }
