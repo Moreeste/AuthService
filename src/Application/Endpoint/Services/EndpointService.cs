@@ -1,9 +1,17 @@
 ﻿using Application.Endpoint.DTOs;
+using Domain.Repository;
 
 namespace Application.Endpoint.Services
 {
     public class EndpointService : IEndpointService
     {
+        private readonly IEndpointRepository _endpointRepository;
+
+        public EndpointService(IEndpointRepository endpointRepository)
+        {
+            _endpointRepository = endpointRepository;
+        }
+
         public async Task<CreateEndpointOutDTO> CreateEndpoint(string idUser, string path)
         {
             throw new NotImplementedException();
