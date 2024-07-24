@@ -1,4 +1,5 @@
 ﻿using Application.Auth.Services;
+using Application.Endpoint.Services;
 using Application.Profile.Services;
 using Application.User.Services;
 using Application.UserProperties.Services;
@@ -28,6 +29,7 @@ namespace Application
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IUserPropertiesService, UserPropertiesService>();
             services.AddScoped<IChangePasswordService, ChangePasswordService>();
+            services.AddScoped<IEndpointService, EndpointService>();
 
             return services;
         }
