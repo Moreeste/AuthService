@@ -2,6 +2,6 @@
 {
     public interface IEndpointRepository
     {
-        Task<bool> RegisterEndpoint(string idEndpoint, string idUser, string path);
+        Task<bool> RegisterEndpoint(string idEndpoint, string idUser, string path, string method);
     }
 }

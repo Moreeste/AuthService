@@ -16,12 +16,13 @@ namespace Infrastructure.Repository
             _authServiceContext = authServiceContext;
         }
 
-        public async Task<bool> RegisterEndpoint(string idEndpoint, string idUser, string path)
+        public async Task<bool> RegisterEndpoint(string idEndpoint, string idUser, string path, string method)
         {
-            string qry = "EXECUTE sp_RegisterEndpoint @IdEndpoint, @Path, @RegistrationUser;";
+            string qry = "EXECUTE sp_RegisterEndpoint @IdEndpoint, @Method, @Path, @RegistrationUser;";
             var parameters = new
             {
                 IdEndpoint = idEndpoint,
+                Method = method,
                 Path = path,
                 RegistrationUser = idUser
             };
