@@ -5,11 +5,11 @@ using MediatR;
 
 namespace Application.Endpoint.Handlers
 {
-    public class CreateEndpointHandler : IRequestHandler<RegisterEndpointCommand, RegisterEndpointOutDTO>
+    public class RegisterEndpointHandler : IRequestHandler<RegisterEndpointCommand, RegisterEndpointOutDTO>
     {
         private readonly IEndpointService _endpointService;
 
-        public CreateEndpointHandler(IEndpointService endpointService)
+        public RegisterEndpointHandler(IEndpointService endpointService)
         {
             _endpointService = endpointService;
         }
