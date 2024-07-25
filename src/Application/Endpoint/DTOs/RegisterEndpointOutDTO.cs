@@ -1,6 +1,6 @@
 ﻿namespace Application.Endpoint.DTOs
 {
-    public class CreateEndpointOutDTO
+    public class RegisterEndpointOutDTO
     {
         public string? IdEndpoint { get; set; }
     }
