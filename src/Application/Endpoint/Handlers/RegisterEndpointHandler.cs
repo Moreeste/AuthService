@@ -16,7 +16,7 @@ namespace Application.Endpoint.Handlers
 
         public async Task<RegisterEndpointOutDTO> Handle(RegisterEndpointCommand request, CancellationToken cancellationToken)
         {
-            return await _endpointService.CreateEndpoint(request.IdUser, request.Path);
+            return await _endpointService.RegisterEndpoint(request.IdUser, request.Path);
         }
     }
 }
