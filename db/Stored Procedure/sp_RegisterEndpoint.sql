@@ -6,6 +6,7 @@ GO
 
 CREATE OR ALTER PROCEDURE sp_RegisterEndpoint
 	@IdEndpoint VARCHAR(36),
+	@Method VARCHAR(10),
 	@Path NVARCHAR(100),
 	@RegistrationUser VARCHAR(36)
 AS
@@ -17,8 +18,8 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION;
 		
-		INSERT INTO Endpoints (IdEndpoint, Path, Active, RegistrationDate, RegistrationUser)
-		VALUES (@IdEndpoint, @Path, 1, GETDATE(), @RegistrationUser);
+		INSERT INTO Endpoints (IdEndpoint, Method, Path, Active, RegistrationDate, RegistrationUser)
+		VALUES (@IdEndpoint, @Method, @Path, 1, GETDATE(), @RegistrationUser);
 
 		COMMIT;
 		SET @Success = 1;
