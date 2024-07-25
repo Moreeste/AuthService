@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Application.Endpoint.Validators
 {
-    public class CreateEndpointValidator : AbstractValidator<CreateEndpointCommand>
+    public class CreateEndpointValidator : AbstractValidator<RegisterEndpointCommand>
     {
         public CreateEndpointValidator(ICommonValidations commonValidations)
         {
