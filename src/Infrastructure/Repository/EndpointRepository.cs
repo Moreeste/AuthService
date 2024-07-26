@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Domain.Exceptions;
+using Domain.Model.Endpoint;
 using Domain.Model.Response;
 using Domain.Repository;
 using Infrastructure.Database;
@@ -14,6 +15,19 @@ namespace Infrastructure.Repository
         public EndpointRepository(AuthServiceContext authServiceContext)
         {
             _authServiceContext = authServiceContext;
+        }
+
+        public async Task<IEnumerable<EndpointModel>> GetEndpointByPath(string path)
+        {
+            string qry = "EXECUTE sp_GetEndpointByPath @Path;";
+            var parameters = new
+            {
+                Path = path
+            };
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryAsync<EndpointModel>(qry, parameters);
+
+            return result;
         }
 
         public async Task<bool> RegisterEndpoint(string idEndpoint, string idUser, string path, string method)
