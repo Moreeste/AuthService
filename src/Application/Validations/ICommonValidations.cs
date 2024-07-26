@@ -15,5 +15,6 @@
         bool BeAValidBase64String(string text);
         bool BeAValidJwt(string jwt);
         bool BeValidEndpoint(string path);
+        bool BeAValidHttpMethod(string method);
     }
 }

@@ -133,5 +133,11 @@ namespace Application.Validations
             string regexPattern = @"^[a-zA-Z0-9/-]*$";
             return Regex.IsMatch(path, regexPattern);
         }
+
+        public bool BeAValidHttpMethod(string method)
+        {
+            string[] ValidHttpMethods = { "GET", "POST", "PUT", "DELETE" };
+            return ValidHttpMethods.Contains(method.ToUpper());
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Application.Endpoint.Services
             _endpointRepository = endpointRepository;
         }
 
-        public async Task<RegisterEndpointOutDTO> RegisterEndpoint(string idUser, string path)
+        public async Task<RegisterEndpointOutDTO> RegisterEndpoint(string idUser, string path, string method)
         {
             throw new NotImplementedException();
         }
