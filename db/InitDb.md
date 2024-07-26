@@ -58,6 +58,7 @@ Los scripts `*.sql` se encuentran en `db/Stored Procedure`.
 - sp_GetLogin
 - sp_ChangePassword
 - sp_RegisterEndpoint
+- sp_GetEndpointByPath
 
 ## Parametría General
 Los scripts `*.sql` se encuentran en `db/Parameter`.
