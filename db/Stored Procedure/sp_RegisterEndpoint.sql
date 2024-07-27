@@ -19,7 +19,7 @@ BEGIN
 		BEGIN TRANSACTION;
 		
 		INSERT INTO Endpoints (IdEndpoint, Method, Path, Active, RegistrationDate, RegistrationUser)
-		VALUES (@IdEndpoint, UPPER(@Method), @Path, 1, GETDATE(), @RegistrationUser);
+		VALUES (@IdEndpoint, UPPER(@Method), LOWER(@Path), 1, GETDATE(), @RegistrationUser);
 
 		COMMIT;
 		SET @Success = 1;
