@@ -130,7 +130,7 @@ namespace Application.Validations
 
         public bool BeValidEndpoint(string path)
         {
-            string regexPattern = @"^[a-zA-Z0-9/-]*$";
+            string regexPattern = @"^\/[a-zA-Z0-9\/]*[a-zA-Z0-9]$";
             return Regex.IsMatch(path, regexPattern);
         }
 
