@@ -1,4 +1,5 @@
 ﻿using Application.Endpoint.DTOs;
+using Domain.Exceptions;
 using Domain.Repository;
 using Domain.Utilities;
 
@@ -8,18 +9,35 @@ namespace Application.Endpoint.Services
     {
         private readonly IUtilities _utilities;
         private readonly IEndpointRepository _endpointRepository;
-        private readonly IUserRepository _userRepository;
 
-        public EndpointService(IUtilities utilities, IEndpointRepository endpointRepository, IUserRepository userRepository)
+        public EndpointService(IUtilities utilities, IEndpointRepository endpointRepository)
         {
             _utilities = utilities;
             _endpointRepository = endpointRepository;
-            _userRepository = userRepository;
         }
 
         public async Task<RegisterEndpointOutDTO> RegisterEndpoint(string idUser, string path, string method)
         {
-            throw new NotImplementedException();
+            var endpointList = await _endpointRepository.GetEndpointByPath(path);
+
+            if (endpointList != null && endpointList.Count() > 0)
+            {
+                var existeEndpoint = endpointList.Any(x => x.Method == method.ToUpper());
+
+                if (existeEndpoint)
+                {
+                    throw new BusinessException($"Ya existe el {method.ToUpper()} {path}.");
+                }
+            }
+
+            var idEndpoint = _utilities.GenerateId();
+
+            await _endpointRepository.RegisterEndpoint(idEndpoint, idUser, path, method);
+
+            return new RegisterEndpointOutDTO
+            {
+                IdEndpoint = idEndpoint
+            };
         }
     }
 }
