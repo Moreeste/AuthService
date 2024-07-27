@@ -32,7 +32,7 @@ namespace Application.Endpoint.Services
 
             var idEndpoint = _utilities.GenerateId();
 
-            await _endpointRepository.RegisterEndpoint(idEndpoint, idUser, path, method);
+            await _endpointRepository.RegisterEndpoint(idEndpoint, idUser, path.ToLower(), method.ToUpper());
 
             return new RegisterEndpointOutDTO
             {
