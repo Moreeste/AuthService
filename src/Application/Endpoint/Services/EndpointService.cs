@@ -16,6 +16,24 @@ namespace Application.Endpoint.Services
             _endpointRepository = endpointRepository;
         }
 
+        public async Task<EndpointDTO> GetEndpointById(string idEndpoint)
+        {
+            var endpoint = await _endpointRepository.GetEndpointById(idEndpoint);
+
+            if (endpoint == null)
+            {
+                throw new SearchException("No existe el endpoint.");
+            }
+
+            return new EndpointDTO
+            {
+                IdEndpoint = endpoint.IdEndpoint,
+                Method = endpoint.Method,
+                Path = endpoint.Path,
+                Active = endpoint.Active
+            };
+        }
+
         public async Task<RegisterEndpointOutDTO> RegisterEndpoint(string idUser, string path, string method)
         {
             var endpointList = await _endpointRepository.GetEndpointByPath(path);

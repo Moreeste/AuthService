@@ -22,5 +22,12 @@ namespace WebApi.Controllers.V1
             var command = new RegisterEndpointCommand(GetIdUser(), parameters.Path, parameters.Method);
             return await mediator.Send(command);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EndpointDTO>> GetById(string id)
+        {
+            var command = new GetEndpointByIdCommand(id);
+            return await mediator.Send(command);
+        }
     }
 }
