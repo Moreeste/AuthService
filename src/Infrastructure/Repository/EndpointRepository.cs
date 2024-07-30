@@ -17,6 +17,15 @@ namespace Infrastructure.Repository
             _authServiceContext = authServiceContext;
         }
 
+        public async Task<IEnumerable<EndpointModel>> GetEndpoints()
+        {
+            string qry = "EXECUTE sp_GetEndpoints;";
+
+            var result = await _authServiceContext.Database.GetDbConnection().QueryAsync<EndpointModel>(qry);
+
+            return result;
+        }
+
         public async Task<EndpointModel?> GetEndpointById(string idEndpoint)
         {
             string qry = "EXECUTE sp_GetEndpointById @IdEndpoint;";
