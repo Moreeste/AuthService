@@ -1,11 +1,11 @@
-﻿using Application.Endpoint.Commands;
-using Application.Endpoint.DTOs;
+﻿using Application.Endpoint.DTOs;
+using Application.Endpoint.Queries;
 using Application.Endpoint.Services;
 using MediatR;
 
 namespace Application.Endpoint.Handlers
 {
-    public class GetEndpointByIdHandler : IRequestHandler<GetEndpointByIdCommand, EndpointDTO>
+    public class GetEndpointByIdHandler : IRequestHandler<GetEndpointByIdQuery, EndpointDTO>
     {
         private readonly IEndpointService _endpointService;
 
@@ -14,7 +14,7 @@ namespace Application.Endpoint.Handlers
             _endpointService = endpointService;
         }
 
-        public async Task<EndpointDTO> Handle(GetEndpointByIdCommand request, CancellationToken cancellationToken)
+        public async Task<EndpointDTO> Handle(GetEndpointByIdQuery request, CancellationToken cancellationToken)
         {
             return await _endpointService.GetEndpointById(request.IdEndpoint);
         }

@@ -1,10 +1,10 @@
-﻿using Application.Endpoint.Commands;
+﻿using Application.Endpoint.Queries;
 using Application.Validations;
 using FluentValidation;
 
 namespace Application.Endpoint.Validators
 {
-    public class GetEndpointByIdValidator : AbstractValidator<GetEndpointByIdCommand>
+    public class GetEndpointByIdValidator : AbstractValidator<GetEndpointByIdQuery>
     {
         public GetEndpointByIdValidator(ICommonValidations commonValidations)
         {
