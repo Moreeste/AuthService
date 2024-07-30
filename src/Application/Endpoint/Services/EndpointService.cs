@@ -1,5 +1,6 @@
 ﻿using Application.Endpoint.DTOs;
 using Domain.Exceptions;
+using Domain.Model.Endpoint;
 using Domain.Repository;
 using Domain.Utilities;
 
@@ -14,6 +15,11 @@ namespace Application.Endpoint.Services
         {
             _utilities = utilities;
             _endpointRepository = endpointRepository;
+        }
+
+        public async Task<PagedList<EndpointModel>> GetAllEndpoints()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<EndpointDTO> GetEndpointById(string idEndpoint)
