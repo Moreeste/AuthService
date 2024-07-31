@@ -17,13 +17,13 @@ namespace Application.Endpoint.Services
             _endpointRepository = endpointRepository;
         }
 
-        public async Task<PagedList<EndpointModel>> GetAllEndpoints()
+        public async Task<PagedList<EndpointModel>> GetAllEndpoints(int page, int pageSize)
         {
             var endpoints = await _endpointRepository.GetEndpoints();
 
             IQueryable<EndpointModel> endpointsQuery = endpoints.AsQueryable();
 
-            var result = PagedList<EndpointModel>.Create(endpointsQuery, 1, 10);
+            var result = PagedList<EndpointModel>.Create(endpointsQuery, page, pageSize);
 
             return result;
         }

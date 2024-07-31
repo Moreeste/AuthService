@@ -17,7 +17,7 @@ namespace Application.Endpoint.Handlers
 
         public async Task<PagedList<EndpointModel>> Handle(GetEndpointsQuery request, CancellationToken cancellationToken)
         {
-            return await _endpointService.GetAllEndpoints();
+            return await _endpointService.GetAllEndpoints(Convert.ToInt32(request.Page), Convert.ToInt32(request.PageSize));
         }
     }
 }
