@@ -19,7 +19,13 @@ namespace Application.Endpoint.Services
 
         public async Task<PagedList<EndpointModel>> GetAllEndpoints()
         {
-            throw new NotImplementedException();
+            var endpoints = await _endpointRepository.GetEndpoints();
+
+            IQueryable<EndpointModel> endpointsQuery = endpoints.AsQueryable();
+
+            var result = PagedList<EndpointModel>.Create(endpointsQuery, 1, 10);
+
+            return result;
         }
 
         public async Task<EndpointDTO> GetEndpointById(string idEndpoint)
