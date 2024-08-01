@@ -1,5 +1,6 @@
 ﻿using Domain.Repository;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Application.Validations
@@ -126,6 +127,17 @@ namespace Application.Validations
             {
                 return false;
             }
+        }
+
+        public bool BeTextAndSlash(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return true;
+            }
+
+            string regexPattern = @"^[a-zA-Z0-9/-]*$";
+            return Regex.IsMatch(text, regexPattern);
         }
 
         public bool BeValidEndpoint(string path)

@@ -14,6 +14,7 @@
         Task<bool> BeValidStatusId(int status, CancellationToken cancellationToken);
         bool BeAValidBase64String(string text);
         bool BeAValidJwt(string jwt);
+        bool BeTextAndSlash(string text);
         bool BeValidEndpoint(string path);
         bool BeAValidHttpMethod(string method);
     }

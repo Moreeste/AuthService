@@ -6,7 +6,7 @@ namespace Application.Endpoint.Services
 {
     public interface IEndpointService
     {
-        Task<PagedList<EndpointModel>> GetAllEndpoints(int page, int pageSize);
+        Task<PagedList<EndpointModel>> GetAllEndpoints(string? path, int page, int pageSize);
         Task<EndpointDTO> GetEndpointById(string idEndpoint);
         Task<RegisterEndpointOutDTO> RegisterEndpoint(string idUser, string path, string method);
     }

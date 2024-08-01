@@ -17,11 +17,16 @@ namespace Application.Endpoint.Services
             _endpointRepository = endpointRepository;
         }
 
-        public async Task<PagedList<EndpointModel>> GetAllEndpoints(int page, int pageSize)
+        public async Task<PagedList<EndpointModel>> GetAllEndpoints(string? path, int page, int pageSize)
         {
             var endpoints = await _endpointRepository.GetEndpoints();
 
             IQueryable<EndpointModel> endpointsQuery = endpoints.AsQueryable();
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                endpointsQuery = endpointsQuery.Where(x => x.Path != null && x.Path.ToLower().Contains(path.ToLower()));
+            }
 
             var result = PagedList<EndpointModel>.Create(endpointsQuery, page, pageSize);
 
