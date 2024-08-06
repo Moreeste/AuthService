@@ -148,6 +148,11 @@ namespace Application.Validations
 
         public bool BeAValidHttpMethod(string method)
         {
+            if (string.IsNullOrEmpty(method))
+            {
+                return true;
+            }
+
             string[] ValidHttpMethods = { "GET", "POST", "PUT", "DELETE" };
             return ValidHttpMethods.Contains(method.ToUpper());
         }
