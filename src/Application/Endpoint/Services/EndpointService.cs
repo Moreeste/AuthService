@@ -17,7 +17,7 @@ namespace Application.Endpoint.Services
             _endpointRepository = endpointRepository;
         }
 
-        public async Task<PagedList<EndpointModel>> GetAllEndpoints(string? path, string? method, int page, int pageSize)
+        public async Task<PagedList<EndpointModel>> GetAllEndpoints(string? path, string? method, string? sortOrder, int page, int pageSize)
         {
             var endpoints = await _endpointRepository.GetEndpoints();
 
@@ -31,6 +31,15 @@ namespace Application.Endpoint.Services
             if (!string.IsNullOrEmpty(method))
             {
                 endpointsQuery = endpointsQuery.Where(x => x.Method != null && x.Method.ToUpper().Contains(method.ToUpper()));
+            }
+
+            if (sortOrder?.ToLower() == "desc")
+            {
+                endpointsQuery = endpointsQuery.OrderByDescending(x => x.Path);
+            }
+            else
+            {
+                endpointsQuery = endpointsQuery.OrderBy(x => x.Path);
             }
 
             var result = PagedList<EndpointModel>.Create(endpointsQuery, page, pageSize);

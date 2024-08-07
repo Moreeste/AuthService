@@ -30,10 +30,11 @@ namespace WebApi.Controllers.V1
         public async Task<ActionResult<PagedList<EndpointModel>>> Get(
             [FromQuery] string? path,
             [FromQuery] string? method,
+            [FromQuery] string? sortOrder,
             [FromQuery] string page = "1",
             [FromQuery] string pageSize = "10")
         {
-            var quey = new GetEndpointsQuery(path, method, page, pageSize);
+            var quey = new GetEndpointsQuery(path, method, sortOrder, page, pageSize);
             return await mediator.Send(quey);
         }
 
