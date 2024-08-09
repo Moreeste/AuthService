@@ -17,5 +17,6 @@
         bool BeTextAndSlash(string text);
         bool BeValidEndpoint(string path);
         bool BeAValidHttpMethod(string method);
+        bool BeZeroOrOneString(string text);
     }
 }

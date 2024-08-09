@@ -156,5 +156,20 @@ namespace Application.Validations
             string[] ValidHttpMethods = { "GET", "POST", "PUT", "DELETE" };
             return ValidHttpMethods.Contains(method.ToUpper());
         }
+
+        public bool BeZeroOrOneString(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return true;
+            }
+
+            if (text == "0" || text == "1")
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

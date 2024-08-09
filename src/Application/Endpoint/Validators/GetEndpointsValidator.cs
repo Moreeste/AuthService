@@ -10,6 +10,7 @@ namespace Application.Endpoint.Validators
         {
             RuleFor(x => x.Path).MaximumLength(100).Must(commonValidations.BeTextAndSlash);
             RuleFor(x => x.Method).MaximumLength(10).Must(commonValidations.BeAValidHttpMethod);
+            RuleFor(x => x.Active).MaximumLength(1).Must(commonValidations.BeZeroOrOneString);
             RuleFor(x => x.SortOrder).MaximumLength(4);
             RuleFor(x => x.Page).NotEmpty().MaximumLength(4).Must(commonValidations.BeValidPositiveInteger)
                 .Must(text => commonValidations.BeTextNumberWithinRange(text, 1, 1000));

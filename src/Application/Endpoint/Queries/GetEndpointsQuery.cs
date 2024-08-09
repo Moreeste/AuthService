@@ -4,5 +4,5 @@ using MediatR;
 
 namespace Application.Endpoint.Queries
 {
-    public sealed record GetEndpointsQuery(string? Path, string? Method, string? SortOrder, string Page, string PageSize) : IRequest<PagedList<EndpointModel>>;
+    public sealed record GetEndpointsQuery(string? Path, string? Method, string? Active, string? SortOrder, string Page, string PageSize) : IRequest<PagedList<EndpointModel>>;
 }
