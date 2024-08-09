@@ -3,20 +3,20 @@
     public interface ICommonValidations
     {
         bool BeValidId(string id);
-        bool BeValidRequiredName(string name);
-        bool BeValidOptionalName(string name);
+        bool BeRequiredName(string name);
+        bool BeOptionalName(string name);
         bool BeValidBirthDate(DateTime birthDate);
         bool BeValidPhoneNumber(string phone);
         Task <bool> BeValidGenderId(int gender, CancellationToken cancellationToken);
         bool BeOnlyLettersAndNumbers(string text);
-        bool BeValidPositiveInteger(string text);
+        bool BePositiveInteger(string text);
         bool BeTextNumberWithinRange(string text, int minValue, int maxValue);
         Task<bool> BeValidStatusId(int status, CancellationToken cancellationToken);
-        bool BeAValidBase64String(string text);
-        bool BeAValidJwt(string jwt);
+        bool BeValidBase64String(string text);
+        bool BeValidJwt(string jwt);
         bool BeTextAndSlash(string text);
         bool BeValidEndpoint(string path);
-        bool BeAValidHttpMethod(string method);
+        bool BeValidHttpMethod(string method);
         bool BeZeroOrOneString(string text);
     }
 }

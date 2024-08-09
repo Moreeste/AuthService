@@ -1,6 +1,5 @@
 ﻿using Domain.Repository;
 using System.IdentityModel.Tokens.Jwt;
-using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Application.Validations
@@ -19,13 +18,13 @@ namespace Application.Validations
             return Guid.TryParse(id, out _);
         }
 
-        public bool BeValidRequiredName(string name)
+        public bool BeRequiredName(string name)
         {
             string regexPattern = @"^[a-zA-Z]+$";
             return Regex.IsMatch(name, regexPattern);
         }
 
-        public bool BeValidOptionalName(string name)
+        public bool BeOptionalName(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -66,7 +65,7 @@ namespace Application.Validations
             return Regex.IsMatch(text, regexPattern);
         }
 
-        public bool BeValidPositiveInteger(string text)
+        public bool BePositiveInteger(string text)
         {
             if (!int.TryParse(text, out int number))
                 return false;
@@ -88,7 +87,7 @@ namespace Application.Validations
             return catStatus.Any(x => x.IdStatus == status);
         }
 
-        public bool BeAValidBase64String(string text)
+        public bool BeValidBase64String(string text)
         {
             if (string.IsNullOrEmpty(text))
             {
@@ -104,7 +103,7 @@ namespace Application.Validations
             return base64Regex.IsMatch(text);
         }
 
-        public bool BeAValidJwt(string jwt)
+        public bool BeValidJwt(string jwt)
         {
             if (string.IsNullOrWhiteSpace(jwt))
             {
@@ -146,7 +145,7 @@ namespace Application.Validations
             return Regex.IsMatch(path, regexPattern);
         }
 
-        public bool BeAValidHttpMethod(string method)
+        public bool BeValidHttpMethod(string method)
         {
             if (string.IsNullOrEmpty(method))
             {

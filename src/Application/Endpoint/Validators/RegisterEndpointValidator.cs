@@ -10,7 +10,7 @@ namespace Application.Endpoint.Validators
         {
             RuleFor(x => x.IdUser).NotNull().NotEmpty().Length(36).Must(commonValidations.BeValidId);
             RuleFor(x => x.Path).NotNull().NotEmpty().MaximumLength(100).Must(commonValidations.BeValidEndpoint);
-            RuleFor(x => x.Method).NotNull().NotEmpty().MaximumLength(10).Must(commonValidations.BeAValidHttpMethod);
+            RuleFor(x => x.Method).NotNull().NotEmpty().MaximumLength(10).Must(commonValidations.BeValidHttpMethod);
         }
     }
 }

@@ -9,12 +9,12 @@ namespace Application.Endpoint.Validators
         public GetEndpointsValidator(ICommonValidations commonValidations)
         {
             RuleFor(x => x.Path).MaximumLength(100).Must(commonValidations.BeTextAndSlash);
-            RuleFor(x => x.Method).MaximumLength(10).Must(commonValidations.BeAValidHttpMethod);
+            RuleFor(x => x.Method).MaximumLength(10).Must(commonValidations.BeValidHttpMethod);
             RuleFor(x => x.Active).MaximumLength(1).Must(commonValidations.BeZeroOrOneString);
             RuleFor(x => x.SortOrder).MaximumLength(4);
-            RuleFor(x => x.Page).NotEmpty().MaximumLength(4).Must(commonValidations.BeValidPositiveInteger)
+            RuleFor(x => x.Page).NotEmpty().MaximumLength(4).Must(commonValidations.BePositiveInteger)
                 .Must(text => commonValidations.BeTextNumberWithinRange(text, 1, 1000));
-            RuleFor(x => x.PageSize).NotEmpty().MaximumLength(3).Must(commonValidations.BeValidPositiveInteger)
+            RuleFor(x => x.PageSize).NotEmpty().MaximumLength(3).Must(commonValidations.BePositiveInteger)
                 .Must(text => commonValidations.BeTextNumberWithinRange(text, 1, 100));
         }
     }

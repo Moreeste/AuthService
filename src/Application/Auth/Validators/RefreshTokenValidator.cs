@@ -8,8 +8,8 @@ namespace Application.Auth.Validators
     {
         public RefreshTokenValidator(ICommonValidations commonValidations)
         {
-            RuleFor(x => x.ExpiredToken).NotNull().NotEmpty().MaximumLength(500).Must(commonValidations.BeAValidJwt);
-            RuleFor(x => x.RefreshToken).NotNull().NotEmpty().MaximumLength(200).Must(commonValidations.BeAValidBase64String);
+            RuleFor(x => x.ExpiredToken).NotNull().NotEmpty().MaximumLength(500).Must(commonValidations.BeValidJwt);
+            RuleFor(x => x.RefreshToken).NotNull().NotEmpty().MaximumLength(200).Must(commonValidations.BeValidBase64String);
         }
     }
 }
