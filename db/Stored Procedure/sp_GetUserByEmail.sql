@@ -23,7 +23,7 @@ BEGIN
 			RegistrationUser, 
 			Users.UpdateDate, 
 			Users.UpdateUser, 
-			Profile
+			Profile AS IdProfile
 	FROM Users 
 	INNER JOIN UserProperties ON UserProperties.IdUser = Users.IdUser
 	WHERE Email = @Email;
