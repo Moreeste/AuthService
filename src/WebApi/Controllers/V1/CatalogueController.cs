@@ -16,17 +16,17 @@ namespace WebApi.Controllers.V1
 
         }
 
-        [HttpGet("Genders")]
-        public async Task<IEnumerable<Gender>> GetGenders()
-        {
-            var query = new GetGendersQuery();
-            return await mediator.Send(query);
-        }
-
         [HttpGet("UserStatus")]
         public async Task<IEnumerable<UserStatus>> GetUserStatus()
         {
             var query = new GetUserStatusQuery();
+            return await mediator.Send(query);
+        }
+
+        [HttpGet("Genders")]
+        public async Task<IEnumerable<Gender>> GetGenders()
+        {
+            var query = new GetGendersQuery();
             return await mediator.Send(query);
         }
     }
