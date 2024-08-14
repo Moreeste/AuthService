@@ -15,5 +15,6 @@
         public string? RegistrationUser { get; set; }
         public DateTime UpdateDate { get; set; }
         public string? UpdateUser { get; set; }
+        public string? IdProfile { get; set; }
     }
 }
