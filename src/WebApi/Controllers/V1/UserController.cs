@@ -31,17 +31,17 @@ namespace WebApi.Controllers.V1
             return await mediator.Send(query);
         }
 
-        [HttpGet("MyUser")]
-        public async Task<ActionResult<UserDTO>> GetMine()
-        {
-            var query = new GetUserByIdQuery(GetIdUser());
-            return await mediator.Send(query);
-        }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetById(string id)
         {
             var query = new GetUserByIdQuery(id);
+            return await mediator.Send(query);
+        }
+
+        [HttpGet("MyUser")]
+        public async Task<ActionResult<UserDTO>> GetMine()
+        {
+            var query = new GetUserByIdQuery(GetIdUser());
             return await mediator.Send(query);
         }
     }
