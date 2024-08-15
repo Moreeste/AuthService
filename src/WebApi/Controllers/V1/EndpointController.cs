@@ -18,14 +18,7 @@ namespace WebApi.Controllers.V1
         {
 
         }
-
-        [HttpPost]
-        public async Task<ActionResult<RegisterEndpointOutDTO>> Post(RegisterEndpointInDTO parameters)
-        {
-            var command = new RegisterEndpointCommand(GetIdUser(), parameters.Path, parameters.Method);
-            return await mediator.Send(command);
-        }
-
+        
         [HttpGet]
         public async Task<ActionResult<PagedList<EndpointModel>>> Get(
             [FromQuery] string? path,
@@ -37,6 +30,13 @@ namespace WebApi.Controllers.V1
         {
             var quey = new GetEndpointsQuery(path, method, active, sortOrder, page, pageSize);
             return await mediator.Send(quey);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<RegisterEndpointOutDTO>> Post(RegisterEndpointInDTO parameters)
+        {
+            var command = new RegisterEndpointCommand(GetIdUser(), parameters.Path, parameters.Method);
+            return await mediator.Send(command);
         }
 
         [HttpGet("{id}")]
