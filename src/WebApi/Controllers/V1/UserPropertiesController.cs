@@ -17,13 +17,6 @@ namespace WebApi.Controllers.V1
 
         }
 
-        [HttpGet("MyProperties")]
-        public async Task<UserPropertiesDTO> GetMine()
-        {
-            var query = new GetUserPropertiesQuery(GetIdUser());
-            return await mediator.Send(query);
-        }
-
         [HttpGet("{id}")]
         public async Task<UserPropertiesDTO> GetMine(string id)
         {
@@ -31,6 +24,13 @@ namespace WebApi.Controllers.V1
             return await mediator.Send(query);
         }
 
+        [HttpGet("MyProperties")]
+        public async Task<UserPropertiesDTO> GetMine()
+        {
+            var query = new GetUserPropertiesQuery(GetIdUser());
+            return await mediator.Send(query);
+        }
+        
         [HttpPut("Profile")]
         public async Task<bool> PutProfile(UpdateUserProfileDTO parameters)
         {
