@@ -24,11 +24,11 @@ namespace WebApi.Controllers.V1
             return await mediator.Send(query);
         }
 
-        [HttpGet("MyProfile")]
-        public async Task<ProfileDTO> GetMine()
+        [HttpPost]
+        public async Task<ActionResult<CreateProfileOutDTO>> Post(CreateProfileInDTO parameters)
         {
-            var query = new GetMyProfileQuery(GetIdUser());
-            return await mediator.Send(query);
+            var command = new CreateProfileCommand(parameters.Description, GetIdUser());
+            return await mediator.Send(command);
         }
 
         [HttpGet("{id}")]
@@ -38,11 +38,11 @@ namespace WebApi.Controllers.V1
             return await mediator.Send(query);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<CreateProfileOutDTO>> Post(CreateProfileInDTO parameters)
+        [HttpGet("MyProfile")]
+        public async Task<ProfileDTO> GetMine()
         {
-            var command = new CreateProfileCommand(parameters.Description, GetIdUser());
-            return await mediator.Send(command);
+            var query = new GetMyProfileQuery(GetIdUser());
+            return await mediator.Send(query);
         }
     }
 }
