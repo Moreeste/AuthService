@@ -68,4 +68,4 @@ Los scripts `*.sql` se encuentran en `db/Parameter`.
 - INSERT Genders
 - EXECUTE CreateProfile
 - EXECUTE CreateUser
-
+- INSERT Endpoints
