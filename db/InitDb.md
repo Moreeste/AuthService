@@ -61,6 +61,9 @@ Los scripts `*.sql` se encuentran en `db/Stored Procedure`.
 - sp_GetEndpoints
 - sp_GetEndpointById
 - sp_GetEndpointByPath
+- sp_RegisterProfilePermission
+- sp_GetProfilePermissionsByIdProfile
+- sp_GetProfilePermissionsByIdEndpoint
 
 ## Parametría General
 Los scripts `*.sql` se encuentran en `db/Parameter`.
