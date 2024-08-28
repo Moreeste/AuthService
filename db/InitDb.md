@@ -64,6 +64,7 @@ Los scripts `*.sql` se encuentran en `db/Stored Procedure`.
 - sp_RegisterProfilePermission
 - sp_GetProfilePermissionsByIdProfile
 - sp_GetProfilePermissionsByIdEndpoint
+- sp_UpdateProfilePermission
 
 ## Parametría General
 Los scripts `*.sql` se encuentran en `db/Parameter`.
