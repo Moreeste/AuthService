@@ -28,6 +28,7 @@ namespace Infrastructure
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<IUserLoginRepository, UserLoginRepository>();
             services.AddScoped<IEndpointRepository, EndpointRepository>();
+            services.AddScoped<IProfilePermissionRepository, ProfilePermissionRepository>();
 
             return services;
         }
