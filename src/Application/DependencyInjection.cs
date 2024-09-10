@@ -1,6 +1,7 @@
 ﻿using Application.Auth.Services;
 using Application.Endpoint.Services;
 using Application.Profile.Services;
+using Application.ProfilePermissions.Services;
 using Application.User.Services;
 using Application.UserProperties.Services;
 using Application.Validations;
@@ -30,6 +31,7 @@ namespace Application
             services.AddScoped<IUserPropertiesService, UserPropertiesService>();
             services.AddScoped<IChangePasswordService, ChangePasswordService>();
             services.AddScoped<IEndpointService, EndpointService>();
+            services.AddScoped<IProfilePermissionsService, ProfilePermissionsService>();
 
             return services;
         }
