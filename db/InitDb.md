@@ -74,3 +74,4 @@ Los scripts `*.sql` se encuentran en `db/Parameter`.
 - EXECUTE CreateProfile
 - EXECUTE CreateUser
 - INSERT Endpoints
+- INSERT ProfilePermissions
