@@ -6,6 +6,7 @@ CREATE TABLE Endpoints
 	IdEndpoint VARCHAR(36) NOT NULL,
 	Method VARCHAR(10) NOT NULL,
 	Path NVARCHAR(100) NOT NULL,
+	IsPublic BIT NOT NULL,
 	Active BIT NOT NULL,
 	RegistrationDate DATETIME NOT NULL,
 	RegistrationUser VARCHAR(36) NOT NULL,

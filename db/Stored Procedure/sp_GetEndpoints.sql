@@ -9,7 +9,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT IdEndpoint, Method, Path, Active 
+	SELECT IdEndpoint, Method, Path, IsPublic, Active 
 	FROM Endpoints;
 
 END

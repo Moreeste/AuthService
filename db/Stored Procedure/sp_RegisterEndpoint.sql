@@ -8,6 +8,7 @@ CREATE OR ALTER PROCEDURE sp_RegisterEndpoint
 	@IdEndpoint VARCHAR(36),
 	@Method VARCHAR(10),
 	@Path NVARCHAR(100),
+	@IsPublic BIT,
 	@RegistrationUser VARCHAR(36)
 AS
 BEGIN
@@ -20,8 +21,8 @@ BEGIN
 		DECLARE @AdminProfile VARCHAR(36) = '00000000-0000-0000-0000-000000000000';
 		DECLARE @IdPermission VARCHAR(36) = LOWER(NEWID());
 		
-		INSERT INTO Endpoints (IdEndpoint, Method, Path, Active, RegistrationDate, RegistrationUser)
-		VALUES (@IdEndpoint, UPPER(@Method), LOWER(@Path), 1, GETDATE(), @RegistrationUser);
+		INSERT INTO Endpoints (IdEndpoint, Method, Path, IsPublic, Active, RegistrationDate, RegistrationUser)
+		VALUES (@IdEndpoint, UPPER(@Method), LOWER(@Path), @IsPublic, 1, GETDATE(), @RegistrationUser);
 
 		INSERT INTO ProfilePermissions (IdPermission, IdProfile, IdEndpoint, Active, RegistrationDate, RegistrationUser)
 		VALUES (@IdPermission, @AdminProfile, @IdEndpoint, 1, GETDATE(), @AdminProfile);
