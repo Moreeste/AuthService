@@ -77,7 +77,7 @@ namespace Application.Endpoint.Services
             };
         }
 
-        public async Task<RegisterEndpointOutDTO> RegisterEndpoint(string idUser, string path, string method)
+        public async Task<RegisterEndpointOutDTO> RegisterEndpoint(string idUser, string path, string method, bool isPublic)
         {
             var endpointList = await _endpointRepository.GetEndpointByPath(path);
 
@@ -93,7 +93,7 @@ namespace Application.Endpoint.Services
 
             var idEndpoint = _utilities.GenerateId();
 
-            await _endpointRepository.RegisterEndpoint(idEndpoint, idUser, path.ToLower(), method.ToUpper());
+            await _endpointRepository.RegisterEndpoint(idEndpoint, idUser, path.ToLower(), method.ToUpper(), isPublic);
 
             return new RegisterEndpointOutDTO
             {

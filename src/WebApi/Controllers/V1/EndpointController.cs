@@ -35,7 +35,7 @@ namespace WebApi.Controllers.V1
         [HttpPost]
         public async Task<ActionResult<RegisterEndpointOutDTO>> Post(RegisterEndpointInDTO parameters)
         {
-            var command = new RegisterEndpointCommand(GetIdUser(), parameters.Path, parameters.Method);
+            var command = new RegisterEndpointCommand(GetIdUser(), parameters.Path, parameters.Method, parameters.IsPublic);
             return await mediator.Send(command);
         }
 

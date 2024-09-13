@@ -52,14 +52,15 @@ namespace Infrastructure.Repository
             return result;
         }
 
-        public async Task<bool> RegisterEndpoint(string idEndpoint, string idUser, string path, string method)
+        public async Task<bool> RegisterEndpoint(string idEndpoint, string idUser, string path, string method, bool isPublic)
         {
-            string qry = "EXECUTE sp_RegisterEndpoint @IdEndpoint, @Method, @Path, @RegistrationUser;";
+            string qry = "EXECUTE sp_RegisterEndpoint @IdEndpoint, @Method, @Path, @IsPublic, @RegistrationUser;";
             var parameters = new
             {
                 IdEndpoint = idEndpoint,
                 Method = method,
                 Path = path,
+                IsPublic = isPublic,
                 RegistrationUser = idUser
             };
 
