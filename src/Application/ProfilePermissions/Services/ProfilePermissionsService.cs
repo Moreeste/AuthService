@@ -18,5 +18,10 @@ namespace Application.ProfilePermissions.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<ProfilePermissionsDTO>> GetPermissionsByIdProfile(string? idProfile)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

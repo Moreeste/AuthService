@@ -7,5 +7,6 @@ namespace Application.ProfilePermissions.Services
         Task<IEnumerable<ProfilePermissionsDTO>> GetProfilePermissions();
         Task<RegisterPermissionOutDTO> RegisterPermission();
         Task<DeletePermissionDTO> DeletePermission();
+        Task<IEnumerable<ProfilePermissionsDTO>> GetPermissionsByIdProfile(string? idProfile);
     }
 }

@@ -14,9 +14,9 @@ namespace Application.ProfilePermissions.Handlers
             _profilePermissionsService = profilePermissionsService;
         }
 
-        public Task<IEnumerable<ProfilePermissionsDTO>> Handle(GetPermissionsByIdProfileQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProfilePermissionsDTO>> Handle(GetPermissionsByIdProfileQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _profilePermissionsService.GetPermissionsByIdProfile(request.IdProfile);
         }
     }
 }
