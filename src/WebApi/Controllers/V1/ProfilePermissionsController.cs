@@ -41,7 +41,7 @@ namespace WebApi.Controllers.V1
         [HttpGet("MyPermissions")]
         public async Task<IEnumerable<ProfilePermissionsDTO>> GetMine()
         {
-            var query = new GetProfilePermissionsQuery();
+            var query = new GetPermissionsByIdProfileQuery(GetIdProfile());
             return await mediator.Send(query);
         }
     }
