@@ -31,7 +31,7 @@ namespace Infrastructure.Repository
             return result;
         }
 
-        public async Task<IEnumerable<ProfilePermissionModel>?> GetProfilePermissionsByIdProfile(string idProfile)
+        public async Task<IEnumerable<ProfilePermissionModel>?> GetProfilePermissionsByIdProfile(string? idProfile)
         {
             string qry = "EXECUTE sp_GetProfilePermissionsByIdProfile @IdProfile;";
             var parameters = new
