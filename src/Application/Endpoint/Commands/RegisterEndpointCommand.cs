@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Application.Endpoint.Commands
 {
-    public sealed record RegisterEndpointCommand(string IdUser, string Path, string Method, bool IsPublic) : IRequest<RegisterEndpointOutDTO>;
+    public sealed record RegisterEndpointCommand(string IdUser, string Path, string Method, bool IsPublic, bool IsForEveryone) : IRequest<RegisterEndpointOutDTO>;
 }

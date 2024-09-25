@@ -8,6 +8,6 @@ namespace Application.Endpoint.Services
     {
         Task<PagedList<EndpointModel>> GetAllEndpoints(string? path, string? method, string? IsPublic, string? active, string? sortOrder, int page, int pageSize);
         Task<EndpointDTO> GetEndpointById(string idEndpoint);
-        Task<RegisterEndpointOutDTO> RegisterEndpoint(string idUser, string path, string method, bool isPublic);
+        Task<RegisterEndpointOutDTO> RegisterEndpoint(string idUser, string path, string method, bool isPublic, bool isForEveryone);
     }
 }
