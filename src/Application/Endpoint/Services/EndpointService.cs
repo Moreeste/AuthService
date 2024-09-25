@@ -85,6 +85,8 @@ namespace Application.Endpoint.Services
                 IdEndpoint = endpoint.IdEndpoint,
                 Method = endpoint.Method,
                 Path = endpoint.Path,
+                IsPublic = endpoint.IsPublic,
+                IsForEveryone = endpoint.IsForEveryone,
                 Active = endpoint.Active
             };
         }
