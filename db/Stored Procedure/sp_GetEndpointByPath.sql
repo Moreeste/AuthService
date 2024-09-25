@@ -10,7 +10,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT IdEndpoint, Method, Path, IsPublic, Active 
+	SELECT IdEndpoint, Method, Path, IsPublic, IsForEveryone, Active 
 	FROM Endpoints 
 	WHERE Path = @Path;
 

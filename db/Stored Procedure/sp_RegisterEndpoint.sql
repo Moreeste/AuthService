@@ -9,6 +9,7 @@ CREATE OR ALTER PROCEDURE sp_RegisterEndpoint
 	@Method VARCHAR(10),
 	@Path NVARCHAR(100),
 	@IsPublic BIT,
+	@IsForEveryone BIT,
 	@RegistrationUser VARCHAR(36)
 AS
 BEGIN
@@ -19,8 +20,8 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION;
 		
-		INSERT INTO Endpoints (IdEndpoint, Method, Path, IsPublic, Active, RegistrationDate, RegistrationUser)
-		VALUES (@IdEndpoint, UPPER(@Method), LOWER(@Path), @IsPublic, 1, GETDATE(), @RegistrationUser);
+		INSERT INTO Endpoints (IdEndpoint, Method, Path, IsPublic, IsForEveryone, Active, RegistrationDate, RegistrationUser)
+		VALUES (@IdEndpoint, UPPER(@Method), LOWER(@Path), @IsPublic, @IsForEveryone, 1, GETDATE(), @RegistrationUser);
 
 		COMMIT;
 		SET @Success = 1;
