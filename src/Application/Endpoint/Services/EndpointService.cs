@@ -17,7 +17,7 @@ namespace Application.Endpoint.Services
             _endpointRepository = endpointRepository;
         }
 
-        public async Task<PagedList<EndpointModel>> GetAllEndpoints(string? path, string? method, string? IsPublic, string? active, string? sortOrder, int page, int pageSize)
+        public async Task<PagedList<EndpointModel>> GetAllEndpoints(string? path, string? method, string? isPublic, string? isForEveryone, string? active, string? sortOrder, int page, int pageSize)
         {
             var endpoints = await _endpointRepository.GetEndpoints();
 
@@ -33,15 +33,27 @@ namespace Application.Endpoint.Services
                 endpointsQuery = endpointsQuery.Where(x => x.Method != null && x.Method.ToUpper().Contains(method.ToUpper()));
             }
 
-            if (!string.IsNullOrEmpty(IsPublic))
+            if (!string.IsNullOrEmpty(isPublic))
             {
-                if (IsPublic == "1")
+                if (isPublic == "1")
                 {
                     endpointsQuery = endpointsQuery.Where(x => x.IsPublic == true);
                 }
-                else if (IsPublic == "0")
+                else if (isPublic == "0")
                 {
                     endpointsQuery = endpointsQuery.Where(x => x.IsPublic == false);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(isForEveryone))
+            {
+                if (isForEveryone == "1")
+                {
+                    endpointsQuery = endpointsQuery.Where(x => x.IsForEveryone == true);
+                }
+                else if (isForEveryone == "0")
+                {
+                    endpointsQuery = endpointsQuery.Where(x => x.IsForEveryone == false);
                 }
             }
 
