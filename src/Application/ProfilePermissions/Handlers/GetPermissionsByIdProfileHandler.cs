@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.ProfilePermissions.Handlers
 {
-    public class GetPermissionsByIdProfileHandler : IRequestHandler<GetPermissionsByIdProfileQuery, IEnumerable<ProfilePermissionsDTO>>
+    public class GetPermissionsByIdProfileHandler : IRequestHandler<GetPermissionsByIdProfileQuery, IEnumerable<PermissionsByProfileDTO>>
     {
         private IProfilePermissionsService _profilePermissionsService;
 
@@ -14,7 +14,7 @@ namespace Application.ProfilePermissions.Handlers
             _profilePermissionsService = profilePermissionsService;
         }
 
-        public async Task<IEnumerable<ProfilePermissionsDTO>> Handle(GetPermissionsByIdProfileQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<PermissionsByProfileDTO>> Handle(GetPermissionsByIdProfileQuery request, CancellationToken cancellationToken)
         {
             return await _profilePermissionsService.GetPermissionsByIdProfile(request.IdProfile);
         }

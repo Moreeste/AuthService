@@ -27,20 +27,18 @@ namespace Application.ProfilePermissions.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ProfilePermissionsDTO>> GetPermissionsByIdProfile(string? idProfile)
+        public async Task<IEnumerable<PermissionsByProfileDTO>> GetPermissionsByIdProfile(string? idProfile)
         {
             var permissions = await _profilePermissionRepository.GetProfilePermissionsByIdProfile(idProfile);
 
             if (permissions == null)
             {
-                return Enumerable.Empty<ProfilePermissionsDTO>();
+                return Enumerable.Empty<PermissionsByProfileDTO>();
             }
 
-            return permissions.Select(model => new ProfilePermissionsDTO
+            return permissions.Select(model => new PermissionsByProfileDTO
             {
                 IdPermission = model.IdPermission,
-                IdProfile = model.IdProfile,
-                Profile = model.Profile,
                 IdEndpoint = model.IdEndpoint,
                 Endpoint = model.Endpoint,
                 Active = model.Active
