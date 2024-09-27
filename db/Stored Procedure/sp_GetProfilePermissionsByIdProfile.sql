@@ -22,25 +22,18 @@ BEGIN
 	);
 
 	INSERT INTO @Permissions
-	SELECT	'Public',
+	SELECT	CASE
+				WHEN IsPublic = 1 THEN 'Public'
+				WHEN IsForEveryone = 1 THEN 'ForEveryone'
+			END,
 			@IdProfile,
 			@Profile,
 			IdEndpoint,
 			Path,
 			Active
 	FROM Endpoints
-	WHERE IsPublic = 1;
+	WHERE IsPublic = 1 OR IsForEveryone = 1;
 
-	INSERT INTO @Permissions
-	SELECT	'ForEveryone',
-			@IdProfile,
-			@Profile,
-			IdEndpoint,
-			Path,
-			Active
-	FROM Endpoints
-	WHERE IsForEveryone = 1;
-	
 	INSERT INTO @Permissions
 	SELECT	PP.IdPermission, 
 			PP.IdProfile, 
@@ -53,6 +46,19 @@ BEGIN
 	LEFT JOIN Endpoints E ON E.IdEndpoint = PP.IdEndpoint
 	WHERE PP.IdProfile = @IdProfile;
 
-	SELECT * FROM @Permissions;
+	IF @IdProfile = '00000000-0000-0000-0000-000000000000'
+	BEGIN
+		INSERT INTO @Permissions
+		SELECT	'AutoForAdmins',
+				@IdProfile,
+				@Profile,
+				IdEndpoint,
+				Path,
+				Active
+		FROM Endpoints
+		WHERE IsPublic = 0 AND IsForEveryone = 0;
+	END
+		
+	SELECT * FROM @Permissions ORDER BY Endpoint;
 END
 GO
