@@ -16,7 +16,7 @@ namespace Application.ProfilePermissions.Handlers
 
         public async Task<RegisterPermissionOutDTO> Handle(RegisterPermissionCommand request, CancellationToken cancellationToken)
         {
-            return await _profilePermissionsService.RegisterPermission();
+            return await _profilePermissionsService.RegisterPermission(request.IdProfile, request.IdEndpoint, request.RegistrationUser);
         }
     }
 }

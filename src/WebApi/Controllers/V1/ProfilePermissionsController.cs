@@ -27,7 +27,7 @@ namespace WebApi.Controllers.V1
         [HttpPost]
         public async Task<ActionResult<RegisterPermissionOutDTO>> Post(RegisterPermissionInDTO parameters)
         {
-            var command = new RegisterPermissionCommand(GetIdUser());
+            var command = new RegisterPermissionCommand(parameters.IdProfile, parameters.IdEndpoint, GetIdUser());
             return await mediator.Send(command);
         }
 

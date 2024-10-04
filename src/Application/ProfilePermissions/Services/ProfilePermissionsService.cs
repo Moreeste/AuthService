@@ -17,7 +17,7 @@ namespace Application.ProfilePermissions.Services
             throw new NotImplementedException();
         }
 
-        public async Task<RegisterPermissionOutDTO> RegisterPermission()
+        public async Task<RegisterPermissionOutDTO> RegisterPermission(string? idProfile, string? idEndpoint, string registrationUser)
         {
             throw new NotImplementedException();
         }

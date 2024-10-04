@@ -5,7 +5,7 @@ namespace Application.ProfilePermissions.Services
     public interface IProfilePermissionsService
     {
         Task<IEnumerable<ProfilePermissionsDTO>> GetProfilePermissions();
-        Task<RegisterPermissionOutDTO> RegisterPermission();
+        Task<RegisterPermissionOutDTO> RegisterPermission(string? idProfile, string? idEndpoint, string registrationUser);
         Task<DeletePermissionDTO> DeletePermission();
         Task<IEnumerable<PermissionsByProfileDTO>> GetPermissionsByIdProfile(string? idProfile);
     }
