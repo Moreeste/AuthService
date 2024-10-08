@@ -2,6 +2,6 @@
 {
     public class RegisterPermissionOutDTO
     {
-
+        public string? IdPermission { get; set; }
     }
 }

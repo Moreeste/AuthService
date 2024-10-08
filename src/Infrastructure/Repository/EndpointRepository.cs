@@ -26,7 +26,7 @@ namespace Infrastructure.Repository
             return result;
         }
 
-        public async Task<EndpointModel?> GetEndpointById(string idEndpoint)
+        public async Task<EndpointModel?> GetEndpointById(string? idEndpoint)
         {
             string qry = "EXECUTE sp_GetEndpointById @IdEndpoint;";
             var parameters = new

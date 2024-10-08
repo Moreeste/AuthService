@@ -57,9 +57,9 @@ namespace Infrastructure.Repository
             return result;
         }
 
-        public async Task<bool> RegisterProfilePermission(string idPermission, string idProfile, string idEndpoint, string registrationUser)
+        public async Task<bool> RegisterProfilePermission(string idPermission, string? idProfile, string? idEndpoint, string registrationUser)
         {
-            string qry = "EXECUTE sp_RegisterProfilePermission @IdPermission, @IdProfile, @IdEndpoint @RegistrationUser;";
+            string qry = "EXECUTE sp_RegisterProfilePermission @IdPermission, @IdProfile, @IdEndpoint, @RegistrationUser;";
             var parameters = new
             {
                 IdPermission = idPermission,
