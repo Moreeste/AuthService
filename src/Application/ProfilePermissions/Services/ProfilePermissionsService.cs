@@ -53,7 +53,19 @@ namespace Application.ProfilePermissions.Services
 
         public async Task<DeletePermissionDTO> DeletePermission(string idPermission, string updaterUser)
         {
-            throw new NotImplementedException();
+            var permission = await _profilePermissionRepository.GetProfilePermissionById(idPermission);
+
+            if (permission == null)
+            {
+                throw new BusinessException("No existe el permiso.");
+            }
+
+            bool permissionUpdated = await _profilePermissionRepository.UpdateProfilePermission(idPermission, false, updaterUser);
+
+            return new DeletePermissionDTO
+            {
+                Deleted = permissionUpdated
+            };
         }
 
         public async Task<IEnumerable<PermissionsByProfileDTO>> GetPermissionsByIdProfile(string? idProfile)
