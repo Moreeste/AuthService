@@ -16,7 +16,7 @@ namespace Application.ProfilePermissions.Handlers
 
         public async Task<DeletePermissionDTO> Handle(DeletePermissionCommand request, CancellationToken cancellationToken)
         {
-            return await _profilePermissionsService.DeletePermission();
+            return await _profilePermissionsService.DeletePermission(request.IdPermission, request.UpdaterUser);
         }
     }
 }

@@ -51,7 +51,7 @@ namespace Application.ProfilePermissions.Services
             };
         }
 
-        public async Task<DeletePermissionDTO> DeletePermission()
+        public async Task<DeletePermissionDTO> DeletePermission(string idPermission, string updaterUser)
         {
             throw new NotImplementedException();
         }

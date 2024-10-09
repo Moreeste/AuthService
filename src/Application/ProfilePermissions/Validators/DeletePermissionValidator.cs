@@ -9,7 +9,7 @@ namespace Application.ProfilePermissions.Validators
         public DeletePermissionValidator(ICommonValidations commonValidations)
         {
             RuleFor(x => x.IdPermission).NotNull().NotEmpty().Length(36).Must(commonValidations.BeValidId);
-            RuleFor(x => x.IdUser).NotNull().NotEmpty().Length(36).Must(commonValidations.BeValidId);
+            RuleFor(x => x.UpdaterUser).NotNull().NotEmpty().Length(36).Must(commonValidations.BeValidId);
         }
     }
 }
