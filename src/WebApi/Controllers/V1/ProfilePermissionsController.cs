@@ -1,6 +1,7 @@
 ﻿using Application.ProfilePermissions.Commands;
 using Application.ProfilePermissions.DTOs;
 using Application.ProfilePermissions.Queries;
+using Domain.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,16 @@ namespace WebApi.Controllers.V1
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ProfilePermissionsDTO>> GetAll()
+        public async Task<PagedList<ProfilePermissionsDTO>> GetAll(
+            [FromQuery] string? idProfile,
+            [FromQuery] string? idEndpoint,
+            [FromQuery] string? active,
+            [FromQuery] string? sortColumn,
+            [FromQuery] string? sortOrder,
+            [FromQuery] string page = "1",
+            [FromQuery] string pageSize = "10")
         {
-            var query = new GetProfilePermissionsQuery();
+            var query = new GetProfilePermissionsQuery(idProfile, idEndpoint, active, sortColumn, sortOrder, page, pageSize);
             return await mediator.Send(query);
         }
 

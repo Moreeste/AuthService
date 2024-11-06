@@ -1,11 +1,12 @@
 ﻿using Application.ProfilePermissions.DTOs;
 using Application.ProfilePermissions.Queries;
 using Application.ProfilePermissions.Services;
+using Domain.Utilities;
 using MediatR;
 
 namespace Application.ProfilePermissions.Handlers
 {
-    public class GetProfilePermissionsHandler : IRequestHandler<GetProfilePermissionsQuery, IEnumerable<ProfilePermissionsDTO>>
+    public class GetProfilePermissionsHandler : IRequestHandler<GetProfilePermissionsQuery, PagedList<ProfilePermissionsDTO>>
     {
         private IProfilePermissionsService _profilePermissionsService;
 
@@ -14,9 +15,9 @@ namespace Application.ProfilePermissions.Handlers
             _profilePermissionsService = profilePermissionsService;
         }
 
-        public async Task<IEnumerable<ProfilePermissionsDTO>> Handle(GetProfilePermissionsQuery request, CancellationToken cancellationToken)
+        public async Task<PagedList<ProfilePermissionsDTO>> Handle(GetProfilePermissionsQuery request, CancellationToken cancellationToken)
         {
-            return await _profilePermissionsService.GetProfilePermissions();
+            return await _profilePermissionsService.GetProfilePermissions(request.IdProfile, request.IdEndpoint, request.Active, request.SortColumn, request.SortOrder, Convert.ToInt32(request.Page), Convert.ToInt32(request.PageSize));
         }
     }
 }

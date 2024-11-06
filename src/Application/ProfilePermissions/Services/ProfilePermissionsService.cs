@@ -20,7 +20,7 @@ namespace Application.ProfilePermissions.Services
             _endpointRepository = endpointRepository;
         }
 
-        public async Task<IEnumerable<ProfilePermissionsDTO>> GetProfilePermissions()
+        public async Task<PagedList<ProfilePermissionsDTO>> GetProfilePermissions(string? idProfile, string? idEndpoint, string? active, string? sortColumn, string? sortOrder, int page, int pageSize)
         {
             throw new NotImplementedException();
         }
