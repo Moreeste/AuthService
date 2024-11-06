@@ -17,7 +17,7 @@ namespace Infrastructure.Repository
             _authServiceContext = authServiceContext;
         }
 
-        public async Task<ProfilePermissionModel?> GetProfilePermission(string idProfile, string idEndpoint)
+        public async Task<ProfilePermissionModel?> GetProfilePermission(string? idProfile, string? idEndpoint)
         {
             string qry = "EXECUTE sp_GetProfilePermission @IdProfile, @IdEndpoint;";
             var parameters = new

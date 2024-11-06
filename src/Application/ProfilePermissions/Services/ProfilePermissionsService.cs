@@ -41,6 +41,16 @@ namespace Application.ProfilePermissions.Services
                 throw new BusinessException("No existe el endpoint.");
             }
 
+            var permission = await _profilePermissionRepository.GetProfilePermission(idProfile, idEndpoint);
+
+            if (permission != null)
+            {
+                if (permission.Active)
+                {
+                    throw new BusinessException("Ya existe el permiso.");
+                }
+            }
+
             var idPermission = _utilities.GenerateId();
 
             await _profilePermissionRepository.RegisterProfilePermission(idPermission, idProfile, idEndpoint, registrationUser);
