@@ -10,16 +10,17 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT	PP.IdPermission, 
-			PP.IdProfile, 
-			P.Description AS Profile,
-			PP.IdEndpoint, 
-			E.Path AS Endpoint,
-			PP.Active
-	FROM ProfilePermissions PP
-	LEFT JOIN Profiles P ON P.IdProfile = PP.IdProfile
-	LEFT JOIN Endpoints E ON E.IdEndpoint = PP.IdEndpoint
-	WHERE PP.IdEndpoint = @IdEndpoint;
+	DECLARE @Endpoint NVARCHAR(100) = (SELECT TOP 1 Path FROM Endpoints WHERE IdEndpoint = @IdEndpoint);
+	DECLARE @Permissions AS TABLE
+	(
+		IdPermission VARCHAR(36) NOT NULL,
+		IdProfile VARCHAR(36) NOT NULL,
+		Profile VARCHAR(50) NOT NULL,
+		IdEndpoint VARCHAR(36) NOT NULL,
+		Endpoint NVARCHAR(100) NOT NULL,
+		Active BIT NOT NULL
+	);
 
+	SELECT * FROM @Permissions ORDER BY Profile;
 END
 GO
