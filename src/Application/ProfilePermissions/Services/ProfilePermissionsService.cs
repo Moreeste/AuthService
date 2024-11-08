@@ -27,6 +27,11 @@ namespace Application.ProfilePermissions.Services
 
         public async Task<RegisterPermissionOutDTO> RegisterPermission(string? idProfile, string? idEndpoint, string registrationUser)
         {
+            if (idProfile == "00000000-0000-0000-0000-000000000000")
+            {
+                throw new BusinessException("No es necesario asignar permisos a los administradores.");
+            }
+
             var profile = await _profileRepository.GetProfileById(idProfile);
 
             if (profile == null)
