@@ -46,6 +46,16 @@ namespace Application.ProfilePermissions.Services
                 throw new BusinessException("No existe el endpoint.");
             }
 
+            if (endpoint.IsPublic)
+            {
+                throw new BusinessException("No es necesario asignar permisos a los endpoints publicos.");
+            }
+
+            if (endpoint.IsForEveryone)
+            {
+                throw new BusinessException("No es necesario asignar permisos a los endpoints generales para usuarios registrados.");
+            }
+
             var permission = await _profilePermissionRepository.GetProfilePermission(idProfile, idEndpoint);
 
             if (permission != null)
