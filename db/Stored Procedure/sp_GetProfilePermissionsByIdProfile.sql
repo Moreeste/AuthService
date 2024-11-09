@@ -22,19 +22,6 @@ BEGIN
 	);
 
 	INSERT INTO @Permissions
-	SELECT	CASE
-				WHEN IsPublic = 1 THEN 'Public'
-				WHEN IsForEveryone = 1 THEN 'ForEveryone'
-			END,
-			@IdProfile,
-			@Profile,
-			IdEndpoint,
-			Path,
-			Active
-	FROM Endpoints
-	WHERE IsPublic = 1 OR IsForEveryone = 1;
-
-	INSERT INTO @Permissions
 	SELECT	PP.IdPermission, 
 			PP.IdProfile, 
 			P.Description AS Profile,
@@ -46,6 +33,19 @@ BEGIN
 	LEFT JOIN Endpoints E ON E.IdEndpoint = PP.IdEndpoint
 	WHERE PP.IdProfile = @IdProfile;
 
+	INSERT INTO @Permissions
+	SELECT	CASE
+				WHEN IsPublic = 1 THEN 'Public'
+				WHEN IsForEveryone = 1 THEN 'ForEveryone'
+			END,
+			@IdProfile,
+			@Profile,
+			IdEndpoint,
+			Path,
+			Active
+	FROM Endpoints
+	WHERE IsPublic = 1 OR IsForEveryone = 1;
+	
 	IF @IdProfile = '00000000-0000-0000-0000-000000000000'
 	BEGIN
 		INSERT INTO @Permissions
