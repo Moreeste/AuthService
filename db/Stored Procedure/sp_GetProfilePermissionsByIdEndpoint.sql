@@ -21,6 +21,18 @@ BEGIN
 		Active BIT NOT NULL
 	);
 
+	INSERT INTO @Permissions
+	SELECT	PP.IdPermission, 
+			PP.IdProfile, 
+			P.Description AS Profile,
+			PP.IdEndpoint, 
+			E.Path AS Endpoint,
+			PP.Active
+	FROM ProfilePermissions PP
+	LEFT JOIN Profiles P ON P.IdProfile = PP.IdProfile
+	LEFT JOIN Endpoints E ON E.IdEndpoint = PP.IdEndpoint
+	WHERE PP.IdEndpoint = @IdEndpoint;
+
 	SELECT * FROM @Permissions ORDER BY Profile;
 END
 GO
