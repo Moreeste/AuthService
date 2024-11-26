@@ -44,18 +44,17 @@ BEGIN
 			Path AS Endpoint, 
 			E.Active 
 	FROM Endpoints E, Profiles P 
-	WHERE (IsPublic = 1 OR IsForEveryone = 1) AND IdEndpoint = @IdEndpoint 
-	AND IdProfile <> '00000000-0000-0000-0000-000000000000';
+	WHERE (IsPublic = 1 OR IsForEveryone = 1) AND IdEndpoint = @IdEndpoint;
 
 	INSERT INTO @Permissions 
-	SELECT 'AutoForAdmins',  
-			P.IdProfile, 
-			P.Description AS Profile, 
+	SELECT	'AutoForAdmins', 
+			'00000000-0000-0000-0000-000000000000', 
+			'ADMIN' AS Profile, 
 			IdEndpoint, 
 			Path AS Endpoint, 
-			E.Active 
-	FROM Endpoints E, Profiles P 
-	WHERE IdEndpoint = @IdEndpoint AND IdProfile = '00000000-0000-0000-0000-000000000000';
+			Active 
+	FROM Endpoints Profiles 
+	WHERE IdEndpoint = @IdEndpoint AND IsPublic = 0 AND IsForEveryone = 0;
 
 	SELECT * FROM @Permissions ORDER BY Profile;
 END
