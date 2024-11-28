@@ -4,6 +4,7 @@ namespace Domain.Repository
 {
     public interface IProfilePermissionRepository
     {
+        Task<IEnumerable<ProfilePermissionModel>?> GetProfilePermissions();
         Task<ProfilePermissionModel?> GetProfilePermission(string? idProfile, string? idEndpoint);
         Task<ProfilePermissionModel?> GetProfilePermissionById(string idPermission);
         Task<IEnumerable<ProfilePermissionModel>?> GetProfilePermissionsByIdProfile(string? idProfile);

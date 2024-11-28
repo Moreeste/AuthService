@@ -17,6 +17,15 @@ namespace Infrastructure.Repository
             _authServiceContext = authServiceContext;
         }
 
+        public async Task<IEnumerable<ProfilePermissionModel>?> GetProfilePermissions()
+        {
+            string qry = "EXECUTE sp_GetProfilePermissions;";
+            
+            var result = await _authServiceContext.Database.GetDbConnection().QueryAsync<ProfilePermissionModel>(qry);
+
+            return result;
+        }
+
         public async Task<ProfilePermissionModel?> GetProfilePermission(string? idProfile, string? idEndpoint)
         {
             string qry = "EXECUTE sp_GetProfilePermission @IdProfile, @IdEndpoint;";
