@@ -40,6 +40,11 @@ namespace Application.ProfilePermissions.Services
 
             IQueryable<ProfilePermissionModel>? profilePermissionsQuery = profilePermissions?.AsQueryable();
 
+            if (!string.IsNullOrEmpty(idProfile) && !string.IsNullOrEmpty(idEndpoint))
+            {
+                profilePermissionsQuery = profilePermissionsQuery?.Where(x => x.IdEndpoint != null && x.IdEndpoint.ToLower() == idEndpoint.ToLower());
+            }
+
             throw new NotImplementedException();
         }
 
