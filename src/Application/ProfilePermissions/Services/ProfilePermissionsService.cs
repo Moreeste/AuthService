@@ -1,5 +1,6 @@
 ﻿using Application.ProfilePermissions.DTOs;
 using Domain.Exceptions;
+using Domain.Model.ProfilePermission;
 using Domain.Repository;
 using Domain.Utilities;
 
@@ -22,6 +23,23 @@ namespace Application.ProfilePermissions.Services
 
         public async Task<PagedList<ProfilePermissionsDTO>> GetProfilePermissions(string? idProfile, string? idEndpoint, string? active, string? sortColumn, string? sortOrder, int page, int pageSize)
         {
+            IEnumerable<ProfilePermissionModel>? profilePermissions = Enumerable.Empty<ProfilePermissionModel>();
+
+            if (string.IsNullOrEmpty(idProfile) && string.IsNullOrEmpty(idEndpoint))
+            {
+                profilePermissions = await _profilePermissionRepository.GetProfilePermissions();
+            }
+            else if (!string.IsNullOrEmpty(idProfile))
+            {
+                profilePermissions = await _profilePermissionRepository.GetProfilePermissionsByIdProfile(idProfile);
+            }
+            else if (!string.IsNullOrEmpty(idEndpoint))
+            {
+                profilePermissions = await _profilePermissionRepository.GetProfilePermissionsByIdEndpoint(idEndpoint);
+            }
+
+            IQueryable<ProfilePermissionModel>? profilePermissionsQuery = profilePermissions?.AsQueryable();
+
             throw new NotImplementedException();
         }
 
