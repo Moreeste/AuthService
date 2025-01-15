@@ -45,6 +45,18 @@ namespace Application.ProfilePermissions.Services
                 profilePermissionsQuery = profilePermissionsQuery?.Where(x => x.IdEndpoint != null && x.IdEndpoint.ToLower() == idEndpoint.ToLower());
             }
 
+            if (!string.IsNullOrEmpty(active))
+            {
+                if (active == "1")
+                {
+                    profilePermissionsQuery = profilePermissionsQuery.Where(x => x.Active == true);
+                }
+                else if (active == "0")
+                {
+                    profilePermissionsQuery = profilePermissionsQuery.Where(x => x.Active == false);
+                }
+            }
+
             throw new NotImplementedException();
         }
 
