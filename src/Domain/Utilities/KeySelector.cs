@@ -1,4 +1,5 @@
-﻿using Domain.Model.User;
+﻿using Domain.Model.ProfilePermission;
+using Domain.Model.User;
 using System.Linq.Expressions;
 
 namespace Domain.Utilities
@@ -13,6 +14,16 @@ namespace Domain.Utilities
                 "lastname" => user => user.LastName ?? string.Empty,
                 "birthdate" => user => user.BirthDate,
                 _ => user => user.FirstName ?? string.Empty
+            };
+        }
+
+        public static Expression<Func<ProfilePermissionModel, object>> GetProfilePermissionModelSortProperty(string? sortColumn)
+        {
+            return sortColumn?.ToLower() switch
+            {
+                "profile" => permission => permission.Profile ?? string.Empty,
+                "endpoint" => permission => permission.Endpoint ?? string.Empty,
+                _ => permission => permission.Profile ?? string.Empty
             };
         }
     }

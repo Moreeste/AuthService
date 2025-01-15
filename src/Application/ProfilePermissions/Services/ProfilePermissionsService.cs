@@ -49,11 +49,25 @@ namespace Application.ProfilePermissions.Services
             {
                 if (active == "1")
                 {
-                    profilePermissionsQuery = profilePermissionsQuery.Where(x => x.Active == true);
+                    profilePermissionsQuery = profilePermissionsQuery?.Where(x => x.Active == true);
                 }
                 else if (active == "0")
                 {
-                    profilePermissionsQuery = profilePermissionsQuery.Where(x => x.Active == false);
+                    profilePermissionsQuery = profilePermissionsQuery?.Where(x => x.Active == false);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(sortColumn))
+            {
+                var sortProperty = KeySelector.GetProfilePermissionModelSortProperty(sortColumn);
+
+                if (sortOrder?.ToLower() == "desc")
+                {
+                    profilePermissionsQuery = profilePermissionsQuery?.OrderByDescending(sortProperty);
+                }
+                else
+                {
+                    profilePermissionsQuery = profilePermissionsQuery?.OrderBy(sortProperty);
                 }
             }
 
