@@ -1,8 +1,8 @@
-﻿using Application.ProfilePermissions.DTOs;
+﻿using Domain.Model.ProfilePermission;
 using Domain.Utilities;
 using MediatR;
 
 namespace Application.ProfilePermissions.Queries
 {
-    public sealed record GetProfilePermissionsQuery(string? IdProfile, string? IdEndpoint, string? Active, string? SortColumn, string? SortOrder, string Page, string PageSize) : IRequest<PagedList<ProfilePermissionsDTO>>;
+    public sealed record GetProfilePermissionsQuery(string? IdProfile, string? IdEndpoint, string? Active, string? SortColumn, string? SortOrder, string Page, string PageSize) : IRequest<PagedList<ProfilePermissionModel>>;
 }

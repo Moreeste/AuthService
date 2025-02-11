@@ -21,7 +21,7 @@ namespace Application.ProfilePermissions.Services
             _endpointRepository = endpointRepository;
         }
 
-        public async Task<PagedList<ProfilePermissionsDTO>> GetProfilePermissions(string? idProfile, string? idEndpoint, string? active, string? sortColumn, string? sortOrder, int page, int pageSize)
+        public async Task<PagedList<ProfilePermissionModel>> GetProfilePermissions(string? idProfile, string? idEndpoint, string? active, string? sortColumn, string? sortOrder, int page, int pageSize)
         {
             IEnumerable<ProfilePermissionModel>? profilePermissions = Enumerable.Empty<ProfilePermissionModel>();
 
@@ -71,7 +71,9 @@ namespace Application.ProfilePermissions.Services
                 }
             }
 
-            throw new NotImplementedException();
+            var result = PagedList<ProfilePermissionModel>.Create(profilePermissionsQuery ?? Enumerable.Empty<ProfilePermissionModel>(), page, pageSize);
+
+            return result;
         }
 
         public async Task<RegisterPermissionOutDTO> RegisterPermission(string? idProfile, string? idEndpoint, string registrationUser)

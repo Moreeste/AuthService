@@ -1,6 +1,7 @@
 ﻿using Application.ProfilePermissions.Commands;
 using Application.ProfilePermissions.DTOs;
 using Application.ProfilePermissions.Queries;
+using Domain.Model.ProfilePermission;
 using Domain.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +20,7 @@ namespace WebApi.Controllers.V1
         }
 
         [HttpGet]
-        public async Task<PagedList<ProfilePermissionsDTO>> GetAll(
+        public async Task<PagedList<ProfilePermissionModel>> GetAll(
             [FromQuery] string? idProfile,
             [FromQuery] string? idEndpoint,
             [FromQuery] string? active,
