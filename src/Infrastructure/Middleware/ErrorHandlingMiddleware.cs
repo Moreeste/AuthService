@@ -53,6 +53,14 @@ namespace Infrastructure.Middleware
                     statusCode = StatusCodes.Status500InternalServerError;
                     errorMessage = "A database error has occurred.";
                     break;
+                case NotFoundException:
+                    statusCode = StatusCodes.Status404NotFound;
+                    errorMessage = exception.Message;
+                    break;
+                case AuthException:
+                    statusCode = StatusCodes.Status401Unauthorized;
+                    errorMessage = exception.Message;
+                    break;
                 case BusinessException:
                     statusCode = StatusCodes.Status400BadRequest;
                     errorMessage = exception.Message;
