@@ -53,7 +53,18 @@ namespace Infrastructure.Middleware
 
                 if (!endpoint.IsForEveryone)
                 {
+                    var permissions = await _profilePermissionRepository.GetProfilePermissionsByIdProfile(user.IdProfile);
+                    var permission = permissions?.Where(x => x.IdEndpoint == endpoint.IdEndpoint).FirstOrDefault();
 
+                    if (permission == null)
+                    {
+                        throw new AuthException("No cuentas con permisos para este endpoint.");
+                    }
+
+                    if (!permission.Active)
+                    {
+                        throw new AuthException("El permiso para este endpoint está inactivo.");
+                    }
                 }
             }
 
