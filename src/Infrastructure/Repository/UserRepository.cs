@@ -17,16 +17,14 @@ namespace Infrastructure.Repository
             _authServiceContext = authServiceContext;
         }
 
-        public async Task<bool> CreateUser(string idUser, string firstName, string? middleName, string lastName, string? secondLastName, int gender, DateTime birthDate, string email, string phoneNumber, string registrationUser, string password, string salt)
+        public async Task<bool> CreateUser(string idUser, string firstName, string lastName, int gender, string birthDate, string email, string phoneNumber, string registrationUser, string password, string salt)
         {
-            string qry = "EXECUTE sp_CreateUser @IdUser, @FirstName, @MiddleName, @LastName, @SecondLastName, @Gender, @BirthDate, @Email, @PhoneNumber, @RegistrationUser, @Password, @Salt;";
+            string qry = "EXECUTE sp_CreateUser @IdUser, @FirstName, @LastName, @Gender, @BirthDate, @Email, @PhoneNumber, @RegistrationUser, @Password, @Salt;";
             var parameters = new
             {
                 IdUser = idUser,
                 FirstName = firstName,
-                MiddleName = middleName,
                 LastName = lastName,
-                SecondLastName = secondLastName,
                 Gender = gender,
                 BirthDate = birthDate,
                 Email = email,

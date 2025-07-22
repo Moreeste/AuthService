@@ -1,4 +1,5 @@
 ﻿using Domain.Repository;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.RegularExpressions;
 
@@ -20,26 +21,21 @@ namespace Application.Validations
 
         public bool BeRequiredName(string name)
         {
-            string regexPattern = @"^[a-zA-Z]+$";
+            string regexPattern = @"^[a-zA-Z\s]+$";
             return Regex.IsMatch(name, regexPattern);
         }
 
-        public bool BeOptionalName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                return true;
-            }
-
-            string regexPattern = @"^[a-zA-Z]+$";
-            return Regex.IsMatch(name, regexPattern);
-        }
-
-        public bool BeValidBirthDate(DateTime birthDate)
+        public bool BeValidBirthDate(string birthDate)
         {
             DateTime minDate = new DateTime(1900, 1, 1);
             DateTime maxDate = DateTime.Now;
-            return birthDate >= minDate && birthDate <= maxDate;
+
+            if (DateTime.TryParseExact(birthDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+            {
+                return parsedDate >= minDate && parsedDate <= maxDate;
+            }
+
+            return false;
         }
 
         public bool BeValidPhoneNumber(string phone)

@@ -32,9 +32,7 @@ namespace Application.User.Services
 
                 usersQuery = usersQuery.Where(x => 
                 (x.FirstName != null && x.FirstName.ToUpper().Contains(searchTerm)) || 
-                (x.MiddleName != null && x.MiddleName.ToUpper().Contains(searchTerm)) ||
-                (x.LastName != null && x.LastName.ToUpper().Contains(searchTerm)) ||
-                (x.SecondLastName != null && x.SecondLastName.ToUpper().Contains(searchTerm)));
+                (x.LastName != null && x.LastName.ToUpper().Contains(searchTerm)));
             }
             
             if (!string.IsNullOrEmpty(sortColumn))
@@ -69,9 +67,7 @@ namespace Application.User.Services
             {
                 IdUser = user?.IdUser,
                 FirstName = user?.FirstName,
-                MiddleName = user?.MiddleName,
                 LastName = user?.LastName,
-                SecondLastName = user?.SecondLastName,
                 Gender = user?.Gender,
                 BirthDate = user?.BirthDate.ToString("yyyy-MM-dd"),
                 Email = user?.Email,

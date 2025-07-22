@@ -7,11 +7,9 @@ namespace Application.Auth.Commands
         string Email,
         string PhoneNumber,
         string FirstName,
-        string? MiddleName,
         string LastName,
-        string? SecondLastName,
         int Gender,
-        DateTime BirthDate,
+        string BirthDate,
         string Password
         ) : IRequest<RegisterDTO>;
 }

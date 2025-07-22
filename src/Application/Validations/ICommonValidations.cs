@@ -4,8 +4,7 @@
     {
         bool BeValidId(string id);
         bool BeRequiredName(string name);
-        bool BeOptionalName(string name);
-        bool BeValidBirthDate(DateTime birthDate);
+        bool BeValidBirthDate(string birthDate);
         bool BeValidPhoneNumber(string phone);
         Task <bool> BeValidGenderId(int gender, CancellationToken cancellationToken);
         bool BeOnlyLettersAndNumbers(string text);

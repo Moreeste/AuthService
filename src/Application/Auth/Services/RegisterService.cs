@@ -44,9 +44,7 @@ namespace Application.Auth.Services
             bool userCreated = await _userRepository.CreateUser(
                 idUser,
                 register.FirstName,
-                register.MiddleName == string.Empty ? null : register.MiddleName,
                 register.LastName,
-                register.SecondLastName == string.Empty ? null : register.SecondLastName,
                 register.Gender,
                 register.BirthDate,
                 register.Email,
