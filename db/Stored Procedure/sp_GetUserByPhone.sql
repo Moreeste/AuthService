@@ -12,9 +12,7 @@ BEGIN
 	
 	SELECT	IdUser, 
 			FirstName, 
-			MiddleName, 
 			LastName, 
-			SecondLastName, 
 			Gender, 
 			BirthDate, 
 			Email, 

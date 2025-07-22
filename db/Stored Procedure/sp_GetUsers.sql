@@ -11,9 +11,7 @@ BEGIN
 	
 	SELECT	Users.IdUser, 
 			FirstName, 
-			MiddleName, 
 			LastName, 
-			SecondLastName, 
 			Gender, 
 			BirthDate, 
 			Email, 

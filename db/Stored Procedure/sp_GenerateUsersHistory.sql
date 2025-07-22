@@ -10,8 +10,8 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO UsersHistory (IdUser,  FirstName, MiddleName, LastName, SecondLastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser, UpdateDate, UpdateUser) 
-	SELECT TOP 1 IdUser, FirstName, MiddleName, LastName, SecondLastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser, UpdateDate, UpdateUser
+	INSERT INTO UsersHistory (IdUser,  FirstName, LastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser, UpdateDate, UpdateUser) 
+	SELECT TOP 1 IdUser, FirstName, LastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser, UpdateDate, UpdateUser
 	FROM Users WHERE IdUser = @IdUser;
 END
 GO

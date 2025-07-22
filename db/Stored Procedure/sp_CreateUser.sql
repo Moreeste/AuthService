@@ -7,9 +7,7 @@ GO
 CREATE OR ALTER PROCEDURE sp_CreateUser
 	@IdUser VARCHAR(36),
 	@FirstName NVARCHAR(30),
-	@MiddleName NVARCHAR(30),
 	@LastName NVARCHAR(30),
-	@SecondLastName NVARCHAR(30),
 	@Gender INT,
 	@BirthDate DATE,
 	@Email VARCHAR(100),
@@ -28,8 +26,8 @@ BEGIN
 		DECLARE @DefaultStatus INT = 1;
 		DECLARE @DefaultProfile VARCHAR(36) = '11111111-1111-1111-1111-111111111111';
 		
-		INSERT INTO Users (IdUser, FirstName, MiddleName, LastName, SecondLastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser) 
-		VALUES (@IdUser, UPPER(@FirstName), UPPER(@MiddleName), UPPER(@LastName), UPPER(@SecondLastName), @Gender, @BirthDate, @Email, @PhoneNumber, GETDATE(), @RegistrationUser);
+		INSERT INTO Users (IdUser, FirstName, LastName, Gender, BirthDate, Email, PhoneNumber, RegistrationDate, RegistrationUser) 
+		VALUES (@IdUser, UPPER(@FirstName), UPPER(@LastName), @Gender, @BirthDate, @Email, @PhoneNumber, GETDATE(), @RegistrationUser);
 
 		EXECUTE sp_GenerateUsersHistory @IdUser;
 

@@ -2,9 +2,7 @@
 EXECUTE	sp_CreateUser
 		@IdUser = '00000000-0000-0000-0000-000000000000',
 		@FirstName = 'ADMIN',
-		@MiddleName = NULL,
 		@LastName = 'ADMIN',
-		@SecondLastName = NULL,
 		@Gender = 3,
 		@BirthDate = '1900-01-01',
 		@Email = 'admin@mail.com',
